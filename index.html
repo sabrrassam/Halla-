@@ -435,12 +435,12 @@
     </div>
   </div>
 
-  <!-- التنبيه المنبثق عند طلب 3 وجبات -->
+  <!-- التنبيه المنبثق عند الحصول على الصنف الرابع مجاناً -->
   <div id="offerToastAlert" class="toast-center-overlay">
     <div class="toast-icon">🎁</div>
     <div class="toast-title">🎉 مبروك! حصلت على الرابع مجاناً</div>
     <div class="toast-body">
-      بما أنك طلبت 3 وجبات، تمت إضافة <strong>الوجبة الرابعة كهدية مجانية</strong> لك إلى الطلب! 🥪✨
+      بما أن مجموع طلباتك من هذا الصنف وصل إلى 3، تمت إضافة <strong>الوجبة الرابعة كهدية مجانية</strong> لك في السلة! 🥪✨
     </div>
     <button class="btn-glow" style="padding: 0.6rem 2.2rem; font-size: 1rem;" onclick="closeOfferToast()">حسناً، استمرار ✨</button>
   </div>
@@ -478,7 +478,7 @@
         <div class="offer-slide-box">
           <span class="offer-badge">🔥 عرض الأسرة الدائم</span>
           <h3 class="offer-title">اطلب 3 من أي صنف وسوف تحصل على الرابع مجاناً! 🎁</h3>
-          <p class="offer-desc">حدد 3 حبات من أي وجبة وسنقوم بإضافة الصنف الرابع لك مجاناً تلقائياً</p>
+          <p class="offer-desc">اطلب 3 حبات من أي صنف (سواء بنفس المواصفات أو مختلفة) وسنضيف الرابع لك مجاناً تلقائياً في السلة</p>
         </div>
       </div>
 
@@ -559,7 +559,7 @@
           </div>
 
           <div class="card">
-            <div class="card-img-wrapper"><img src="img/كلوب زنجر.jpeg" alt="كلوب زنجر"></div>
+            <div class="card-img-wrapper"><img src="img/كلووووب.jpeg" alt="كلوب زنجر"></div>
             <div class="card-content">
               <div class="card-top">
                 <span class="item-title">كلوب زنجر</span>
@@ -667,7 +667,7 @@
           </div>
 
           <div class="card">
-            <div class="card-img-wrapper"><img src="img/توست شوارما.jpeg" alt="توست شاورما"></div><!--[cite: 8] -->
+            <div class="card-img-wrapper"><img src="img/توست شاورمااا.jpeg" alt="توست شاورما"></div><!--[cite: 8] -->
             <div class="card-content">
               <div class="card-top">
                 <span class="item-title">توست شاورما</span>
@@ -1268,7 +1268,7 @@
     🛒 الطلبات: <span id="cartCount">0</span> | الإجمالي: <span id="cartSum">0.00</span> ر.ي
   </div>
 
-  <!-- نافذة التخصيص التفصيلي مع خيار الخبز الأسمر والملاحظات -->
+  <!-- نافذة التخصيص التفصيلي الديناميكية -->
   <div id="customizeModal" class="modal-overlay">
     <div class="modal-box">
       <div class="modal-header">
@@ -1276,14 +1276,11 @@
         <span class="close-btn" onclick="closeCustomizeModal()">&times;</span>
       </div>
       <form id="customizeForm">
-        <!-- نوع الخبز مع إضافة 1 ريال للخبز الأسمر وتحديث المبلغ فوراً -->
-        <div class="option-group-title">🥖 نوع الخبز:</div>
-        <div class="options-grid">
-          <label class="option-item"><input type="radio" name="opt_bread" value="خبز أبيض" checked onchange="updateCustomModalQtyDisplay()"> خبز أبيض</label>
-          <label class="option-item"><input type="radio" name="opt_bread" value="خبز أسمر (بُر)" onchange="updateCustomModalQtyDisplay()"> <span style="color: var(--accent); font-weight: 800;">خبز أسمر (+1 ر.ي)</span></label>
-        </div>
-        <div id="breadNotice" style="display:none; background: rgba(247, 127, 0, 0.18); border: 1px dashed var(--secondary); color: var(--accent); font-size: 0.84rem; font-weight: 800; padding: 6px 12px; border-radius: 8px; margin-bottom: 8px;">
-          ℹ️ ملاحظة: تم احتساب +1 ر.ي لكل حبة لاختيار الخبز الأسمر الصحّي.
+        <!-- قسم خيار الخبز الديناميكي -->
+        <div id="breadSectionContainer">
+          <div class="option-group-title" id="breadSectionTitle">🥖 خيارات الخبز:</div>
+          <div class="options-grid" id="breadOptionsGrid"></div>
+          <div id="breadNotice" style="display:none; background: rgba(247, 127, 0, 0.18); border: 1px dashed var(--secondary); color: var(--accent); font-size: 0.84rem; font-weight: 800; padding: 6px 12px; border-radius: 8px; margin-bottom: 8px;"></div>
         </div>
 
         <!-- مستوى الحرارة -->
@@ -1309,6 +1306,9 @@
           <label class="note-chip"><input type="checkbox" value="مع الثوم">مع الثوم</label>
           <label class="note-chip"><input type="checkbox" value="مع الكتشب">مع الكتشب</label>
           <label class="note-chip"><input type="checkbox" value="مع الشطه العادي">مع الشطه العادي</label>
+          <label class="note-chip"><input type="checkbox" value="قطع معه">قطع معه</label>
+          <label class="note-chip"><input type="checkbox" value="طلع">طلع</label>
+          <label class="note-chip"><input type="checkbox" value="اتصال">اتصال</label>
           <label class="note-chip"><input type="checkbox" value="خس">خس</label>
           <label class="note-chip"><input type="checkbox" value="صوصات خفيف">صوصات خفيف</label>
           <label class="note-chip"><input type="checkbox" value="شطه حار خفيف">شطه حار خفيف</label>
@@ -1322,6 +1322,7 @@
           <label class="note-chip"><input type="checkbox" value="بدون كتشب">بدون كتشب</label>
           <label class="note-chip"><input type="checkbox" value="بدون شطة">بدون شطة</label>
           <label class="note-chip"><input type="checkbox" value="سبايسي">سبايسي</label>
+          <label class="note-chip"><input type="checkbox" value="مجمر">مجمر</label>
         </div>
 
         <div class="option-group-title">🔢 تحديد الكمية المطلوبة والحساب:</div>
@@ -1337,7 +1338,7 @@
           </div>
         </div>
         <div id="freeItemHint" style="display:none; color:#25d366; font-size:0.85rem; font-weight:800; text-align:center; margin-top:4px;">
-          🎁 مبروك! سيتم إضافة الوجبة الرابعة مجاناً لحسابك عند التأكيد.
+          🎁 مبروك! سيتم إضافة الوجبة الرابعة مجاناً لحسابك تلقائياً في السلة.
         </div>
         <div class="option-group-title">✍️ ملاحظات خاصة إضافية إن وجدت:</div>
         <textarea id="itemCustomNote" class="notes-textarea" rows="2" placeholder="اكتب أي ملاحظة أخرى هنا..."></textarea>
@@ -1400,7 +1401,6 @@
     let cart = [];
     let currentCustomizingItem = null;
     let currentCustomizingQty = 1;
-    let hasAlertedForCurrentSelection = false;
     const restaurantPhone = "966500953327";
 
     // تفعيل تفاعل أزرار الملاحظات السريعة Chips
@@ -1442,13 +1442,58 @@
       }
     }
 
+    // تهيئة وتوليد خيارات الخبز حسب الصنف
+    function setupBreadOptions(itemName) {
+      const container = document.getElementById('breadSectionContainer');
+      const grid = document.getElementById('breadOptionsGrid');
+      const title = document.getElementById('breadSectionTitle');
+      const notice = document.getElementById('breadNotice');
+      
+      notice.style.display = 'none';
+
+      // 1. الصحون (صحن عربي): متاح إضافة خبز صاج بـ 2 ر.ي
+      if (itemName.includes('صحن عربي')) {
+        container.style.display = 'block';
+        title.innerText = '🥖 إضافة خبز صاج إضافي مع الصحن:';
+        grid.innerHTML = `
+          <label class="option-item"><input type="radio" name="opt_bread" value="خبز ابيض" checked onchange="updateCustomModalQtyDisplay()"> خبز أبيض</label>
+          <label class="option-item"><input type="radio" name="opt_bread" value="خبز صاج (+2 ر.ي)" onchange="updateCustomModalQtyDisplay()"> <span style="color: var(--accent); font-weight: 800;">خبز صاج (+2 ر.ي)</span></label>
+        `;
+      }
+      // 2. الأصناف الملغي منها خيار الخبز تماماً
+      else if (
+        itemName.includes('باشكا') || 
+        itemName.includes('صاروخ') || 
+        itemName.includes('برجر') || 
+        itemName.includes('تورتيلا') || 
+        itemName.includes('مسحب') || 
+        itemName.includes('بطاطس') ||
+        itemName.includes('فرايز') ||
+        itemName.includes('وجبة')
+      ) {
+        container.style.display = 'none';
+        grid.innerHTML = '';
+      }
+      // 3. باقي السندوتشات: خيارات الأبيض والأسمر والصاج (+1 ر.ي)
+      else {
+        container.style.display = 'block';
+        title.innerText = '🥖 نوع الخبز:';
+        grid.innerHTML = `
+          <label class="option-item"><input type="radio" name="opt_bread" value="خبز أبيض" checked onchange="updateCustomModalQtyDisplay()"> خبز أبيض</label>
+          <label class="option-item"><input type="radio" name="opt_bread" value="خبز أسمر (بُر) (+1 ر.ي)" onchange="updateCustomModalQtyDisplay()"> <span style="color: var(--accent); font-weight: 800;">خبز أسمر (+1 ر.ي)</span></label>
+          <label class="option-item"><input type="radio" name="opt_bread" value="خبز صاج (+1 ر.ي)" onchange="updateCustomModalQtyDisplay()"> <span style="color: var(--accent); font-weight: 800;">خبز صاج (+1 ر.ي)</span></label>
+        `;
+      }
+    }
+
     function openCustomizeModal(name, price) {
       currentCustomizingItem = { name: name, basePrice: price };
       currentCustomizingQty = 1;
-      hasAlertedForCurrentSelection = false;
       document.getElementById('modalItemTitle').innerText = `تخصيص: ${name} (${price} ر.ي)`;
       document.getElementById('customizeForm').reset();
       
+      setupBreadOptions(name);
+
       document.querySelectorAll('.note-chip').forEach(chip => {
         chip.classList.remove('active');
         chip.querySelector('input').checked = false;
@@ -1462,11 +1507,6 @@
     function changeCustomModalQty(delta) {
       currentCustomizingQty += delta;
       if (currentCustomizingQty < 1) currentCustomizingQty = 1;
-
-      if (currentCustomizingQty === 3 && !hasAlertedForCurrentSelection) {
-        showOfferToast();
-        hasAlertedForCurrentSelection = true;
-      }
       updateCustomModalQtyDisplay();
     }
 
@@ -1485,24 +1525,36 @@
 
       document.getElementById('customModalQtyDisplay').innerText = currentCustomizingQty;
       
-      // التحقق من خيار الخبز الأسمر لإضافة 1 ر.ي
+      // احتساب فارق سعر الخبز
       const breadOpt = document.querySelector('input[name="opt_bread"]:checked');
-      const isBrownBread = breadOpt && breadOpt.value === "خبز أسمر (بُر)";
-      const breadExtra = isBrownBread ? 1 : 0;
+      let breadExtra = 0;
+      const notice = document.getElementById('breadNotice');
 
-      // إظهار تنبيه فارق السعر للمستخدم
-      const breadNoticeEl = document.getElementById('breadNotice');
-      if (breadNoticeEl) {
-        breadNoticeEl.style.display = isBrownBread ? 'block' : 'none';
+      if (breadOpt) {
+        if (breadOpt.value.includes('+2 ر.ي')) {
+          breadExtra = 2;
+          notice.style.display = 'block';
+          notice.innerText = 'ℹ️ تم احتساب +2 ر.ي لإضافة خبز الصاج مع الصحن.';
+        } else if (breadOpt.value.includes('+1 ر.ي')) {
+          breadExtra = 1;
+          notice.style.display = 'block';
+          notice.innerText = 'ℹ️ تم احتساب +1 ر.ي لكل حبة لاختيار الخبز الإضافي/الأسمر.';
+        } else {
+          notice.style.display = 'none';
+        }
+      } else {
+        notice.style.display = 'none';
       }
 
-      // حساب السعر الفردي والإجمالي بدقة
       const unitPrice = currentCustomizingItem.basePrice + breadExtra;
       const subtotal = unitPrice * currentCustomizingQty;
       document.getElementById('customModalSubtotal').innerText = `${subtotal.toFixed(2)} ر.ي`;
 
+      // فحص هل الوصول لـ 3 في هذا الصنف ضمن السلة
+      const currentInCartCount = cart.filter(it => it.baseName === currentCustomizingItem.name && !it.isFree)
+                                     .reduce((sum, it) => sum + it.qty, 0);
       const hint = document.getElementById('freeItemHint');
-      if (currentCustomizingQty >= 3) {
+      if (currentInCartCount + currentCustomizingQty >= 3) {
         hint.style.display = 'block';
       } else {
         hint.style.display = 'none';
@@ -1513,25 +1565,58 @@
       document.getElementById('customizeModal').style.display = 'none';
     }
 
+    /* فحص السلة الكامل وتطبيق العرض التلقائي */
+    function evaluateCartFamilyOffers() {
+      // 1. مسح الوجبات المجانية القديمة لإعادة الاحتساب بدقة
+      cart = cart.filter(item => !item.isFree);
+
+      // 2. تجميع كميات الأصناف المدفوعة حسب اسم الصنف الأساسي
+      let baseCounts = {};
+      cart.forEach(item => {
+        baseCounts[item.baseName] = (baseCounts[item.baseName] || 0) + item.qty;
+      });
+
+      let newlyEarnedGift = false;
+
+      // 3. لكل 3 حبات من نفس الصنف الأساسي، يحصل على حبة رابعة مجاناً
+      Object.keys(baseCounts).forEach(bName => {
+        const totalPaidCount = baseCounts[bName];
+        const freeCountEarned = Math.floor(totalPaidCount / 3);
+
+        if (freeCountEarned > 0) {
+          cart.push({
+            name: `${bName} (هدية العرض)`,
+            baseName: bName,
+            price: 0,
+            qty: freeCountEarned,
+            options: ["وجبة مجانية ضمن عرض الأسرة 🎁"],
+            customNote: "",
+            isFree: true
+          });
+          newlyEarnedGift = true;
+        }
+      });
+
+      return newlyEarnedGift;
+    }
+
     function confirmItemCustomization() {
       if (!currentCustomizingItem) return;
+
+      let options = [];
+      let breadExtra = 0;
+
+      const breadOpt = document.querySelector('input[name="opt_bread"]:checked');
+      if (breadOpt) {
+        options.push(breadOpt.value);
+        if (breadOpt.value.includes('+2 ر.ي')) breadExtra = 2;
+        else if (breadOpt.value.includes('+1 ر.ي')) breadExtra = 1;
+      }
 
       const getRadioVal = (name) => {
         const el = document.querySelector(`input[name="${name}"]:checked`);
         return el ? el.value : null;
       };
-
-      let options = [];
-      const breadVal = getRadioVal('opt_bread');
-      let breadExtra = 0;
-      if (breadVal) {
-        if (breadVal === "خبز أسمر (بُر)") {
-          options.push("نوع الخبز: خبز أسمر (+1 ر.ي)");
-          breadExtra = 1;
-        } else {
-          options.push("نوع الخبز: خبز أبيض");
-        }
-      }
 
       const spicyVal = getRadioVal('opt_spicy'); if (spicyVal) options.push(spicyVal);
       const garlicVal = getRadioVal('opt_garlic'); if (garlicVal) options.push(garlicVal);
@@ -1544,9 +1629,14 @@
       const note = document.getElementById('itemCustomNote').value.trim();
       const finalItemPrice = currentCustomizingItem.basePrice + breadExtra;
 
-      // إضافة الوجبات المدفوعة
+      // حساب عدد الحبات الحالي من هذا الصنف قبل الإضافة الجديدة
+      const previousTotalForThisItem = cart.filter(it => it.baseName === currentCustomizingItem.name && !it.isFree)
+                                           .reduce((sum, it) => sum + it.qty, 0);
+
+      // إضافة الصنف الجديد للسلة
       cart.push({ 
         name: currentCustomizingItem.name, 
+        baseName: currentCustomizingItem.name,
         price: finalItemPrice, 
         qty: currentCustomizingQty, 
         options: options, 
@@ -1554,16 +1644,13 @@
         isFree: false
       });
 
-      // إضافة الوجبة الرابعة المجانية تلقائياً عند طلب 3
-      if (currentCustomizingQty === 3) {
-        cart.push({
-          name: `${currentCustomizingItem.name} (هدية العرض)`,
-          price: 0,
-          qty: 1,
-          options: options,
-          customNote: "وجبة رابعة مجانية ضمن عرض الأسرة 🎁",
-          isFree: true
-        });
+      // فحص كامل السلة وإعادة توزيع الهدايا المجانية
+      evaluateCartFamilyOffers();
+
+      // حساب العدد الجديد بعد الإضافة لمعرفة هل استحق العرض لتشغيل التنبيه
+      const newTotalForThisItem = previousTotalForThisItem + currentCustomizingQty;
+      if (Math.floor(newTotalForThisItem / 3) > Math.floor(previousTotalForThisItem / 3)) {
+        showOfferToast();
       }
 
       updateCartUI();
@@ -1571,7 +1658,25 @@
     }
 
     function addDirectItem(name, price) {
-      cart.push({ name: name, price: price, qty: 1, options: [], customNote: "", isFree: false });
+      const previousTotal = cart.filter(it => it.baseName === name && !it.isFree)
+                                .reduce((sum, it) => sum + it.qty, 0);
+
+      cart.push({ 
+        name: name, 
+        baseName: name, 
+        price: price, 
+        qty: 1, 
+        options: [], 
+        customNote: "", 
+        isFree: false 
+      });
+
+      evaluateCartFamilyOffers();
+
+      if (Math.floor((previousTotal + 1) / 3) > Math.floor(previousTotal / 3)) {
+        showOfferToast();
+      }
+
       updateCartUI();
     }
 
@@ -1634,6 +1739,8 @@
 
     function removeItemFromCart(index) {
       cart.splice(index, 1);
+      // إعادة فحص وتحديث العرض عند الحذف
+      evaluateCartFamilyOffers();
       updateCartUI();
       if (cart.length === 0) closeCartReviewModal();
       else openCartReviewModal();
