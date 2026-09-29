@@ -702,7 +702,7 @@
     </div>
   </section>
 
-  <!-- القسم 3: قسم البرجر -->
+  <!-- القسم 3: قسم البرجر (محدث مع جانبو دجاج برجر بـ 10 ر.ي) -->
   <section class="menu-section" id="burgers" style="background: rgba(16,10,8,0.95);">
     <div class="section-container">
       <div class="section-header">
@@ -725,6 +725,22 @@
               <div class="card-footer">
                 <button class="btn-add" onclick="openCustomizeModal('برجر دجاج (مشوي)', 9)">+ مشوي (9)</button>
                 <button class="btn-add" onclick="openCustomizeModal('برجر دجاج (مقلي)', 9)">+ مقلي (9)</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- جانبو دجاج برجر المضاف حديثاً بـ 10 ر.ي -->
+          <div class="card">
+            <div class="card-img-wrapper"><img src="img/جامبو دجاج برجر.jpeg" alt="جانبو دجاج برجر"></div>
+            <div class="card-content">
+              <div class="card-top">
+                <span class="item-title">جانبو دجاج برجر</span>
+                <span class="price-tag">10 ر.ي</span>
+              </div>
+              <p class="item-desc">قطعة دجاج جامبو كبيرة وغنية بالنكهات والصلصة الخاصة.</p>
+              <div class="card-footer">
+                <button class="btn-add" onclick="openCustomizeModal('جانبو دجاج برجر (مشوي)', 10)">+ مشوي (10)</button>
+                <button class="btn-add" onclick="openCustomizeModal('جانبو دجاج برجر (مقلي)', 10)">+ مقلي (10)</button>
               </div>
             </div>
           </div>
@@ -949,7 +965,7 @@
     </div>
   </section>
 
-  <!-- القسم 4: وجبات شاورمايشن -->
+  <!-- القسم 4: وجبات شاورمايشن (محدث مع وجبة توست دجاج بـ 13 ر.ي) -->
   <section class="menu-section" id="meals" style="background: rgba(20,13,11,0.95);">
     <div class="section-container">
       <div class="section-header">
@@ -961,6 +977,22 @@
         <button class="slider-arrow-btn arrow-right" onclick="scrollSection('mealsTrack', 'right')" aria-label="التالي">❯</button>
 
         <div class="slider-track" id="mealsTrack">
+          <!-- وجبة توست دجاج المضافة حديثاً بـ 13 ر.ي -->
+          <div class="card">
+            <div class="card-img-wrapper"><img src="img/وجبة توست دجاج.jpeg" alt="وجبة توست دجاج"></div>
+            <div class="card-content">
+              <div class="card-top">
+                <span class="item-title">وجبة توست دجاج متكاملة</span>
+                <span class="price-tag">13 ر.ي</span>
+              </div>
+              <p class="item-desc">تتكون الوجبة من: توست دجاج محمص مع بطاطس ومشروب غازي.</p>
+              <div class="card-footer">
+                <button class="btn-add" onclick="openCustomizeModal('وجبة توست دجاج (مشوي)', 13)">+ مشوي (13)</button>
+                <button class="btn-add" onclick="openCustomizeModal('وجبة توست دجاج (مقلي)', 13)">+ مقلي (13)</button>
+              </div>
+            </div>
+          </div>
+
           <div class="card">
             <div class="card-img-wrapper"><img src="img/تشكن فرايز صغير.jpeg" alt="تشيكن فرايز صغير"></div><!--[cite: 6] -->
             <div class="card-content">
@@ -1268,7 +1300,7 @@
     🛒 الطلبات: <span id="cartCount">0</span> | الإجمالي: <span id="cartSum">0.00</span> ر.ي
   </div>
 
-  <!-- نافذة التخصيص التفصيلي الديناميكية (تم إلغاء خيار الثومية بناءً على طلبك) -->
+  <!-- نافذة التخصيص التفصيلي الديناميكية -->
   <div id="customizeModal" class="modal-overlay">
     <div class="modal-box">
       <div class="modal-header">
@@ -1291,16 +1323,21 @@
           <label class="option-item"><input type="radio" name="opt_spicy" value="بدون حراق"> بدون حراق</label>
         </div>
 
-        <!-- تفضيلات وملاحظات الطلب السريعة All Notes (شاملة خيار الثوم) -->
+        <!-- الثومية -->
+        <div class="option-group-title">🧄 الثومية:</div>
+        <div class="options-grid">
+          <label class="option-item"><input type="radio" name="opt_garlic" value="ثوم عادي"> ثوم عادي</label>
+          <label class="option-item"><input type="radio" name="opt_garlic" value="زيادة ثوم 🧄"> زيادة ثوم</label>
+          <label class="option-item"><input type="radio" name="opt_garlic" value="بدون ثوم"> بدون ثوم</label>
+        </div>
+
+        <!-- تفضيلات وملاحظات الطلب السريعة All Notes -->
         <div class="option-group-title">✨ تفضيلات وملاحظات الطلب (All Notes):</div>
         <div class="notes-chips-grid" id="notesChipsWrapper">
           <label class="note-chip"><input type="checkbox" value="مخلل">مخلل</label>
           <label class="note-chip"><input type="checkbox" value="مع الثوم">مع الثوم</label>
-          <label class="note-chip"><input type="checkbox" value="بدون ثوم">بدون ثوم</label>
           <label class="note-chip"><input type="checkbox" value="مع الكتشب">مع الكتشب</label>
-          <label class="note-chip"><input type="checkbox" value="بدون كتشب">بدون كتشب</label>
           <label class="note-chip"><input type="checkbox" value="مع الشطه العادي">مع الشطه العادي</label>
-          <label class="note-chip"><input type="checkbox" value="بدون شطة">بدون شطة</label>
           <label class="note-chip"><input type="checkbox" value="قطع معه">قطع معه</label>
           <label class="note-chip"><input type="checkbox" value="طلع">طلع</label>
           <label class="note-chip"><input type="checkbox" value="اتصال">اتصال</label>
@@ -1313,6 +1350,9 @@
           <label class="note-chip"><input type="checkbox" value="دجاج فقط">دجاج فقط</label>
           <label class="note-chip"><input type="checkbox" value="دجاج وبطاطس">دجاج وبطاطس</label>
           <label class="note-chip"><input type="checkbox" value="كل شي">كل شي</label>
+          <label class="note-chip"><input type="checkbox" value="بدون ثوم">بدون ثوم</label>
+          <label class="note-chip"><input type="checkbox" value="بدون كتشب">بدون كتشب</label>
+          <label class="note-chip"><input type="checkbox" value="بدون شطة">بدون شطة</label>
           <label class="note-chip"><input type="checkbox" value="سبايسي">سبايسي</label>
           <label class="note-chip"><input type="checkbox" value="مجمر">مجمر</label>
         </div>
@@ -1443,16 +1483,16 @@
       
       notice.style.display = 'none';
 
-      // 1. الصحون (صحن عربي): متاح إضافة خبز صاج بـ 2 ر.ي وخيار الخبز الأسمر ملغي تماماً
+      // 1. الصحون (صحن عربي): متاح إضافة خبز صاج بـ 2 ر.ي
       if (itemName.includes('صحن عربي')) {
         container.style.display = 'block';
         title.innerText = '🥖 إضافة خبز صاج إضافي مع الصحن:';
         grid.innerHTML = `
-          <label class="option-item"><input type="radio" name="opt_bread" value="بدون خبز إضافي" checked onchange="updateCustomModalQtyDisplay()"> بدون خبز إضافي</label>
+          <label class="option-item"><input type="radio" name="opt_bread" value="خبز ابيض" checked onchange="updateCustomModalQtyDisplay()"> خبز أبيض</label>
           <label class="option-item"><input type="radio" name="opt_bread" value="خبز صاج (+2 ر.ي)" onchange="updateCustomModalQtyDisplay()"> <span style="color: var(--accent); font-weight: 800;">خبز صاج (+2 ر.ي)</span></label>
         `;
       }
-      // 2. الأصناف الملغي منها خيار الخبز تماماً (الباشكا الإيطالي، شاورما الصاروخ، البرجر، التورتيلا، البطاطس، الكلوب)
+      // 2. الأصناف الملغي منها خيار الخبز تماماً
       else if (
         itemName.includes('باشكا') || 
         itemName.includes('صاروخ') || 
@@ -1461,13 +1501,12 @@
         itemName.includes('مسحب') || 
         itemName.includes('بطاطس') ||
         itemName.includes('فرايز') ||
-        itemName.includes('وجبة') ||
-        itemName.includes('كلوب')
+        itemName.includes('وجبة')
       ) {
         container.style.display = 'none';
         grid.innerHTML = '';
       }
-      // 3. باقي السندوتشات (شاورما وسط، جامبو، شاورمايشن، توست شاورما): خيارات الأبيض والأسمر والصاج (+1 ر.ي)
+      // 3. باقي السندوتشات: خيارات الأبيض والأسمر والصاج (+1 ر.ي)
       else {
         container.style.display = 'block';
         title.innerText = '🥖 نوع الخبز:';
@@ -1600,18 +1639,19 @@
       let breadExtra = 0;
 
       const breadOpt = document.querySelector('input[name="opt_bread"]:checked');
-      if (breadOpt && breadOpt.value !== "بدون خبز إضافي") {
+      if (breadOpt) {
         options.push(breadOpt.value);
         if (breadOpt.value.includes('+2 ر.ي')) breadExtra = 2;
         else if (breadOpt.value.includes('+1 ر.ي')) breadExtra = 1;
       }
 
-      const spicyVal = getRadioVal('opt_spicy'); if (spicyVal) options.push(spicyVal);
-
-      function getRadioVal(name) {
+      const getRadioVal = (name) => {
         const el = document.querySelector(`input[name="${name}"]:checked`);
         return el ? el.value : null;
-      }
+      };
+
+      const spicyVal = getRadioVal('opt_spicy'); if (spicyVal) options.push(spicyVal);
+      const garlicVal = getRadioVal('opt_garlic'); if (garlicVal) options.push(garlicVal);
 
       // جمع ملاحظات All Notes
       document.querySelectorAll('.note-chip input:checked').forEach(chk => {
