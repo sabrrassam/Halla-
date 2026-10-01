@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>مطعم شاورمايشن | خيارك الصح .. في الوقت الصح</title>
+  <title>مطعم شاورمايشن - فرع حلي | خيارك الصح .. في الوقت الصح</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -32,7 +32,7 @@
       overflow-x: hidden;
     }
 
-    /* === شاشة الترحيب Splash Screen بأزرار الفروع === */
+    /* === شاشة الترحيب Splash Screen تلقائية لمدة 5 ثوانٍ === */
     #splashScreen {
       position: fixed;
       inset: 0;
@@ -96,54 +96,37 @@
       letter-spacing: 1px;
     }
 
-    .splash-branches-box {
-      margin-top: 1.8rem;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .branch-select-title {
-      font-size: 1rem;
+    .splash-branch-label {
+      font-size: 1.05rem;
       color: var(--text-light);
       font-weight: 700;
-      margin-bottom: 4px;
+      margin-top: 1rem;
+      background: rgba(247, 127, 0, 0.15);
+      padding: 6px 18px;
+      border-radius: 20px;
+      border: 1px solid rgba(247, 127, 0, 0.4);
     }
 
-    .branch-btn {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: #fff;
-      border: 2px solid var(--accent);
-      padding: 0.85rem 1.5rem;
-      border-radius: 30px;
-      font-size: 1.05rem;
-      font-weight: 800;
-      cursor: pointer;
-      box-shadow: 0 0 20px rgba(214, 40, 40, 0.6);
-      transition: all 0.3s ease;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-      text-decoration: none;
+    .splash-loader-bar {
+      width: 140px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      margin-top: 1.5rem;
+      overflow: hidden;
+      position: relative;
     }
 
-    .branch-btn:hover {
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 0 30px rgba(247, 127, 0, 0.8);
-      background: linear-gradient(135deg, var(--secondary), var(--primary));
+    .splash-loader-progress {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      width: 0%;
+      animation: fillProgress 5s linear forwards;
     }
 
-    .branch-btn.alqouz {
-      background: rgba(36, 21, 18, 0.9);
-      border: 2px solid var(--secondary);
-      color: var(--accent);
-    }
-
-    .branch-btn.alqouz:hover {
-      background: rgba(247, 127, 0, 0.25);
-      color: #fff;
+    @keyframes fillProgress {
+      0% { width: 0%; }
+      100% { width: 100%; }
     }
 
     @keyframes spinRing {
@@ -413,7 +396,7 @@
 </head>
 <body>
 
-  <!-- شاشة البداية Splash Screen باختيار الفرع -->
+  <!-- شاشة البداية Splash Screen تلقائية لمدة 5 ثوانٍ لفرع حلي -->
   <div id="splashScreen">
     <div class="splash-content">
       <div class="splash-logo-ring">
@@ -421,20 +404,12 @@
       </div>
       <div class="splash-logo-badge">شاورمايشن</div>
       <div class="splash-slogan">طعم .. مذاق .. لذاذه ✨</div>
+      <div class="splash-branch-label">📍 فرع حلي (المثلث أمام مستوصف العلوي الطبي)</div>
       
-      <div class="splash-branches-box">
-        <div class="branch-select-title">اختر الفرع لعرض المنيو والأسعار المعتمدة:</div>
-        
-        <!-- زر فرع حلي -->
-        <button class="branch-btn" onclick="selectBranch('حلي')">
-          📍 فرع حلي (المثلث أمام مستوصف العلوي الطبي)
-        </button>
-
-        <!-- زر فرع القوز -->
-        <button class="branch-btn alqouz" onclick="selectBranch('القوز')">
-          📍 فرع القوز (مجمع فواصل)
-        </button>
+      <div class="splash-loader-bar">
+        <div class="splash-loader-progress"></div>
       </div>
+      <span style="font-size: 0.85rem; color: var(--text-muted); margin-top: 8px;">جاري فتح القائمة...</span>
     </div>
   </div>
 
@@ -475,7 +450,7 @@
     <div class="hero-content">
       <span class="tagline" id="heroTagline">خيارك الصح .. في الوقت الصح ✨</span>
       <h1>مطعم <span>شاورمايشن</span></h1>
-      <p class="hero-sub" id="heroSubText">قائمة كاملة تضم أشهى صحون وسندوتشات الشاورما، البرجر، التورتيلا والوجبات</p>
+      <p class="hero-sub" id="heroSubText">قائمة فرع حلي الكاملة لأشهى صحون وسندوتشات الشاورما، البرجر، التورتيلا والوجبات</p>
 
       <div class="offers-interactive-wrapper">
         <div class="offer-slide-box">
@@ -1361,9 +1336,9 @@
             <div class="card-img-wrapper"><img src="img/ماء صحي صغير.jpeg" alt="ماء صحي نقي صغير"></div>
             <div class="card-content" style="text-align: center; justify-content: center;">
                <span class="item-title" style="font-size: 1.25rem; margin-bottom: 8px;">ماء صحي (صغير)</span>
-               <span class="price-tag price-display-single" style="font-size: 1.4rem; margin-bottom: 15px;">0.50 ر.ي</span>
+               <span class="price-tag price-display-single" style="font-size: 1.4rem; margin-bottom: 15px;">0.05 ر.ي</span>
                <div class="card-footer" style="justify-content: center;">
-                 <button class="btn-add btn-action-single" onclick="addDirectItemByName('ماء صغير')">+ أضف (0.5)</button>
+                 <button class="btn-add btn-action-single" onclick="addDirectItemByName('ماء صغير')">+ أضف (0.05)</button>
                </div>
             </div>
           </div>
@@ -1501,123 +1476,68 @@
 
   <script>
     /* ========================================================
-       بيانات الأسعار الصحيحة 100% المطابقة للمنيو الأصلي للفرعين
+       قائمة أسعار وبيانات فرع حلي المعتمدة رسمياً 100%
        ======================================================== */
     const BRANCH_DATA = {
-      "حلي": {
-        navLabel: "فرع حلي",
-        footerLocation: "📍 حلي - المثلث أمام مستوصف العلوي الطبي",
-        phone: "966500953327",
-        displayPhone: "0500953327",
-        prices: {
-          "صحن عربي كبير": { base: 18, cheese: 20 },
-          "صحن عربي وسط": { base: 16, cheese: 18 },
-          "صحن عربي صغير": { base: 13, cheese: 15 },
-          "باشكا إيطالي": { base: 18, cheese: 20 },
-          "كلوب زنجر": { base: 18, cheese: 20 },
-          "كلوب شاورما": { base: 18, cheese: 20 },
-          "شاورما صاروخ": { base: 8, cheese: 9 },
-          "شاورما وسط": { base: 5, cheese: 6 },
-          "ساندوتش شاورمايشن": { base: 10, cheese: 11 },
-          "شاورما جامبو": { base: 9, cheese: 10 },
-          "توست شاورما": { base: 8, cheese: 9 },
-          "برجر شاورما": { base: 8, cheese: 9 },
-          "برجر دجاج": { base: 9, cheese: 10 },
-          "جانبو دجاج برجر": { base: 10, cheese: 11 },
-          "برجر دبل دجاج": { base: 14, cheese: 15 },
-          "برجر زنجر": { base: 9, cheese: 10 },
-          "برجر زنجر دبل": { base: 14, cheese: 15 },
-          "جانبو زنجر": { base: 10, cheese: 11 },
-          "توست دجاج برجر": { base: 8, cheese: 9 },
-          "تورتيلا دجاج برجر صغير": { base: 7, cheese: 8 },
-          "تورتيلا دجاج برجر كبير": { base: 11, cheese: 12 },
-          "تورتيلا زنجر كبير": { base: 11, cheese: 12 },
-          "تورتيلا زنجر برجر صغير": { base: 8, cheese: 9 },
-          "سندوتش مسحب دجاج كبير": { base: 10, cheese: 11 },
-          "سندوتش مسحب دجاج صغير": { base: 8, cheese: 9 },
-          "صحن بطاطس صغير": { base: 3, cheese: 6, labelBase: "صافي: 3 ر.ي", labelCheese: "جبن: 6 ر.ي", btnBase: "+ صافي (3)", btnCheese: "+ مع جبن (6)" },
-          "صحن بطاطس كبير": { base: 5, cheese: 8, labelBase: "صافي: 5 ر.ي", labelCheese: "جبن: 8 ر.ي", btnBase: "+ صافي (5)", btnCheese: "+ مع جبن (8)" },
-          "وجبة توست دجاج متكاملة": { base: 13, cheese: 14 },
-          "تشيكن فرايز صغير": { single: 10 },
-          "تشيكن فرايز كبير": { single: 15 },
-          "وجبة زنجر متكاملة": { base: 15, cheese: 16 },
-          "وجبة برجر دجاج متكاملة": { base: 14, cheese: 15 },
-          "إضافة: صوص ثوم": { single: 1 },
-          "إضافة: صوص كوكتيل": { single: 1 },
-          "إضافة: صوص طحينية": { single: 1 },
-          "إضافة: شطة حار": { single: 1 },
-          "إضافة: صوص جبنة": { single: 2 },
-          "كوكاكولا": { single: 2 },
-          "كولا لايت": { single: 2 },
-          "فانتا برتقال": { single: 2 },
-          "فانتا حمضيات": { single: 2 },
-          "فانتا فراولة": { single: 2 },
-          "سبرايت": { single: 2 },
-          "عصير ربيع": { single: 2 },
-          "ماء كبير": { single: 1 },
-          "ماء صغير": { single: 0.05 }
-        }
-      },
-      "القوز": {
-        navLabel: "فرع القوز",
-        footerLocation: "📍 فرع القوز (مجمع فواصل)",
-        phone: "966539583619",
-        displayPhone: "0539583619",
-        prices: {
-          "صحن عربي كبير": { base: 14, cheese: 16 },
-          "صحن عربي وسط": { base: 12, cheese: 14 },
-          "صحن عربي صغير": { base: 13, cheese: 15 },
-          "باشكا إيطالي": { base: 18, cheese: 20 },
-          "كلوب زنجر": { base: 18, cheese: 20 },
-          "كلوب شاورما": { base: 18, cheese: 20 },
-          "شاورما صاروخ": { base: 7, cheese: 8 },
-          "شاورما وسط": { base: 5, cheese: 6 },
-          "ساندوتش شاورمايشن": { base: 9, cheese: 10 },
-          "شاورما جامبو": { base: 8, cheese: 9 },
-          "توست شاورما": { base: 7, cheese: 8 },
-          "برجر شاورما": { base: 7, cheese: 8 },
-          "برجر دجاج": { base: 8, cheese: 9 },
-          "جانبو دجاج برجر": { base: 9, cheese: 10 },
-          "برجر دبل دجاج": { base: 14, cheese: 15 },
-          "برجر زنجر": { base: 8, cheese: 9 },
-          "برجر زنجر دبل": { base: 14, cheese: 15 },
-          "جانبو زنجر": { base: 9, cheese: 10 },
-          "توست دجاج برجر": { base: 7, cheese: 8 },
-          "تورتيلا دجاج برجر صغير": { base: 7, cheese: 8 },
-          "تورتيلا دجاج برجر كبير": { base: 10, cheese: 11 },
-          "تورتيلا زنجر كبير": { base: 10, cheese: 11 },
-          "تورتيلا زنجر برجر صغير": { base: 8, cheese: 9 },
-          "سندوتش مسحب دجاج كبير": { base: 9, cheese: 10 },
-          "سندوتش مسحب دجاج صغير": { base: 7, cheese: 8 },
-          "صحن بطاطس صغير": { base: 3, cheese: 6, labelBase: "صافي: 3 ر.ي", labelCheese: "جبن: 6 ر.ي", btnBase: "+ صافي (3)", btnCheese: "+ مع جبن (6)" },
-          "صحن بطاطس كبير": { base: 5, cheese: 8, labelBase: "صافي: 5 ر.ي", labelCheese: "جبن: 8 ر.ي", btnBase: "+ صافي (5)", btnCheese: "+ مع جبن (8)" },
-          "وجبة توست دجاج متكاملة": { base: 13, cheese: 14 },
-          "تشيكن فرايز صغير": { single: 9 },
-          "تشيكن فرايز كبير": { single: 14 },
-          "وجبة زنجر متكاملة": { base: 14, cheese: 15 },
-          "وجبة برجر دجاج متكاملة": { base: 14, cheese: 15 },
-          "إضافة: صوص ثوم": { single: 1 },
-          "إضافة: صوص كوكتيل": { single: 1 },
-          "إضافة: صوص طحينية": { single: 1 },
-          "إضافة: شطة حار": { single: 1 },
-          "إضافة: صوص جبنة": { single: 2 },
-          "كوكاكولا": { single: 2 },
-          "كولا لايت": { single: 2 },
-          "فانتا برتقال": { single: 2 },
-          "فانتا حمضيات": { single: 2 },
-          "فانتا فراولة": { single: 2 },
-          "سبرايت": { single: 2 },
-          "عصير ربيع": { single: 2 },
-          "ماء كبير": { single: 1 },
-          "ماء صغير": { single: 0.05 }
-        }
+      navLabel: "فرع حلي",
+      footerLocation: "📍 حلي - المثلث أمام مستوصف العلوي الطبي",
+      phone: "966500953327",
+      displayPhone: "0500953327",
+      prices: {
+        "صحن عربي كبير": { base: 18, cheese: 20 },
+        "صحن عربي وسط": { base: 16, cheese: 18 },
+        "صحن عربي صغير": { base: 13, cheese: 15 },
+        "باشكا إيطالي": { base: 18, cheese: 20 },
+        "كلوب زنجر": { base: 18, cheese: 20 },
+        "كلوب شاورما": { base: 18, cheese: 20 },
+        "شاورما صاروخ": { base: 8, cheese: 9 },
+        "شاورما وسط": { base: 5, cheese: 6 },
+        "ساندوتش شاورمايشن": { base: 10, cheese: 11 },
+        "شاورما جامبو": { base: 9, cheese: 10 },
+        "توست شاورما": { base: 8, cheese: 9 },
+        "برجر شاورما": { base: 8, cheese: 9 },
+        "برجر دجاج": { base: 9, cheese: 10 },
+        "جانبو دجاج برجر": { base: 10, cheese: 11 },
+        "برجر دبل دجاج": { base: 14, cheese: 15 },
+        "برجر زنجر": { base: 9, cheese: 10 },
+        "برجر زنجر دبل": { base: 14, cheese: 15 },
+        "جانبو زنجر": { base: 10, cheese: 11 },
+        "توست دجاج برجر": { base: 8, cheese: 9 },
+        "تورتيلا دجاج برجر صغير": { base: 7, cheese: 8 },
+        "تورتيلا دجاج برجر كبير": { base: 11, cheese: 12 },
+        "تورتيلا زنجر كبير": { base: 11, cheese: 12 },
+        "تورتيلا زنجر برجر صغير": { base: 8, cheese: 9 },
+        "سندوتش مسحب دجاج كبير": { base: 10, cheese: 11 },
+        "سندوتش مسحب دجاج صغير": { base: 8, cheese: 9 },
+        "صحن بطاطس صغير": { base: 3, cheese: 6, labelBase: "صافي: 3 ر.ي", labelCheese: "جبن: 6 ر.ي", btnBase: "+ صافي (3)", btnCheese: "+ مع جبن (6)" },
+        "صحن بطاطس كبير": { base: 5, cheese: 8, labelBase: "صافي: 5 ر.ي", labelCheese: "جبن: 8 ر.ي", btnBase: "+ صافي (5)", btnCheese: "+ مع جبن (8)" },
+        "وجبة توست دجاج متكاملة": { base: 13, cheese: 14 },
+        "تشيكن فرايز صغير": { single: 10 },
+        "تشيكن فرايز كبير": { single: 15 },
+        "وجبة زنجر متكاملة": { base: 15, cheese: 16 },
+        "وجبة برجر دجاج متكاملة": { base: 14, cheese: 15 },
+        "إضافة: صوص ثوم": { single: 1 },
+        "إضافة: صوص كوكتيل": { single: 1 },
+        "إضافة: صوص طحينية": { single: 1 },
+        "إضافة: شطة حار": { single: 1 },
+        "إضافة: صوص جبنة": { single: 2 },
+        "كوكاكولا": { single: 2 },
+        "كولا لايت": { single: 2 },
+        "فانتا برتقال": { single: 2 },
+        "فانتا حمضيات": { single: 2 },
+        "فانتا فراولة": { single: 2 },
+        "سبرايت": { single: 2 },
+        "عصير ربيع": { single: 2 },
+        "ماء كبير": { single: 1 },
+        "ماء صغير": { single: 0.05 }
       }
     };
 
     let cart = [];
     let currentCustomizingItem = null;
     let currentCustomizingQty = 1;
-    let selectedBranchName = "حلي";
+    const branchName = "حلي";
+    const restaurantPhone = BRANCH_DATA.phone;
 
     // تفعيل تفاعل أزرار الملاحظات السريعة Chips
     document.querySelectorAll('.note-chip input').forEach(input => {
@@ -1630,61 +1550,7 @@
       });
     });
 
-    // تحديث الواجهة والأسعار عند تغيير الفرع
-    function updateBranchPricingUI() {
-      const branchInfo = BRANCH_DATA[selectedBranchName];
-      if (!branchInfo) return;
-
-      document.getElementById('navBranchIndicator').innerText = branchInfo.navLabel;
-      document.getElementById('footerLocationText').innerText = branchInfo.footerLocation;
-      
-      const phoneLink = document.getElementById('footerPhoneLink');
-      if (phoneLink) {
-        phoneLink.href = `tel:${branchInfo.displayPhone}`;
-        phoneLink.innerText = `📞 ${branchInfo.displayPhone}`;
-      }
-
-      const pList = branchInfo.prices;
-
-      document.querySelectorAll('.card[data-item-id]').forEach(card => {
-        const itemId = card.getAttribute('data-item-id');
-        const itemPricing = pList[itemId];
-        if (!itemPricing) return;
-
-        if (itemPricing.base !== undefined && itemPricing.cheese !== undefined) {
-          const baseDisplay = card.querySelector('.price-display-base');
-          const subDisplay = card.querySelector('.price-display-sub');
-          const btnBase = card.querySelector('.btn-action-base');
-          const btnCheese = card.querySelector('.btn-action-cheese');
-
-          if (baseDisplay) baseDisplay.innerText = itemPricing.labelBase || `${itemPricing.base} ر.ي`;
-          if (subDisplay) subDisplay.innerText = itemPricing.labelCheese || `جبن: ${itemPricing.cheese} ر.ي`;
-          if (btnBase) btnBase.innerText = itemPricing.btnBase || `+ بدون جبن (${itemPricing.base})`;
-          if (btnCheese) btnCheese.innerText = itemPricing.btnCheese || `+ جبنة (${itemPricing.cheese})`;
-        } else if (itemPricing.single !== undefined) {
-          const singleDisplay = card.querySelector('.price-display-single');
-          const btnSingle = card.querySelector('.btn-action-single');
-
-          if (singleDisplay) singleDisplay.innerText = `${itemPricing.single} ر.ي`;
-          if (btnSingle) {
-            if (itemId.includes('إضافة:')) {
-              btnSingle.innerText = `+ أضف (${itemPricing.single} ر.ي)`;
-            } else if (itemId.includes('فرايز')) {
-              btnSingle.innerText = `+ إضافة (${itemPricing.single})`;
-            } else {
-              btnSingle.innerText = `+ أضف (${itemPricing.single})`;
-            }
-          }
-        }
-      });
-    }
-
-    function selectBranch(branch) {
-      selectedBranchName = branch;
-      updateBranchPricingUI();
-      dismissSplashScreen();
-    }
-
+    // إخفاء الـ Splash Screen تلقائياً بعد 5 ثوانٍ
     function dismissSplashScreen() {
       const splash = document.getElementById('splashScreen');
       if (splash && !splash.classList.contains('fade-out')) {
@@ -1707,7 +1573,7 @@
     }
 
     function openItemByName(itemId, type) {
-      const itemPricing = BRANCH_DATA[selectedBranchName].prices[itemId];
+      const itemPricing = BRANCH_DATA.prices[itemId];
       if (!itemPricing) return;
 
       let chosenName = itemId;
@@ -1727,16 +1593,17 @@
     }
 
     function addDirectItemByName(itemId) {
-      const itemPricing = BRANCH_DATA[selectedBranchName].prices[itemId];
+      const itemPricing = BRANCH_DATA.prices[itemId];
       if (!itemPricing) return;
       addDirectItem(itemId, itemPricing.single);
     }
 
     /* ========================================================
-       تعديل خيارات الخبز بحسب المطلوب حرفياً وبدقة:
-       1. قسم البرجر: إلغاء الخبز تماماً.
-       2. الكلوب: إلغاء خيار خبز الصاج منه تماماً (أبيض وأسمر فقط).
-       3. باقي الأصناف كما هي.
+       تخصيص خيارات الخبز:
+       1. أي تورتيلا كبير: خياران فقط (أبيض وصاج).
+       2. أي تورتيلا صغير: 3 خيارات (أبيض، صاج، أسمر).
+       3. البرجر: بدون خيارات خبز نهائياً.
+       4. الكلوب: توست أبيض وأسمر فقط.
        ======================================================== */
     function setupBreadOptions(itemName) {
       const container = document.getElementById('breadSectionContainer');
@@ -1746,7 +1613,30 @@
       
       notice.style.display = 'none';
 
-      // 1. قسم البرجر بالكامل (أي صنف برجر عادي أو دبل أو جانبو أو لحم أو دجاج): إلغاء خيار الخبز تماماً
+      // 1. أي تورتيلا كبير: صاج وأبيض فقط
+      if (itemName.includes('تورتيلا') && itemName.includes('كبير')) {
+        container.style.display = 'block';
+        title.innerText = '🥖 نوع الخبز:';
+        grid.innerHTML = `
+          <label class="option-item"><input type="radio" name="opt_bread" value="خبز أبيض" checked onchange="updateCustomModalQtyDisplay()"> خبز أبيض</label>
+          <label class="option-item"><input type="radio" name="opt_bread" value="خبز صاج (+1 ر.ي)" onchange="updateCustomModalQtyDisplay()"> <span style="color: var(--accent); font-weight: 800;">خبز صاج (+1 ر.ي)</span></label>
+        `;
+        return;
+      }
+
+      // 2. أي تورتيلا صغير: أبيض وصاج وأسمر
+      if (itemName.includes('تورتيلا') && itemName.includes('صغير')) {
+        container.style.display = 'block';
+        title.innerText = '🥖 نوع الخبز:';
+        grid.innerHTML = `
+          <label class="option-item"><input type="radio" name="opt_bread" value="خبز أبيض" checked onchange="updateCustomModalQtyDisplay()"> خبز أبيض</label>
+          <label class="option-item"><input type="radio" name="opt_bread" value="خبز صاج (+1 ر.ي)" onchange="updateCustomModalQtyDisplay()"> <span style="color: var(--accent); font-weight: 800;">خبز صاج (+1 ر.ي)</span></label>
+          <label class="option-item"><input type="radio" name="opt_bread" value="خبز أسمر (بُر) (+1 ر.ي)" onchange="updateCustomModalQtyDisplay()"> <span style="color: var(--accent); font-weight: 800;">خبز أسمر (+1 ر.ي)</span></label>
+        `;
+        return;
+      }
+
+      // 3. قسم البرجر بالكامل: إلغاء خيار الخبز تماماً
       if (
         itemName.includes('برجر') || 
         itemName.includes('جانبو دجاج') || 
@@ -1758,7 +1648,7 @@
         return;
       }
 
-      // 2. الكلوب ساندوتش (كلوب زنجر وكلوب شاورما): إلغاء خيار خبز الصاج تماماً
+      // 4. الكلوب ساندوتش: توست أبيض أو أسمر فقط (إلغاء الصاج)
       if (itemName.includes('كلوب')) {
         container.style.display = 'block';
         title.innerText = '🥖 نوع خبز التوست:';
@@ -1769,7 +1659,7 @@
         return;
       }
 
-      // 3. الصحون (صحن عربي): خيار إضافة خبز صاج بـ 2 ر.ي
+      // 5. الصحون (صحن عربي): خيار إضافة خبز صاج إضافي بـ 2 ر.ي
       if (itemName.includes('صحن عربي')) {
         container.style.display = 'block';
         title.innerText = '🥖 إضافة خبز صاج إضافي مع الصحن:';
@@ -1780,7 +1670,7 @@
         return;
       }
 
-      // 4. الصاروخ: أبيض، سمر (+1 ر.ي)، وصاج (+1 ر.ي)
+      // 6. الصاروخ: أبيض، سمر (+1 ر.ي)، وصاج (+1 ر.ي)
       if (itemName.includes('صاروخ')) {
         container.style.display = 'block';
         title.innerText = '🥖 نوع الخبز:';
@@ -1792,35 +1682,12 @@
         return;
       }
 
-      // 5. ساندوتش شاورمايشن: صاج فقط
+      // 7. ساندوتش شاورمايشن: صاج فقط
       if (itemName.includes('ساندوتش شاورمايشن')) {
         container.style.display = 'block';
         title.innerText = '🥖 نوع الخبز:';
         grid.innerHTML = `
           <label class="option-item"><input type="radio" name="opt_bread" value="خبز صاج" checked onchange="updateCustomModalQtyDisplay()"> خبز صاج</label>
-        `;
-        return;
-      }
-
-      // 6. التورتيلا الكبير (أبيض وصاج فقط)
-      if (itemName.includes('تورتيلا') && itemName.includes('كبير')) {
-        container.style.display = 'block';
-        title.innerText = '🥖 نوع الخبز:';
-        grid.innerHTML = `
-          <label class="option-item"><input type="radio" name="opt_bread" value="خبز أبيض" checked onchange="updateCustomModalQtyDisplay()"> خبز أبيض</label>
-          <label class="option-item"><input type="radio" name="opt_bread" value="خبز صاج (+1 ر.ي)" onchange="updateCustomModalQtyDisplay()"> <span style="color: var(--accent); font-weight: 800;">خبز صاج (+1 ر.ي)</span></label>
-        `;
-        return;
-      }
-
-      // 7. التورتيلا الصغير (أبيض، صاج، وأسمر بـ 1 ريال)
-      if (itemName.includes('تورتيلا') && itemName.includes('صغير')) {
-        container.style.display = 'block';
-        title.innerText = '🥖 نوع الخبز:';
-        grid.innerHTML = `
-          <label class="option-item"><input type="radio" name="opt_bread" value="خبز أبيض" checked onchange="updateCustomModalQtyDisplay()"> خبز أبيض</label>
-          <label class="option-item"><input type="radio" name="opt_bread" value="خبز أسمر (بُر) (+1 ر.ي)" onchange="updateCustomModalQtyDisplay()"> <span style="color: var(--accent); font-weight: 800;">خبز أسمر (+1 ر.ي)</span></label>
-          <label class="option-item"><input type="radio" name="opt_bread" value="خبز صاج (+1 ر.ي)" onchange="updateCustomModalQtyDisplay()"> <span style="color: var(--accent); font-weight: 800;">خبز صاج (+1 ر.ي)</span></label>
         `;
         return;
       }
@@ -1909,7 +1776,7 @@
         } else if (breadOpt.value.includes('+1 ر.ي')) {
           breadExtra = 1;
           notice.style.display = 'block';
-          notice.innerText = 'ℹ️️ تم احتساب +1 ر.ي لكل حبة لاختيار الخبز الإضافي (أسمر/صاج).';
+          notice.innerText = 'ℹ تم احتساب +1 ر.ي لكل حبة لاختيار الخبز الإضافي (أسمر/صاج).';
         } else {
           notice.style.display = 'none';
         }
@@ -2106,16 +1973,13 @@
     function sendFullOrderToWhatsApp() {
       if (cart.length === 0) return;
 
-      const branchInfo = BRANCH_DATA[selectedBranchName];
-      const targetPhone = branchInfo ? branchInfo.phone : "966500953327";
-
       const method = document.getElementById('deliverySelect').value;
       const customerAddress = document.getElementById('customerAddress').value.trim();
       const carDetails = document.getElementById('carDetails').value.trim();
       const storeName = document.getElementById('storeName').value.trim();
       const storePhone = document.getElementById('storePhone').value.trim();
       
-      let orderText = `السلام عليكم ورحمة الله،\nأرغب في تقديم طلب جديد من مطعم *شاورمايشن* - *${branchInfo ? branchInfo.navLabel : selectedBranchName}*:\n\n`;
+      let orderText = `السلام عليكم ورحمة الله،\nأرغب في تقديم طلب جديد من مطعم *شاورمايشن* - *فرع ${branchName}*:\n\n`;
       orderText += "------------------------------------\n📋 *تفاصيل الطلبات:*\n";
 
       let hasFreeItems = false;
@@ -2152,15 +2016,17 @@
       orderText += `\n💰 *الإجمالي الكلي المطلوب:* ${itemsSum.toFixed(2)} ر.ي\n`;
       orderText += "يرجى تأكيد استلام الطلب. شكراً لكم!";
 
-      window.open(`https://wa.me/${targetPhone}?text=${encodeURIComponent(orderText)}`, '_blank');
+      window.open(`https://wa.me/${restaurantPhone}?text=${encodeURIComponent(orderText)}`, '_blank');
       cart = [];
       updateCartUI();
       closeCartReviewModal();
     }
 
-    // التهيئة التلقائية عند فتح الصفحة
+    // إغلاق شاشة البداية تلقائياً بعد 5 ثوانٍ من فتح الصفحة
     window.addEventListener('DOMContentLoaded', () => {
-      updateBranchPricingUI();
+      setTimeout(() => {
+        dismissSplashScreen();
+      }, 5000);
     });
   </script>
 </body>
