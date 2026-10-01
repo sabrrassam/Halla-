@@ -32,7 +32,7 @@
       overflow-x: hidden;
     }
 
-    /* === شاشة الترحيب Splash Screen تلقائية لمدة 5 ثوانٍ === */
+    /* === شاشة الترحيب Splash Screen === */
     #splashScreen {
       position: fixed;
       inset: 0;
@@ -121,7 +121,7 @@
       height: 100%;
       background: linear-gradient(90deg, var(--primary), var(--secondary));
       width: 0%;
-      animation: fillProgress 5s linear forwards;
+      animation: fillProgress 3s linear forwards;
     }
 
     @keyframes fillProgress {
@@ -266,7 +266,7 @@
     .arrow-left { left: -14px; }
     .arrow-right { right: -14px; }
 
-    /* إشعار الهدية المنبثق */
+    /* إشعار الهدية */
     .toast-center-overlay {
       position: fixed;
       top: 50%;
@@ -328,7 +328,7 @@
     .option-item:hover { background: rgba(214, 40, 40, 0.25); border-color: var(--secondary); }
     .option-item input { accent-color: var(--primary); cursor: pointer; }
 
-    /* تفضيلات وملاحظات الطلب السريعة All Notes */
+    /* تفضيلات وملاحظات الطلب All Notes */
     .notes-chips-grid {
       display: flex;
       flex-wrap: wrap;
@@ -396,7 +396,7 @@
 </head>
 <body>
 
-  <!-- شاشة البداية Splash Screen تلقائية لمدة 5 ثوانٍ لفرع حلي -->
+  <!-- شاشة البداية Splash Screen -->
   <div id="splashScreen">
     <div class="splash-content">
       <div class="splash-logo-ring">
@@ -413,7 +413,7 @@
     </div>
   </div>
 
-  <!-- التنبيه المنبثق عند الحصول على الصنف الرابع مجاناً -->
+  <!-- التنبيه المنبثق لعرض الأسرة -->
   <div id="offerToastAlert" class="toast-center-overlay">
     <div class="toast-icon">🎁</div>
     <div class="toast-title">🎉 مبروك! حصلت على الرابع مجاناً</div>
@@ -728,7 +728,7 @@
     </div>
   </section>
 
-  <!-- القسم 3: قسم البرجر (بدون خيارات خبز نهائياً) -->
+  <!-- القسم 3: قسم البرجر (أزرار مشوي / مقلي مباشرة في البطاقة) -->
   <section class="menu-section" id="burgers" style="background: rgba(16,10,8,0.95);">
     <div class="section-container">
       <div class="section-header">
@@ -746,34 +746,12 @@
             <div class="card-content">
               <div class="card-top">
                 <span class="item-title">برجر دجاج</span>
-                <div class="prices-badge-group">
-                  <span class="price-tag price-display-base">9 ر.ي</span>
-                  <span class="price-sub price-display-sub">جبن: 10 ر.ي</span>
-                </div>
+                <span class="price-tag">9 ر.ي</span>
               </div>
-              <p class="item-desc">قطعة دجاج (مشوية أو مقلية) مع الخس والصلصة اللذيذة.</p>
+              <p class="item-desc">قطعة دجاج طازجة (مشوي أو مقلي) مع الخس والصلصة المميزة.</p>
               <div class="card-footer">
-                <button class="btn-add btn-action-base" onclick="openItemByName('برجر دجاج', 'base')">+ بدون جبن (9)</button>
-                <button class="btn-add btn-action-cheese" onclick="openItemByName('برجر دجاج', 'cheese')">+ جبنة (10)</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- جانبو دجاج برجر -->
-          <div class="card" data-item-id="جانبو دجاج برجر">
-            <div class="card-img-wrapper"><img src="img/جامبو دجاج برجر.jpeg" alt="جانبو دجاج برجر"></div>
-            <div class="card-content">
-              <div class="card-top">
-                <span class="item-title">جانبو دجاج برجر</span>
-                <div class="prices-badge-group">
-                  <span class="price-tag price-display-base">10 ر.ي</span>
-                  <span class="price-sub price-display-sub">جبن: 11 ر.ي</span>
-                </div>
-              </div>
-              <p class="item-desc">قطعة دجاج جامبو كبيرة وغنية بالنكهات والصلصة الخاصة.</p>
-              <div class="card-footer">
-                <button class="btn-add btn-action-base" onclick="openItemByName('جانبو دجاج برجر', 'base')">+ بدون جبن (10)</button>
-                <button class="btn-add btn-action-cheese" onclick="openItemByName('جانبو دجاج برجر', 'cheese')">+ جبنة (11)</button>
+                <button class="btn-add" onclick="openItemWithPrep('برجر دجاج', 9, 'مشوي 🔥')">+ مشوي 🔥 (9)</button>
+                <button class="btn-add" onclick="openItemWithPrep('برجر دجاج', 9, 'مقلي 🍗')">+ مقلي 🍗 (9)</button>
               </div>
             </div>
           </div>
@@ -784,15 +762,12 @@
             <div class="card-content">
               <div class="card-top">
                 <span class="item-title">برجر دبل دجاج</span>
-                <div class="prices-badge-group">
-                  <span class="price-tag price-display-base">14 ر.ي</span>
-                  <span class="price-sub price-display-sub">جبن: 15 ر.ي</span>
-                </div>
+                <span class="price-tag">14 ر.ي</span>
               </div>
-              <p class="item-desc">شريحتين دجاج مشوي أو مقلي مع الخس والصلصة الخاصة.</p>
+              <p class="item-desc">شريحتين دجاج مشوي أو مقلي بالحجم المضاعف والمشبع.</p>
               <div class="card-footer">
-                <button class="btn-add btn-action-base" onclick="openItemByName('برجر دبل دجاج', 'base')">+ بدون جبن (14)</button>
-                <button class="btn-add btn-action-cheese" onclick="openItemByName('برجر دبل دجاج', 'cheese')">+ جبنة (15)</button>
+                <button class="btn-add" onclick="openItemWithPrep('برجر دبل دجاج', 14, 'مشوي 🔥')">+ مشوي 🔥 (14)</button>
+                <button class="btn-add" onclick="openItemWithPrep('برجر دبل دجاج', 14, 'مقلي 🍗')">+ مقلي 🍗 (14)</button>
               </div>
             </div>
           </div>
@@ -803,15 +778,11 @@
             <div class="card-content">
               <div class="card-top">
                 <span class="item-title">برجر زنجر</span>
-                <div class="prices-badge-group">
-                  <span class="price-tag price-display-base">9 ر.ي</span>
-                  <span class="price-sub price-display-sub">جبن: 10 ر.ي</span>
-                </div>
+                <span class="price-tag">9 ر.ي</span>
               </div>
-              <p class="item-desc">دجاج زنجر مقرمش حار مع صوص المايونيز والجبنة اللذيذة.</p>
+              <p class="item-desc">دجاج زنجر مقرمش حار مع صوص المايونيز والصلصة اللذيذة.</p>
               <div class="card-footer">
-                <button class="btn-add btn-action-base" onclick="openItemByName('برجر زنجر', 'base')">+ بدون جبن (9)</button>
-                <button class="btn-add btn-action-cheese" onclick="openItemByName('برجر زنجر', 'cheese')">+ جبنة (10)</button>
+                <button class="btn-add" onclick="openItemWithPrep('برجر زنجر', 9, 'مقلي 🍗')">+ إضافة للطلب (9 ر.ي)</button>
               </div>
             </div>
           </div>
@@ -822,15 +793,27 @@
             <div class="card-content">
               <div class="card-top">
                 <span class="item-title">برجر زنجر دبل</span>
-                <div class="prices-badge-group">
-                  <span class="price-tag price-display-base">14 ر.ي</span>
-                  <span class="price-sub price-display-sub">جبن: 15 ر.ي</span>
-                </div>
+                <span class="price-tag">14 ر.ي</span>
               </div>
               <p class="item-desc">شريحتين من الزنجر المقرمش الحار بالحجم المضاعف والمشبع.</p>
               <div class="card-footer">
-                <button class="btn-add btn-action-base" onclick="openItemByName('برجر زنجر دبل', 'base')">+ بدون جبن (14)</button>
-                <button class="btn-add btn-action-cheese" onclick="openItemByName('برجر زنجر دبل', 'cheese')">+ جبنة (15)</button>
+                <button class="btn-add" onclick="openItemWithPrep('برجر زنجر دبل', 14, 'مقلي 🍗')">+ إضافة للطلب (14 ر.ي)</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- جانبو دجاج برجر -->
+          <div class="card" data-item-id="جانبو دجاج برجر">
+            <div class="card-img-wrapper"><img src="img/جامبو دجاج برجر.jpeg" alt="جانبو دجاج برجر"></div>
+            <div class="card-content">
+              <div class="card-top">
+                <span class="item-title">جانبو دجاج برجر</span>
+                <span class="price-tag">10 ر.ي</span>
+              </div>
+              <p class="item-desc">قطعة دجاج جامبو كبيرة وغنية بالنكهات والصلصة الخاصة.</p>
+              <div class="card-footer">
+                <button class="btn-add" onclick="openItemWithPrep('جانبو دجاج برجر', 10, 'مشوي 🔥')">+ مشوي 🔥 (10)</button>
+                <button class="btn-add" onclick="openItemWithPrep('جانبو دجاج برجر', 10, 'مقلي 🍗')">+ مقلي 🍗 (10)</button>
               </div>
             </div>
           </div>
@@ -841,15 +824,11 @@
             <div class="card-content">
               <div class="card-top">
                 <span class="item-title">جانبو زنجر</span>
-                <div class="prices-badge-group">
-                  <span class="price-tag price-display-base">10 ر.ي</span>
-                  <span class="price-sub price-display-sub">جبن: 11 ر.ي</span>
-                </div>
+                <span class="price-tag">10 ر.ي</span>
               </div>
               <p class="item-desc">قطعة زنجر كبيرة مقرمشة ومتبلة داخل خبز برجر فاخر.</p>
               <div class="card-footer">
-                <button class="btn-add btn-action-base" onclick="openItemByName('جانبو زنجر', 'base')">+ بدون جبن (10)</button>
-                <button class="btn-add btn-action-cheese" onclick="openItemByName('جانبو زنجر', 'cheese')">+ جبنة (11)</button>
+                <button class="btn-add" onclick="openItemWithPrep('جانبو زنجر', 10, 'مقلي 🍗')">+ إضافة للطلب (10 ر.ي)</button>
               </div>
             </div>
           </div>
@@ -860,15 +839,12 @@
             <div class="card-content">
               <div class="card-top">
                 <span class="item-title">توست دجاج برجر</span>
-                <div class="prices-badge-group">
-                  <span class="price-tag price-display-base">8 ر.ي</span>
-                  <span class="price-sub price-display-sub">جبن: 9 ر.ي</span>
-                </div>
+                <span class="price-tag">8 ر.ي</span>
               </div>
               <p class="item-desc">دجاج برجر مشوي أو مقلي محمص بشرائح التوست الذهبي الشهي.</p>
               <div class="card-footer">
-                <button class="btn-add btn-action-base" onclick="openItemByName('توست دجاج برجر', 'base')">+ بدون جبن (8)</button>
-                <button class="btn-add btn-action-cheese" onclick="openItemByName('توست دجاج برجر', 'cheese')">+ جبنة (9)</button>
+                <button class="btn-add" onclick="openItemWithPrep('توست دجاج برجر', 8, 'مشوي 🔥')">+ مشوي 🔥 (8)</button>
+                <button class="btn-add" onclick="openItemWithPrep('توست دجاج برجر', 8, 'مقلي 🍗')">+ مقلي 🍗 (8)</button>
               </div>
             </div>
           </div>
@@ -897,15 +873,12 @@
             <div class="card-content">
               <div class="card-top">
                 <span class="item-title">تورتيلا دجاج برجر صغير</span>
-                <div class="prices-badge-group">
-                  <span class="price-tag price-display-base">7 ر.ي</span>
-                  <span class="price-sub price-display-sub">جبن: 8 ر.ي</span>
-                </div>
+                <span class="price-tag">7 ر.ي</span>
               </div>
               <p class="item-desc">دجاج برجر طازج ملفوف بخبز التورتيلا الرائع مع الصوص الخاص.</p>
               <div class="card-footer">
-                <button class="btn-add btn-action-base" onclick="openItemByName('تورتيلا دجاج برجر صغير', 'base')">+ بدون جبن (7)</button>
-                <button class="btn-add btn-action-cheese" onclick="openItemByName('تورتيلا دجاج برجر صغير', 'cheese')">+ جبنة (8)</button>
+                <button class="btn-add" onclick="openItemWithPrep('تورتيلا دجاج برجر صغير', 7, 'مشوي 🔥')">+ مشوي 🔥 (7)</button>
+                <button class="btn-add" onclick="openItemWithPrep('تورتيلا دجاج برجر صغير', 7, 'مقلي 🍗')">+ مقلي 🍗 (7)</button>
               </div>
             </div>
           </div>
@@ -916,15 +889,12 @@
             <div class="card-content">
               <div class="card-top">
                 <span class="item-title">تورتيلا دجاج برجر كبير</span>
-                <div class="prices-badge-group">
-                  <span class="price-tag price-display-base">11 ر.ي</span>
-                  <span class="price-sub price-display-sub">جبن: 12 ر.ي</span>
-                </div>
+                <span class="price-tag">11 ر.ي</span>
               </div>
               <p class="item-desc">حجم كبير مشبع من برجر الدجاج داخل خبز التورتيلا المحمص.</p>
               <div class="card-footer">
-                <button class="btn-add btn-action-base" onclick="openItemByName('تورتيلا دجاج برجر كبير', 'base')">+ بدون جبن (11)</button>
-                <button class="btn-add btn-action-cheese" onclick="openItemByName('تورتيلا دجاج برجر كبير', 'cheese')">+ جبنة (12)</button>
+                <button class="btn-add" onclick="openItemWithPrep('تورتيلا دجاج برجر كبير', 11, 'مشوي 🔥')">+ مشوي 🔥 (11)</button>
+                <button class="btn-add" onclick="openItemWithPrep('تورتيلا دجاج برجر كبير', 11, 'مقلي 🍗')">+ مقلي 🍗 (11)</button>
               </div>
             </div>
           </div>
@@ -935,15 +905,11 @@
             <div class="card-content">
               <div class="card-top">
                 <span class="item-title">تورتيلا زنجر كبير</span>
-                <div class="prices-badge-group">
-                  <span class="price-tag price-display-base">11 ر.ي</span>
-                  <span class="price-sub price-display-sub">جبن: 12 ر.ي</span>
-                </div>
+                <span class="price-tag">11 ر.ي</span>
               </div>
               <p class="item-desc">قطع الزنجر المقرمشة الحارة ملفوفة بعناية في خبز التورتيلا اللذيذ.</p>
               <div class="card-footer">
-                <button class="btn-add btn-action-base" onclick="openItemByName('تورتيلا زنجر كبير', 'base')">+ بدون جبن (11)</button>
-                <button class="btn-add btn-action-cheese" onclick="openItemByName('تورتيلا زنجر كبير', 'cheese')">+ جبنة (12)</button>
+                <button class="btn-add" onclick="openItemWithPrep('تورتيلا زنجر كبير', 11, 'مقلي 🍗')">+ إضافة للطلب (11 ر.ي)</button>
               </div>
             </div>
           </div>
@@ -954,15 +920,11 @@
             <div class="card-content">
               <div class="card-top">
                 <span class="item-title">تورتيلا زنجر برجر صغير</span>
-                <div class="prices-badge-group">
-                  <span class="price-tag price-display-base">8 ر.ي</span>
-                  <span class="price-sub price-display-sub">جبن: 9 ر.ي</span>
-                </div>
+                <span class="price-tag">8 ر.ي</span>
               </div>
               <p class="item-desc">ساندوتش تورتيلا خفيف ومقرمش بقطع زنجر متبلة وغنية بالصوص.</p>
               <div class="card-footer">
-                <button class="btn-add btn-action-base" onclick="openItemByName('تورتيلا زنجر برجر صغير', 'base')">+ بدون جبن (8)</button>
-                <button class="btn-add btn-action-cheese" onclick="openItemByName('تورتيلا زنجر برجر صغير', 'cheese')">+ جبنة (9)</button>
+                <button class="btn-add" onclick="openItemWithPrep('تورتيلا زنجر برجر صغير', 8, 'مقلي 🍗')">+ إضافة للطلب (8 ر.ي)</button>
               </div>
             </div>
           </div>
@@ -973,15 +935,11 @@
             <div class="card-content">
               <div class="card-top">
                 <span class="item-title">سندوتش مسحب دجاج كبير</span>
-                <div class="prices-badge-group">
-                  <span class="price-tag price-display-base">10 ر.ي</span>
-                  <span class="price-sub price-display-sub">جبن: 11 ر.ي</span>
-                </div>
+                <span class="price-tag">10 ر.ي</span>
               </div>
               <p class="item-desc">أصابع مسحب الدجاج الذهبي المقرمش مع الثومية والبطاطس بالحجم الكبير.</p>
               <div class="card-footer">
-                <button class="btn-add btn-action-base" onclick="openItemByName('سندوتش مسحب دجاج كبير', 'base')">+ بدون جبن (10)</button>
-                <button class="btn-add btn-action-cheese" onclick="openItemByName('سندوتش مسحب دجاج كبير', 'cheese')">+ جبنة (11)</button>
+                <button class="btn-add" onclick="openItemWithPrep('سندوتش مسحب دجاج كبير', 10, 'مقلي 🍗')">+ إضافة للطلب (10 ر.ي)</button>
               </div>
             </div>
           </div>
@@ -992,15 +950,11 @@
             <div class="card-content">
               <div class="card-top">
                 <span class="item-title">سندوتش مسحب دجاج صغير</span>
-                <div class="prices-badge-group">
-                  <span class="price-tag price-display-base">8 ر.ي</span>
-                  <span class="price-sub price-display-sub">جبن: 9 ر.ي</span>
-                </div>
+                <span class="price-tag">8 ر.ي</span>
               </div>
-              <p class="item-desc">وجبة خفيفة من مسحب الدجاج المتبل والمقرمش مع الصصوص الخاص.</p>
+              <p class="item-desc">وجبة خفيفة من مسحب الدجاج المتبل والمقرمش مع الصوص الخاص.</p>
               <div class="card-footer">
-                <button class="btn-add btn-action-base" onclick="openItemByName('سندوتش مسحب دجاج صغير', 'base')">+ بدون جبن (8)</button>
-                <button class="btn-add btn-action-cheese" onclick="openItemByName('سندوتش مسحب دجاج صغير', 'cheese')">+ جبنة (9)</button>
+                <button class="btn-add" onclick="openItemWithPrep('سندوتش مسحب دجاج صغير', 8, 'مقلي 🍗')">+ إضافة للطلب (8 ر.ي)</button>
               </div>
             </div>
           </div>
@@ -1012,14 +966,14 @@
               <div class="card-top">
                 <span class="item-title">صحن بطاطس صغير</span>
                 <div class="prices-badge-group">
-                  <span class="price-tag price-display-base">صافي: 3 ر.ي</span>
-                  <span class="price-sub price-display-sub">جبن: 6 ر.ي</span>
+                  <span class="price-tag">صافي: 3 ر.ي</span>
+                  <span class="price-sub">جبن: 6 ر.ي</span>
                 </div>
               </div>
               <p class="item-desc">أصابع بطاطس مقلية ذهبية مقرمشة ولذيذة.</p>
               <div class="card-footer">
-                <button class="btn-add btn-action-base" onclick="openItemByName('صحن بطاطس صغير', 'base')">+ صافي (3)</button>
-                <button class="btn-add btn-action-cheese" onclick="openItemByName('صحن بطاطس صغير', 'cheese')">+ مع جبن (6)</button>
+                <button class="btn-add" onclick="openItemByName('صحن بطاطس صغير', 'base')">+ صافي (3)</button>
+                <button class="btn-add" onclick="openItemByName('صحن بطاطس صغير', 'cheese')">+ مع جبن (6)</button>
               </div>
             </div>
           </div>
@@ -1031,14 +985,14 @@
               <div class="card-top">
                 <span class="item-title">صحن بطاطس كبير</span>
                 <div class="prices-badge-group">
-                  <span class="price-tag price-display-base">صافي: 5 ر.ي</span>
-                  <span class="price-sub price-display-sub">جبن: 8 ر.ي</span>
+                  <span class="price-tag">صافي: 5 ر.ي</span>
+                  <span class="price-sub">جبن: 8 ر.ي</span>
                 </div>
               </div>
               <p class="item-desc">كمية كبيرة ومقرمشة من البطاطس المقلية الطازجة.</p>
               <div class="card-footer">
-                <button class="btn-add btn-action-base" onclick="openItemByName('صحن بطاطس كبير', 'base')">+ صافي (5)</button>
-                <button class="btn-add btn-action-cheese" onclick="openItemByName('صحن بطاطس كبير', 'cheese')">+ مع جبن (8)</button>
+                <button class="btn-add" onclick="openItemByName('صحن بطاطس كبير', 'base')">+ صافي (5)</button>
+                <button class="btn-add" onclick="openItemByName('صحن بطاطس كبير', 'cheese')">+ مع جبن (8)</button>
               </div>
             </div>
           </div>
@@ -1061,21 +1015,49 @@
         <button class="slider-arrow-btn arrow-right" onclick="scrollSection('mealsTrack', 'right')" aria-label="التالي">❯</button>
 
         <div class="slider-track" id="mealsTrack">
+          <!-- وجبة برجر دجاج متكاملة -->
+          <div class="card" data-item-id="وجبة برجر دجاج متكاملة">
+            <div class="card-img-wrapper"><img src="img/برجر زنجر مع شبس وبطاطس.jpeg" alt="وجبة برجر دجاج متكاملة"></div>
+            <div class="card-content">
+              <div class="card-top">
+                <span class="item-title">وجبة برجر دجاج متكاملة</span>
+                <span class="price-tag">14 ر.ي</span>
+              </div>
+              <p class="item-desc">تتكون الوجبة من: بطاطس مقرمشة مع برجر دجاج مع مشروب غازي.</p>
+              <div class="card-footer">
+                <button class="btn-add" onclick="openItemWithPrep('وجبة برجر دجاج متكاملة', 14, 'مشوي 🔥')">+ مشوي 🔥 (14)</button>
+                <button class="btn-add" onclick="openItemWithPrep('وجبة برجر دجاج متكاملة', 14, 'مقلي 🍗')">+ مقلي 🍗 (14)</button>
+              </div>
+            </div>
+          </div>
+
           <!-- وجبة توست دجاج متكاملة -->
           <div class="card" data-item-id="وجبة توست دجاج متكاملة">
             <div class="card-img-wrapper"><img src="img/وجبة توست دجاج.jpeg" alt="وجبة توست دجاج"></div>
             <div class="card-content">
               <div class="card-top">
                 <span class="item-title">وجبة توست دجاج متكاملة</span>
-                <div class="prices-badge-group">
-                  <span class="price-tag price-display-base">13 ر.ي</span>
-                  <span class="price-sub price-display-sub">جبن: 14 ر.ي</span>
-                </div>
+                <span class="price-tag">13 ر.ي</span>
               </div>
               <p class="item-desc">تتكون الوجبة من: توست دجاج محمص مع بطاطس ومشروب غازي.</p>
               <div class="card-footer">
-                <button class="btn-add btn-action-base" onclick="openItemByName('وجبة توست دجاج متكاملة', 'base')">+ بدون جبن (13)</button>
-                <button class="btn-add btn-action-cheese" onclick="openItemByName('وجبة توست دجاج متكاملة', 'cheese')">+ جبنة (14)</button>
+                <button class="btn-add" onclick="openItemWithPrep('وجبة توست دجاج متكاملة', 13, 'مشوي 🔥')">+ مشوي 🔥 (13)</button>
+                <button class="btn-add" onclick="openItemWithPrep('وجبة توست دجاج متكاملة', 13, 'مقلي 🍗')">+ مقلي 🍗 (13)</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- وجبة زنجر متكاملة -->
+          <div class="card" data-item-id="وجبة زنجر متكاملة">
+            <div class="card-img-wrapper"><img src="img/برجر لحم وجبه مع شبس وبطاطس.jpeg" alt="وجبة زنجر متكاملة"></div>
+            <div class="card-content">
+              <div class="card-top">
+                <span class="item-title">وجبة زنجر متكاملة</span>
+                <span class="price-tag">15 ر.ي</span>
+              </div>
+              <p class="item-desc">تتكون الوجبة من: بطاطس مع برجر زنجر مقرمش ومشروب غازي بارد.</p>
+              <div class="card-footer">
+                <button class="btn-add" onclick="openItemWithPrep('وجبة زنجر متكاملة', 15, 'مقلي 🍗')">+ إضافة للطلب (15 ر.ي)</button>
               </div>
             </div>
           </div>
@@ -1106,44 +1088,6 @@
               <p class="item-desc">صحن تشيكن فرايز كبير مشبع بالدجاج المقرمش والجبن الذائب.</p>
               <div class="card-footer">
                 <button class="btn-add btn-action-single" onclick="openItemByName('تشيكن فرايز كبير', 'single')">+ إضافة (15)</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- وجبة زنجر متكاملة -->
-          <div class="card" data-item-id="وجبة زنجر متكاملة">
-            <div class="card-img-wrapper"><img src="img/برجر لحم وجبه مع شبس وبطاطس.jpeg" alt="وجبة زنجر متكاملة"></div>
-            <div class="card-content">
-              <div class="card-top">
-                <span class="item-title">وجبة زنجر متكاملة</span>
-                <div class="prices-badge-group">
-                  <span class="price-tag price-display-base">15 ر.ي</span>
-                  <span class="price-sub price-display-sub">جبن: 16 ر.ي</span>
-                </div>
-              </div>
-              <p class="item-desc">تتكون الوجبة من: بطاطس مع برجر زنجر مع مشروب غازي بارد.</p>
-              <div class="card-footer">
-                <button class="btn-add btn-action-base" onclick="openItemByName('وجبة زنجر متكاملة', 'base')">+ بدون جبن (15)</button>
-                <button class="btn-add btn-action-cheese" onclick="openItemByName('وجبة زنجر متكاملة', 'cheese')">+ جبنة (16)</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- وجبة برجر دجاج متكاملة -->
-          <div class="card" data-item-id="وجبة برجر دجاج متكاملة">
-            <div class="card-img-wrapper"><img src="img/برجر زنجر مع شبس وبطاطس.jpeg" alt="وجبة برجر دجاج متكاملة"></div>
-            <div class="card-content">
-              <div class="card-top">
-                <span class="item-title">وجبة برجر دجاج متكاملة</span>
-                <div class="prices-badge-group">
-                  <span class="price-tag price-display-base">14 ر.ي</span>
-                  <span class="price-sub price-display-sub">جبن: 15 ر.ي</span>
-                </div>
-              </div>
-              <p class="item-desc">تتكون الوجبة من: بطاطس مقرمشة مع برجر دجاج مع مشروب غازي.</p>
-              <div class="card-footer">
-                <button class="btn-add btn-action-base" onclick="openItemByName('وجبة برجر دجاج متكاملة', 'base')">+ بدون جبن (14)</button>
-                <button class="btn-add btn-action-cheese" onclick="openItemByName('وجبة برجر دجاج متكاملة', 'cheese')">+ جبنة (15)</button>
               </div>
             </div>
           </div>
@@ -1379,6 +1323,18 @@
           <div id="breadNotice" style="display:none; background: rgba(247, 127, 0, 0.18); border: 1px dashed var(--secondary); color: var(--accent); font-size: 0.84rem; font-weight: 800; padding: 6px 12px; border-radius: 8px; margin-bottom: 8px;"></div>
         </div>
 
+        <!-- قسم خيار التحضير (مشوي / مقلي) -->
+        <div id="cookingSectionContainer" style="display:none;">
+          <div class="option-group-title">🔥 نوع التحضير:</div>
+          <div class="options-grid" id="cookingOptionsGrid"></div>
+        </div>
+
+        <!-- قسم إضافة الجبنة (للبرجر، التورتيلا، والوجبات) -->
+        <div id="cheeseSectionContainer" style="display:none;">
+          <div class="option-group-title">🧀 خيارات الجبنة في التفاصيل:</div>
+          <div class="options-grid" id="cheeseOptionsGrid"></div>
+        </div>
+
         <!-- تفضيلات وملاحظات الطلب السريعة All Notes -->
         <div class="option-group-title">✨ تفضيلات وملاحظات الطلب (All Notes):</div>
         <div class="notes-chips-grid" id="notesChipsWrapper">
@@ -1476,7 +1432,7 @@
 
   <script>
     /* ========================================================
-       قائمة أسعار وبيانات فرع حلي المعتمدة رسمياً 100%
+       قائمة أسعار فرع حلي المعتمدة رسمياً 100%
        ======================================================== */
     const BRANCH_DATA = {
       navLabel: "فرع حلي",
@@ -1496,26 +1452,26 @@
         "شاورما جامبو": { base: 9, cheese: 10 },
         "توست شاورما": { base: 8, cheese: 9 },
         "برجر شاورما": { base: 8, cheese: 9 },
-        "برجر دجاج": { base: 9, cheese: 10 },
-        "جانبو دجاج برجر": { base: 10, cheese: 11 },
-        "برجر دبل دجاج": { base: 14, cheese: 15 },
-        "برجر زنجر": { base: 9, cheese: 10 },
-        "برجر زنجر دبل": { base: 14, cheese: 15 },
-        "جانبو زنجر": { base: 10, cheese: 11 },
-        "توست دجاج برجر": { base: 8, cheese: 9 },
-        "تورتيلا دجاج برجر صغير": { base: 7, cheese: 8 },
-        "تورتيلا دجاج برجر كبير": { base: 11, cheese: 12 },
-        "تورتيلا زنجر كبير": { base: 11, cheese: 12 },
-        "تورتيلا زنجر برجر صغير": { base: 8, cheese: 9 },
-        "سندوتش مسحب دجاج كبير": { base: 10, cheese: 11 },
-        "سندوتش مسحب دجاج صغير": { base: 8, cheese: 9 },
-        "صحن بطاطس صغير": { base: 3, cheese: 6, labelBase: "صافي: 3 ر.ي", labelCheese: "جبن: 6 ر.ي", btnBase: "+ صافي (3)", btnCheese: "+ مع جبن (6)" },
-        "صحن بطاطس كبير": { base: 5, cheese: 8, labelBase: "صافي: 5 ر.ي", labelCheese: "جبن: 8 ر.ي", btnBase: "+ صافي (5)", btnCheese: "+ مع جبن (8)" },
-        "وجبة توست دجاج متكاملة": { base: 13, cheese: 14 },
+        "برجر دجاج": { base: 9 },
+        "جانبو دجاج برجر": { base: 10 },
+        "برجر دبل دجاج": { base: 14 },
+        "برجر زنجر": { base: 9 },
+        "برجر زنجر دبل": { base: 14 },
+        "جانبو زنجر": { base: 10 },
+        "توست دجاج برجر": { base: 8 },
+        "تورتيلا دجاج برجر صغير": { base: 7 },
+        "تورتيلا دجاج برجر كبير": { base: 11 },
+        "تورتيلا زنجر كبير": { base: 11 },
+        "تورتيلا زنجر برجر صغير": { base: 8 },
+        "سندوتش مسحب دجاج كبير": { base: 10 },
+        "سندوتش مسحب دجاج صغير": { base: 8 },
+        "صحن بطاطس صغير": { base: 3, cheese: 6 },
+        "صحن بطاطس كبير": { base: 5, cheese: 8 },
+        "وجبة توست دجاج متكاملة": { base: 13 },
         "تشيكن فرايز صغير": { single: 10 },
         "تشيكن فرايز كبير": { single: 15 },
-        "وجبة زنجر متكاملة": { base: 15, cheese: 16 },
-        "وجبة برجر دجاج متكاملة": { base: 14, cheese: 15 },
+        "وجبة زنجر متكاملة": { base: 15 },
+        "وجبة برجر دجاج متكاملة": { base: 14 },
         "إضافة: صوص ثوم": { single: 1 },
         "إضافة: صوص كوكتيل": { single: 1 },
         "إضافة: صوص طحينية": { single: 1 },
@@ -1550,7 +1506,7 @@
       });
     });
 
-    // إخفاء الـ Splash Screen تلقائياً بعد 5 ثوانٍ
+    // إخفاء الـ Splash Screen تلقائياً بعد 3 ثوانٍ
     function dismissSplashScreen() {
       const splash = document.getElementById('splashScreen');
       if (splash && !splash.classList.contains('fade-out')) {
@@ -1572,6 +1528,7 @@
       }
     }
 
+    // فتح التخصيص للأصناف العادية
     function openItemByName(itemId, type) {
       const itemPricing = BRANCH_DATA.prices[itemId];
       if (!itemPricing) return;
@@ -1589,7 +1546,12 @@
         chosenPrice = itemPricing.single;
       }
 
-      openCustomizeModal(chosenName, chosenPrice);
+      openCustomizeModal(chosenName, chosenPrice, null);
+    }
+
+    // دالة جديدة مخصصة للأزرار الخارجية التي تختار نوع التحضير مباشرة (مشوي / مقلي)
+    function openItemWithPrep(itemId, price, prepChoice) {
+      openCustomizeModal(itemId, price, prepChoice);
     }
 
     function addDirectItemByName(itemId) {
@@ -1600,10 +1562,6 @@
 
     /* ========================================================
        تخصيص خيارات الخبز:
-       1. أي تورتيلا كبير: خياران فقط (أبيض وصاج).
-       2. أي تورتيلا صغير: 3 خيارات (أبيض، صاج، أسمر).
-       3. البرجر: بدون خيارات خبز نهائياً.
-       4. الكلوب: توست أبيض وأسمر فقط.
        ======================================================== */
     function setupBreadOptions(itemName) {
       const container = document.getElementById('breadSectionContainer');
@@ -1613,7 +1571,41 @@
       
       notice.style.display = 'none';
 
-      // 1. أي تورتيلا كبير: صاج وأبيض فقط
+      // 1. ساندوتش شاورمايشن: صاج + أبيض
+      if (itemName.includes('ساندوتش شاورمايشن')) {
+        container.style.display = 'block';
+        title.innerText = '🥖 نوع الخبز:';
+        grid.innerHTML = `
+          <label class="option-item"><input type="radio" name="opt_bread" value="خبز صاج" checked onchange="updateCustomModalQtyDisplay()"> خبز صاج</label>
+          <label class="option-item"><input type="radio" name="opt_bread" value="خبز أبيض" onchange="updateCustomModalQtyDisplay()"> خبز أبيض</label>
+        `;
+        return;
+      }
+
+      // 2. مسحب دجاج كبير: أبيض + صاج
+      if (itemName.includes('مسحب') && itemName.includes('كبير')) {
+        container.style.display = 'block';
+        title.innerText = '🥖 نوع الخبز:';
+        grid.innerHTML = `
+          <label class="option-item"><input type="radio" name="opt_bread" value="خبز أبيض" checked onchange="updateCustomModalQtyDisplay()"> خبز أبيض</label>
+          <label class="option-item"><input type="radio" name="opt_bread" value="خبز صاج (+1 ر.ي)" onchange="updateCustomModalQtyDisplay()"> <span style="color: var(--accent); font-weight: 800;">خبز صاج (+1 ر.ي)</span></label>
+        `;
+        return;
+      }
+
+      // 3. مسحب دجاج صغير: أبيض + صاج + أسمر
+      if (itemName.includes('مسحب') && itemName.includes('صغير')) {
+        container.style.display = 'block';
+        title.innerText = '🥖 نوع الخبز:';
+        grid.innerHTML = `
+          <label class="option-item"><input type="radio" name="opt_bread" value="خبز أبيض" checked onchange="updateCustomModalQtyDisplay()"> خبز أبيض</label>
+          <label class="option-item"><input type="radio" name="opt_bread" value="خبز صاج (+1 ر.ي)" onchange="updateCustomModalQtyDisplay()"> <span style="color: var(--accent); font-weight: 800;">خبز صاج (+1 ر.ي)</span></label>
+          <label class="option-item"><input type="radio" name="opt_bread" value="خبز أسمر (بُر) (+1 ر.ي)" onchange="updateCustomModalQtyDisplay()"> <span style="color: var(--accent); font-weight: 800;">خبز أسمر (+1 ر.ي)</span></label>
+        `;
+        return;
+      }
+
+      // 4. تورتيلا كبير: صاج وأبيض فقط
       if (itemName.includes('تورتيلا') && itemName.includes('كبير')) {
         container.style.display = 'block';
         title.innerText = '🥖 نوع الخبز:';
@@ -1624,7 +1616,7 @@
         return;
       }
 
-      // 2. أي تورتيلا صغير: أبيض وصاج وأسمر
+      // 5. تورتيلا صغير: أبيض وصاج وأسمر
       if (itemName.includes('تورتيلا') && itemName.includes('صغير')) {
         container.style.display = 'block';
         title.innerText = '🥖 نوع الخبز:';
@@ -1636,7 +1628,7 @@
         return;
       }
 
-      // 3. قسم البرجر بالكامل: إلغاء خيار الخبز تماماً
+      // 6. قسم البرجر: إلغاء الخبز تماماً
       if (
         itemName.includes('برجر') || 
         itemName.includes('جانبو دجاج') || 
@@ -1648,7 +1640,7 @@
         return;
       }
 
-      // 4. الكلوب ساندوتش: توست أبيض أو أسمر فقط (إلغاء الصاج)
+      // 7. الكلوب: توست أبيض أو أسمر
       if (itemName.includes('كلوب')) {
         container.style.display = 'block';
         title.innerText = '🥖 نوع خبز التوست:';
@@ -1659,7 +1651,7 @@
         return;
       }
 
-      // 5. الصحون (صحن عربي): خيار إضافة خبز صاج إضافي بـ 2 ر.ي
+      // 8. الصحن العربي: خبز صاج إضافي
       if (itemName.includes('صحن عربي')) {
         container.style.display = 'block';
         title.innerText = '🥖 إضافة خبز صاج إضافي مع الصحن:';
@@ -1670,7 +1662,7 @@
         return;
       }
 
-      // 6. الصاروخ: أبيض، سمر (+1 ر.ي)، وصاج (+1 ر.ي)
+      // 9. الصاروخ
       if (itemName.includes('صاروخ')) {
         container.style.display = 'block';
         title.innerText = '🥖 نوع الخبز:';
@@ -1682,17 +1674,7 @@
         return;
       }
 
-      // 7. ساندوتش شاورمايشن: صاج فقط
-      if (itemName.includes('ساندوتش شاورمايشن')) {
-        container.style.display = 'block';
-        title.innerText = '🥖 نوع الخبز:';
-        grid.innerHTML = `
-          <label class="option-item"><input type="radio" name="opt_bread" value="خبز صاج" checked onchange="updateCustomModalQtyDisplay()"> خبز صاج</label>
-        `;
-        return;
-      }
-
-      // 8. التوست العادي (أبيض وسمر بـ 1 ريال فقط)
+      // 10. التوست
       if (itemName.includes('توست')) {
         container.style.display = 'block';
         title.innerText = '🥖 نوع الخبز:';
@@ -1703,10 +1685,9 @@
         return;
       }
 
-      // 9. الأصناف التي ليس لها خيار خبز إطلاقاً
+      // 11. أصناف بدون خيارات خبز
       if (
         itemName.includes('باشكا') || 
-        itemName.includes('مسحب') || 
         itemName.includes('بطاطس') ||
         itemName.includes('فرايز')
       ) {
@@ -1715,7 +1696,7 @@
         return;
       }
 
-      // 10. باقي السندوتشات العادية
+      // 12. الوضع الافتراضي
       container.style.display = 'block';
       title.innerText = '🥖 نوع الخبز:';
       grid.innerHTML = `
@@ -1725,13 +1706,92 @@
       `;
     }
 
-    function openCustomizeModal(name, price) {
-      currentCustomizingItem = { name: name, basePrice: price };
+    /* ========================================================
+       إعداد خيار نوع التحضير في النافذة
+       ======================================================== */
+    function setupCookingOptions(itemName, presetPrep) {
+      const cookingContainer = document.getElementById('cookingSectionContainer');
+      const cookingGrid = document.getElementById('cookingOptionsGrid');
+
+      const isPrepSupported = (
+        itemName.includes('تورتيلا دجاج برجر') || 
+        itemName.includes('برجر دجاج') || 
+        itemName.includes('جانبو دجاج برجر') || 
+        itemName.includes('توست دجاج برجر') || 
+        itemName.includes('وجبة برجر دجاج') || 
+        itemName.includes('وجبة توست دجاج')
+      ) && !itemName.includes('شاورما') && !itemName.includes('زنجر');
+
+      if (!isPrepSupported) {
+        cookingContainer.style.display = 'none';
+        cookingGrid.innerHTML = '';
+        return;
+      }
+
+      cookingContainer.style.display = 'block';
+      const isGrilled = presetPrep ? presetPrep.includes('مشوي') : true;
+
+      cookingGrid.innerHTML = `
+        <label class="option-item">
+          <input type="radio" name="opt_cooking" value="مشوي 🔥" ${isGrilled ? 'checked' : ''}> مشوي 🔥
+        </label>
+        <label class="option-item">
+          <input type="radio" name="opt_cooking" value="مقلي 🍗" ${!isGrilled ? 'checked' : ''}> مقلي 🍗
+        </label>
+      `;
+    }
+
+    /* ========================================================
+       إعداد خيارات الجبنة في نافذة التفاصيل:
+       بدون جبنة / إضافة جبنة (+1 ر.ي) / دبل جبنة (+2 ر.ي)
+       ======================================================== */
+    function setupCheeseOptions(itemName) {
+      const cheeseContainer = document.getElementById('cheeseSectionContainer');
+      const cheeseGrid = document.getElementById('cheeseOptionsGrid');
+
+      const isTargetSection = (
+        itemName.includes('برجر') || 
+        itemName.includes('جانبو دجاج') || 
+        itemName.includes('جانبو زنجر') ||
+        itemName.includes('جامبو') ||
+        itemName.includes('تورتيلا') ||
+        itemName.includes('وجبة')
+      );
+
+      if (!isTargetSection) {
+        cheeseContainer.style.display = 'none';
+        cheeseGrid.innerHTML = '';
+        return;
+      }
+
+      cheeseContainer.style.display = 'block';
+      cheeseGrid.innerHTML = `
+        <label class="option-item">
+          <input type="radio" name="opt_cheese" value="بدون جبنة" checked onchange="updateCustomModalQtyDisplay()"> 
+          بدون جبنة
+        </label>
+        <label class="option-item">
+          <input type="radio" name="opt_cheese" value="إضافة جبنة (+1 ر.ي)" onchange="updateCustomModalQtyDisplay()"> 
+          <span style="color: var(--accent); font-weight: 800;">إضافة جبنة (+1 ر.ي) 🧀</span>
+        </label>
+        <label class="option-item">
+          <input type="radio" name="opt_cheese" value="دبل جبنة (+2 ر.ي)" onchange="updateCustomModalQtyDisplay()"> 
+          <span style="color: #ff9e00; font-weight: 800;">دبل جبنة (+2 ر.ي) 🧀🧀</span>
+        </label>
+      `;
+    }
+
+    function openCustomizeModal(name, price, presetPrep) {
+      const cleanBaseName = name.replace(' (بدون جبنة)', '').replace(' (جبنة)', '').replace(' (صافي)', '').replace(' (جبن)', '');
+      currentCustomizingItem = { name: cleanBaseName, basePrice: price, presetPrep: presetPrep };
       currentCustomizingQty = 1;
-      document.getElementById('modalItemTitle').innerText = `تخصيص: ${name} (${price} ر.ي)`;
+      
+      document.getElementById('modalItemTitle').innerText = `تخصيص: ${cleanBaseName}`;
       document.getElementById('customizeForm').reset();
       
-      setupBreadOptions(name);
+      setupBreadOptions(cleanBaseName);
+      setupCookingOptions(cleanBaseName, presetPrep);
+      setupCheeseOptions(cleanBaseName);
 
       document.querySelectorAll('.note-chip').forEach(chip => {
         chip.classList.remove('active');
@@ -1776,7 +1836,7 @@
         } else if (breadOpt.value.includes('+1 ر.ي')) {
           breadExtra = 1;
           notice.style.display = 'block';
-          notice.innerText = 'ℹ تم احتساب +1 ر.ي لكل حبة لاختيار الخبز الإضافي (أسمر/صاج).';
+          notice.innerText = 'ℹ تم احتساب +1 ر.ي لاختيار الخبز الإضافي (أسمر/صاج).';
         } else {
           notice.style.display = 'none';
         }
@@ -1784,7 +1844,18 @@
         notice.style.display = 'none';
       }
 
-      const unitPrice = currentCustomizingItem.basePrice + breadExtra;
+      // احتساب تسعير الجبنة
+      const cheeseOpt = document.querySelector('input[name="opt_cheese"]:checked');
+      let cheeseExtra = 0;
+      if (cheeseOpt) {
+        if (cheeseOpt.value.includes('+2 ر.ي')) {
+          cheeseExtra = 2;
+        } else if (cheeseOpt.value.includes('+1 ر.ي')) {
+          cheeseExtra = 1;
+        }
+      }
+
+      const unitPrice = currentCustomizingItem.basePrice + breadExtra + cheeseExtra;
       const subtotal = unitPrice * currentCustomizingQty;
       document.getElementById('customModalSubtotal').innerText = `${subtotal.toFixed(2)} ر.ي`;
 
@@ -1838,7 +1909,9 @@
 
       let options = [];
       let breadExtra = 0;
+      let cheeseExtra = 0;
 
+      // نوع الخبز
       const breadOpt = document.querySelector('input[name="opt_bread"]:checked');
       if (breadOpt) {
         options.push(breadOpt.value);
@@ -1846,12 +1919,32 @@
         else if (breadOpt.value.includes('+1 ر.ي')) breadExtra = 1;
       }
 
+      // نوع التحضير
+      const cookingOpt = document.querySelector('input[name="opt_cooking"]:checked');
+      if (cookingOpt) {
+        options.push(`التحضير: ${cookingOpt.value}`);
+      } else if (currentCustomizingItem.presetPrep) {
+        options.push(`التحضير: ${currentCustomizingItem.presetPrep}`);
+      }
+
+      // خيارات الجبنة في التفاصيل
+      const cheeseOpt = document.querySelector('input[name="opt_cheese"]:checked');
+      if (cheeseOpt) {
+        options.push(`الجبنة: ${cheeseOpt.value}`);
+        if (cheeseOpt.value.includes('+2 ر.ي')) {
+          cheeseExtra = 2;
+        } else if (cheeseOpt.value.includes('+1 ر.ي')) {
+          cheeseExtra = 1;
+        }
+      }
+
+      // الملاحظات السريعة
       document.querySelectorAll('.note-chip input:checked').forEach(chk => {
         options.push(chk.value);
       });
 
       const note = document.getElementById('itemCustomNote').value.trim();
-      const finalItemPrice = currentCustomizingItem.basePrice + breadExtra;
+      const finalItemPrice = currentCustomizingItem.basePrice + breadExtra + cheeseExtra;
 
       const previousTotalForThisItem = cart.filter(it => it.baseName === currentCustomizingItem.name && !it.isFree)
                                            .reduce((sum, it) => sum + it.qty, 0);
@@ -2022,7 +2115,7 @@
       closeCartReviewModal();
     }
 
-    // إغلاق شاشة البداية تلقائياً بعد 5 ثوانٍ من فتح الصفحة
+    // إغلاق شاشة البداية تلقائياً
     window.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
         dismissSplashScreen();
