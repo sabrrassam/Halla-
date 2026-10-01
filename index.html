@@ -1549,7 +1549,7 @@
       openCustomizeModal(chosenName, chosenPrice, null);
     }
 
-    // دالة جديدة مخصصة للأزرار الخارجية التي تختار نوع التحضير مباشرة (مشوي / مقلي)
+    // دالة مخصصة للأزرار الخارجية التي تختار نوع التحضير مباشرة (مشوي / مقلي)
     function openItemWithPrep(itemId, price, prepChoice) {
       openCustomizeModal(itemId, price, prepChoice);
     }
@@ -1571,7 +1571,20 @@
       
       notice.style.display = 'none';
 
-      // 1. ساندوتش شاورمايشن: صاج + أبيض
+      // 1. وجبة زنجر وقسم البرجر: إلغاء خيار الخبز تماماً
+      if (
+        itemName.includes('وجبة زنجر') ||
+        itemName.includes('برجر') || 
+        itemName.includes('جانبو دجاج') || 
+        itemName.includes('جانبو زنجر') ||
+        itemName.includes('جامبو')
+      ) {
+        container.style.display = 'none';
+        grid.innerHTML = '';
+        return;
+      }
+
+      // 2. ساندوتش شاورمايشن: صاج + أبيض
       if (itemName.includes('ساندوتش شاورمايشن')) {
         container.style.display = 'block';
         title.innerText = '🥖 نوع الخبز:';
@@ -1582,7 +1595,7 @@
         return;
       }
 
-      // 2. مسحب دجاج كبير: أبيض + صاج
+      // 3. مسحب دجاج كبير: أبيض + صاج
       if (itemName.includes('مسحب') && itemName.includes('كبير')) {
         container.style.display = 'block';
         title.innerText = '🥖 نوع الخبز:';
@@ -1593,7 +1606,7 @@
         return;
       }
 
-      // 3. مسحب دجاج صغير: أبيض + صاج + أسمر
+      // 4. مسحب دجاج صغير: أبيض + صاج + أسمر
       if (itemName.includes('مسحب') && itemName.includes('صغير')) {
         container.style.display = 'block';
         title.innerText = '🥖 نوع الخبز:';
@@ -1605,7 +1618,7 @@
         return;
       }
 
-      // 4. تورتيلا كبير: صاج وأبيض فقط
+      // 5. تورتيلا كبير: صاج وأبيض فقط
       if (itemName.includes('تورتيلا') && itemName.includes('كبير')) {
         container.style.display = 'block';
         title.innerText = '🥖 نوع الخبز:';
@@ -1616,7 +1629,7 @@
         return;
       }
 
-      // 5. تورتيلا صغير: أبيض وصاج وأسمر
+      // 6. تورتيلا صغير: أبيض وصاج وأسمر
       if (itemName.includes('تورتيلا') && itemName.includes('صغير')) {
         container.style.display = 'block';
         title.innerText = '🥖 نوع الخبز:';
@@ -1625,18 +1638,6 @@
           <label class="option-item"><input type="radio" name="opt_bread" value="خبز صاج (+1 ر.ي)" onchange="updateCustomModalQtyDisplay()"> <span style="color: var(--accent); font-weight: 800;">خبز صاج (+1 ر.ي)</span></label>
           <label class="option-item"><input type="radio" name="opt_bread" value="خبز أسمر (بُر) (+1 ر.ي)" onchange="updateCustomModalQtyDisplay()"> <span style="color: var(--accent); font-weight: 800;">خبز أسمر (+1 ر.ي)</span></label>
         `;
-        return;
-      }
-
-      // 6. قسم البرجر: إلغاء الخبز تماماً
-      if (
-        itemName.includes('برجر') || 
-        itemName.includes('جانبو دجاج') || 
-        itemName.includes('جانبو زنجر') ||
-        itemName.includes('جامبو')
-      ) {
-        container.style.display = 'none';
-        grid.innerHTML = '';
         return;
       }
 
@@ -1688,8 +1689,9 @@
       // 11. أصناف بدون خيارات خبز
       if (
         itemName.includes('باشكا') || 
-        itemName.includes('بطاطس') ||
-        itemName.includes('فرايز')
+        itemName.includes('بطاطس') || 
+        itemName.includes('فرايز') ||
+        itemName.includes('وجبة برجر')
       ) {
         container.style.display = 'none';
         grid.innerHTML = '';
@@ -2119,7 +2121,7 @@
     window.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
         dismissSplashScreen();
-      }, 3000);
+      }, 2000);
     });
   </script>
 </body>
