@@ -1329,13 +1329,13 @@
           <div class="options-grid" id="cookingOptionsGrid"></div>
         </div>
 
-        <!-- قسم إضافة الجبنة (للبرجر، التورتيلا، والوجبات) -->
+        <!-- قسم إضافة الجبنة (للتورتيلا والوجبات فقط - ملغي تماماً عن البرجر) -->
         <div id="cheeseSectionContainer" style="display:none;">
           <div class="option-group-title">🧀 خيارات الجبنة في التفاصيل:</div>
           <div class="options-grid" id="cheeseOptionsGrid"></div>
         </div>
 
-        <!-- تفضيلات وملاحظات الطلب السريعة All Notes -->
+        <!-- تفضيلات وملاحظات الطلب All Notes -->
         <div class="option-group-title">✨ تفضيلات وملاحظات الطلب (All Notes):</div>
         <div class="notes-chips-grid" id="notesChipsWrapper">
           <label class="note-chip"><input type="checkbox" value="مخلل">مخلل</label>
@@ -1506,7 +1506,7 @@
       });
     });
 
-    // إخفاء الـ Splash Screen تلقائياً بعد 3 ثوانٍ
+    // إخفاء الـ Splash Screen تلقائياً بعد ثانيتين
     function dismissSplashScreen() {
       const splash = document.getElementById('splashScreen');
       if (splash && !splash.classList.contains('fade-out')) {
@@ -1562,6 +1562,7 @@
 
     /* ========================================================
        تخصيص خيارات الخبز:
+       تم إلغاء خيار الخبز تماماً عن جميع أنواع البرجر والوجبات
        ======================================================== */
     function setupBreadOptions(itemName) {
       const container = document.getElementById('breadSectionContainer');
@@ -1571,13 +1572,15 @@
       
       notice.style.display = 'none';
 
-      // 1. وجبة زنجر وقسم البرجر: إلغاء خيار الخبز تماماً
+      // 1. أي برجر (دجاج، زنجر، شاورما برجر، دبل، جامبو)، أو وجبات، أو بطاطس/فرايز/باشكا: إلغاء خيار الخبز تماماً
       if (
-        itemName.includes('وجبة زنجر') ||
         itemName.includes('برجر') || 
-        itemName.includes('جانبو دجاج') || 
-        itemName.includes('جانبو زنجر') ||
-        itemName.includes('جامبو')
+        itemName.includes('جانبو') || 
+        itemName.includes('جامبو') ||
+        itemName.includes('وجبة') ||
+        itemName.includes('باشكا') || 
+        itemName.includes('بطاطس') || 
+        itemName.includes('فرايز')
       ) {
         container.style.display = 'none';
         grid.innerHTML = '';
@@ -1686,19 +1689,7 @@
         return;
       }
 
-      // 11. أصناف بدون خيارات خبز
-      if (
-        itemName.includes('باشكا') || 
-        itemName.includes('بطاطس') || 
-        itemName.includes('فرايز') ||
-        itemName.includes('وجبة برجر')
-      ) {
-        container.style.display = 'none';
-        grid.innerHTML = '';
-        return;
-      }
-
-      // 12. الوضع الافتراضي
+      // 11. الوضع الافتراضي
       container.style.display = 'block';
       title.innerText = '🥖 نوع الخبز:';
       grid.innerHTML = `
@@ -1745,20 +1736,15 @@
 
     /* ========================================================
        إعداد خيارات الجبنة في نافذة التفاصيل:
-       بدون جبنة / إضافة جبنة (+1 ر.ي) / دبل جبنة (+2 ر.ي)
+       إلغاء خيار الجبنة عن قسم البرجر بالكامل
+       تفعيله فقط للتورتيلا والوجبات
        ======================================================== */
     function setupCheeseOptions(itemName) {
       const cheeseContainer = document.getElementById('cheeseSectionContainer');
       const cheeseGrid = document.getElementById('cheeseOptionsGrid');
 
-      const isTargetSection = (
-        itemName.includes('برجر') || 
-        itemName.includes('جانبو دجاج') || 
-        itemName.includes('جانبو زنجر') ||
-        itemName.includes('جامبو') ||
-        itemName.includes('تورتيلا') ||
-        itemName.includes('وجبة')
-      );
+      // تم استثناء البرجر بالكامل والاعتماد فقط على التورتيلا والوجبات
+      const isTargetSection = (itemName.includes('تورتيلا') || itemName.includes('وجبة')) && !itemName.includes('برجر');
 
       if (!isTargetSection) {
         cheeseContainer.style.display = 'none';
