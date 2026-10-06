@@ -1329,11 +1329,7 @@
           <div class="options-grid" id="cookingOptionsGrid"></div>
         </div>
 
-        <!-- قسم إضافة الجبنة (للتورتيلا فقط - ملغي تماماً عن الوجبات والبرجر) -->
-        <div id="cheeseSectionContainer" style="display:none;">
-          <div class="option-group-title">🧀 خيارات الجبنة في التفاصيل:</div>
-          <div class="options-grid" id="cheeseOptionsGrid"></div>
-        </div>
+        <!-- قسم خيارات الجبنة تم إلغاؤه -->
 
         <!-- تفضيلات وملاحظات الطلب All Notes -->
         <div class="option-group-title">✨ تفضيلات وملاحظات الطلب (All Notes):</div>
@@ -1401,6 +1397,9 @@
                 <option value="من المحل">استلام شخصي من المحل</option>
             </select>
         </div>
+        <button type="button" class="btn-modal-action" style="margin-top: 12px; background: linear-gradient(135deg, #0ea5e9, #38bdf8);" onclick="addAnotherOrder()">
+          + إضافة طلبات أخرى إلى السلة
+        </button>
       </div>
 
       <div id="deliveryExtraFields" style="margin-top: 10px; background: rgba(255,255,255,0.03); padding: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
@@ -1723,44 +1722,6 @@
       `;
     }
 
-    /* ========================================================
-       إعداد خيارات الجبنة في نافذة التفاصيل:
-       (تم إلغاؤه تماماً عن الوجبات والبرجر وحصره فقط في التورتيلا)
-       ======================================================== */
-
-    /* ========================================================
-       إعداد خيارات الجبنة في نافذة التفاصيل
-       ======================================================== */
-    function setupCheeseOptions(itemName) {
-      const cheeseContainer = document.getElementById('cheeseSectionContainer');
-      const cheeseGrid = document.getElementById('cheeseOptionsGrid');
-
-      // تم استثناء البرجر بالكامل والاعتماد فقط على التورتيلا والوجبات
-      const isTargetSection = (itemName.includes('تورتيلا') || itemName.includes('وجبة')) && !itemName.includes('برجر');
-
-      if (!isTargetSection) {
-        cheeseContainer.style.display = 'none';
-        cheeseGrid.innerHTML = '';
-        return;
-      }
-
-      cheeseContainer.style.display = 'block';
-      cheeseGrid.innerHTML = `
-        <label class="option-item">
-          <input type="radio" name="opt_cheese" value="بدون جبنة" checked onchange="updateCustomModalQtyDisplay()"> 
-          بدون جبنة
-        </label>
-        <label class="option-item">
-          <input type="radio" name="opt_cheese" value="إضافة جبنة (+1 ر.ي)" onchange="updateCustomModalQtyDisplay()"> 
-          <span style="color: var(--accent); font-weight: 800;">إضافة جبنة (+1 ر.ي) 🧀</span>
-        </label>
-        <label class="option-item">
-          <input type="radio" name="opt_cheese" value="دبل جبنة (+2 ر.ي)" onchange="updateCustomModalQtyDisplay()"> 
-          <span style="color: #ff9e00; font-weight: 800;">دبل جبنة (+2 ر.ي) 🧀🧀</span>
-        </label>
-      `;
-    }
-
     function openCustomizeModal(name, price, presetPrep) {
       const cleanBaseName = name.replace(' (بدون جبنة)', '').replace(' (جبنة)', '').replace(' (صافي)', '').replace(' (جبن)', '');
       currentCustomizingItem = { name: cleanBaseName, basePrice: price, presetPrep: presetPrep };
@@ -1771,7 +1732,6 @@
       
       setupBreadOptions(cleanBaseName);
       setupCookingOptions(cleanBaseName, presetPrep);
-      setupCheeseOptions(cleanBaseName);
 
       document.querySelectorAll('.note-chip').forEach(chip => {
         chip.classList.remove('active');
@@ -1824,18 +1784,7 @@
         notice.style.display = 'none';
       }
 
-      // احتساب تسعير الجبنة
-      const cheeseOpt = document.querySelector('input[name="opt_cheese"]:checked');
-      let cheeseExtra = 0;
-      if (cheeseOpt) {
-        if (cheeseOpt.value.includes('+2 ر.ي')) {
-          cheeseExtra = 2;
-        } else if (cheeseOpt.value.includes('+1 ر.ي')) {
-          cheeseExtra = 1;
-        }
-      }
-
-      const unitPrice = currentCustomizingItem.basePrice + breadExtra + cheeseExtra;
+      const unitPrice = currentCustomizingItem.basePrice + breadExtra;
       const subtotal = unitPrice * currentCustomizingQty;
       document.getElementById('customModalSubtotal').innerText = `${subtotal.toFixed(2)} ر.ي`;
 
@@ -1889,7 +1838,6 @@
 
       let options = [];
       let breadExtra = 0;
-      let cheeseExtra = 0;
 
       // نوع الخبز
       const breadOpt = document.querySelector('input[name="opt_bread"]:checked');
@@ -1907,24 +1855,13 @@
         options.push(`التحضير: ${currentCustomizingItem.presetPrep}`);
       }
 
-      // خيارات الجبنة في التفاصيل
-      const cheeseOpt = document.querySelector('input[name="opt_cheese"]:checked');
-      if (cheeseOpt) {
-        options.push(`الجبنة: ${cheeseOpt.value}`);
-        if (cheeseOpt.value.includes('+2 ر.ي')) {
-          cheeseExtra = 2;
-        } else if (cheeseOpt.value.includes('+1 ر.ي')) {
-          cheeseExtra = 1;
-        }
-      }
-
       // الملاحظات السريعة
       document.querySelectorAll('.note-chip input:checked').forEach(chk => {
         options.push(chk.value);
       });
 
       const note = document.getElementById('itemCustomNote').value.trim();
-      const finalItemPrice = currentCustomizingItem.basePrice + breadExtra + cheeseExtra;
+      const finalItemPrice = currentCustomizingItem.basePrice + breadExtra;
 
       const previousTotalForThisItem = cart.filter(it => it.baseName === currentCustomizingItem.name && !it.isFree)
                                            .reduce((sum, it) => sum + it.qty, 0);
@@ -1991,6 +1928,17 @@
       document.getElementById('carField').style.display = method === 'استلام سيارة' ? 'block' : 'none';
       document.getElementById('storeField').style.display = method === 'من المحل' ? 'block' : 'none';
       updateCartModalTotal();
+    }
+
+    function addAnotherOrder() {
+      closeCartReviewModal();
+
+      const menuSection = document.querySelector('.menu-section');
+      if (menuSection) {
+        menuSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
     }
 
     function updateCartModalTotal() {
