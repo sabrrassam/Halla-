@@ -728,7 +728,7 @@
     </div>
   </section>
 
-  <!-- القسم 3: قسم البرجر (أزرار مشوي / مقلي مباشرة في البطاقة) -->
+  <!-- القسم 3: قسم البرجر -->
   <section class="menu-section" id="burgers" style="background: rgba(16,10,8,0.95);">
     <div class="section-container">
       <div class="section-header">
@@ -1329,7 +1329,7 @@
           <div class="options-grid" id="cookingOptionsGrid"></div>
         </div>
 
-        <!-- قسم إضافة الجبنة (للتورتيلا والوجبات فقط - ملغي تماماً عن البرجر) -->
+        <!-- قسم إضافة الجبنة (للتورتيلا فقط - ملغي تماماً عن الوجبات والبرجر) -->
         <div id="cheeseSectionContainer" style="display:none;">
           <div class="option-group-title">🧀 خيارات الجبنة في التفاصيل:</div>
           <div class="options-grid" id="cheeseOptionsGrid"></div>
@@ -1338,6 +1338,8 @@
         <!-- تفضيلات وملاحظات الطلب All Notes -->
         <div class="option-group-title">✨ تفضيلات وملاحظات الطلب (All Notes):</div>
         <div class="notes-chips-grid" id="notesChipsWrapper">
+          <label class="note-chip"><input type="checkbox" value="مع الجبن">مع الجبن</label>
+          <label class="note-chip"><input type="checkbox" value="بدون جبن">بدون جبن</label>
           <label class="note-chip"><input type="checkbox" value="مخلل">مخلل</label>
           <label class="note-chip"><input type="checkbox" value="مع الثوم">مع الثوم</label>
           <label class="note-chip"><input type="checkbox" value="مع الكتشب">مع الكتشب</label>
@@ -1561,8 +1563,7 @@
     }
 
     /* ========================================================
-       تخصيص خيارات الخبز:
-       تم إلغاء خيار الخبز تماماً عن جميع أنواع البرجر والوجبات
+       تخصيص خيارات الخبز وفقاً للشروط التسعة بدقة:
        ======================================================== */
     function setupBreadOptions(itemName) {
       const container = document.getElementById('breadSectionContainer');
@@ -1572,7 +1573,97 @@
       
       notice.style.display = 'none';
 
-      // 1. أي برجر (دجاج، زنجر، شاورما برجر، دبل، جامبو)، أو وجبات، أو بطاطس/فرايز/باشكا: إلغاء خيار الخبز تماماً
+      // 1. سندوتش شاورمايشن: خبز أبيض وصاج
+      if (itemName.includes('ساندوتش شاورمايشن')) {
+        container.style.display = 'block';
+        title.innerText = '🥖 نوع الخبز:';
+        grid.innerHTML = `
+          <label class="option-item"><input type="radio" name="opt_bread" value="خبز أبيض" checked onchange="updateCustomModalQtyDisplay()"> خبز أبيض</label>
+          <label class="option-item"><input type="radio" name="opt_bread" value="خبز صاج" onchange="updateCustomModalQtyDisplay()"> خبز صاج</label>
+        `;
+        return;
+      }
+
+      // 2. كلوب زنجر وشاورما: الأسمر 2 ريالين (+2 ر.ي)
+      if (itemName.includes('كلوب')) {
+        container.style.display = 'block';
+        title.innerText = '🥖 نوع خبز التوست:';
+        grid.innerHTML = `
+          <label class="option-item"><input type="radio" name="opt_bread" value="توست أبيض" checked onchange="updateCustomModalQtyDisplay()"> توست أبيض</label>
+          <label class="option-item"><input type="radio" name="opt_bread" value="توست أسمر (+2 ر.ي)" onchange="updateCustomModalQtyDisplay()"> <span style="color: var(--accent); font-weight: 800;">توست أسمر (+2 ر.ي)</span></label>
+        `;
+        return;
+      }
+
+      // 3. كل توست في سندوتش أو في وجبات أو توست برجر: أبيض أو أسمر (+1 ر.ي)
+      if (itemName.includes('توست')) {
+        container.style.display = 'block';
+        title.innerText = '🥖 نوع خبز التوست:';
+        grid.innerHTML = `
+          <label class="option-item"><input type="radio" name="opt_bread" value="توست أبيض" checked onchange="updateCustomModalQtyDisplay()"> توست أبيض</label>
+          <label class="option-item"><input type="radio" name="opt_bread" value="توست أسمر (+1 ر.ي)" onchange="updateCustomModalQtyDisplay()"> <span style="color: var(--accent); font-weight: 800;">توست أسمر (+1 ر.ي)</span></label>
+        `;
+        return;
+      }
+
+      // 4. المسحب الكبير: أبيض + صاج
+      if (itemName.includes('مسحب') && itemName.includes('كبير')) {
+        container.style.display = 'block';
+        title.innerText = '🥖 نوع الخبز:';
+        grid.innerHTML = `
+          <label class="option-item"><input type="radio" name="opt_bread" value="خبز أبيض" checked onchange="updateCustomModalQtyDisplay()"> خبز أبيض</label>
+          <label class="option-item"><input type="radio" name="opt_bread" value="خبز صاج" onchange="updateCustomModalQtyDisplay()"> خبز صاج</label>
+        `;
+        return;
+      }
+
+      // 5. المسحب الصغير: أبيض + صاج + أسمر
+      if (itemName.includes('مسحب') && itemName.includes('صغير')) {
+        container.style.display = 'block';
+        title.innerText = '🥖 نوع الخبز:';
+        grid.innerHTML = `
+          <label class="option-item"><input type="radio" name="opt_bread" value="خبز أبيض" checked onchange="updateCustomModalQtyDisplay()"> خبز أبيض</label>
+          <label class="option-item"><input type="radio" name="opt_bread" value="خبز صاج" onchange="updateCustomModalQtyDisplay()"> خبز صاج</label>
+          <label class="option-item"><input type="radio" name="opt_bread" value="خبز أسمر" onchange="updateCustomModalQtyDisplay()"> خبز أسمر</label>
+        `;
+        return;
+      }
+
+      // 6. تورتيلا كبير: أبيض وصاج
+      if (itemName.includes('تورتيلا') && itemName.includes('كبير')) {
+        container.style.display = 'block';
+        title.innerText = '🥖 نوع الخبز:';
+        grid.innerHTML = `
+          <label class="option-item"><input type="radio" name="opt_bread" value="خبز أبيض" checked onchange="updateCustomModalQtyDisplay()"> خبز أبيض</label>
+          <label class="option-item"><input type="radio" name="opt_bread" value="خبز صاج" onchange="updateCustomModalQtyDisplay()"> خبز صاج</label>
+        `;
+        return;
+      }
+
+      // 7. تورتيلا صغير: أبيض وصاج وأسمر
+      if (itemName.includes('تورتيلا') && itemName.includes('صغير')) {
+        container.style.display = 'block';
+        title.innerText = '🥖 نوع الخبز:';
+        grid.innerHTML = `
+          <label class="option-item"><input type="radio" name="opt_bread" value="خبز أبيض" checked onchange="updateCustomModalQtyDisplay()"> خبز أبيض</label>
+          <label class="option-item"><input type="radio" name="opt_bread" value="خبز صاج" onchange="updateCustomModalQtyDisplay()"> خبز صاج</label>
+          <label class="option-item"><input type="radio" name="opt_bread" value="خبز أسمر" onchange="updateCustomModalQtyDisplay()"> خبز أسمر</label>
+        `;
+        return;
+      }
+
+      // 8. الصحن العربي: إضافة خبز صاج
+      if (itemName.includes('صحن عربي')) {
+        container.style.display = 'block';
+        title.innerText = '🥖 إضافة خبز صاج إضافي مع الصحن:';
+        grid.innerHTML = `
+          <label class="option-item"><input type="radio" name="opt_bread" value="بدون خبز إضافي" checked onchange="updateCustomModalQtyDisplay()"> بدون خبز إضافي</label>
+          <label class="option-item"><input type="radio" name="opt_bread" value="خبز صاج (+2 ر.ي)" onchange="updateCustomModalQtyDisplay()"> <span style="color: var(--accent); font-weight: 800;">خبز صاج (+2 ر.ي)</span></label>
+        `;
+        return;
+      }
+
+      // 9. إخفاء خيار الخبز عن باقي أنواع البرجر العادية وباقي الوجبات والبطاطس والفرايز والباشكا
       if (
         itemName.includes('برجر') || 
         itemName.includes('جانبو') || 
@@ -1587,114 +1678,12 @@
         return;
       }
 
-      // 2. ساندوتش شاورمايشن: صاج + أبيض
-      if (itemName.includes('ساندوتش شاورمايشن')) {
-        container.style.display = 'block';
-        title.innerText = '🥖 نوع الخبز:';
-        grid.innerHTML = `
-          <label class="option-item"><input type="radio" name="opt_bread" value="خبز صاج" checked onchange="updateCustomModalQtyDisplay()"> خبز صاج</label>
-          <label class="option-item"><input type="radio" name="opt_bread" value="خبز أبيض" onchange="updateCustomModalQtyDisplay()"> خبز أبيض</label>
-        `;
-        return;
-      }
-
-      // 3. مسحب دجاج كبير: أبيض + صاج
-      if (itemName.includes('مسحب') && itemName.includes('كبير')) {
-        container.style.display = 'block';
-        title.innerText = '🥖 نوع الخبز:';
-        grid.innerHTML = `
-          <label class="option-item"><input type="radio" name="opt_bread" value="خبز أبيض" checked onchange="updateCustomModalQtyDisplay()"> خبز أبيض</label>
-          <label class="option-item"><input type="radio" name="opt_bread" value="خبز صاج (+1 ر.ي)" onchange="updateCustomModalQtyDisplay()"> <span style="color: var(--accent); font-weight: 800;">خبز صاج (+1 ر.ي)</span></label>
-        `;
-        return;
-      }
-
-      // 4. مسحب دجاج صغير: أبيض + صاج + أسمر
-      if (itemName.includes('مسحب') && itemName.includes('صغير')) {
-        container.style.display = 'block';
-        title.innerText = '🥖 نوع الخبز:';
-        grid.innerHTML = `
-          <label class="option-item"><input type="radio" name="opt_bread" value="خبز أبيض" checked onchange="updateCustomModalQtyDisplay()"> خبز أبيض</label>
-          <label class="option-item"><input type="radio" name="opt_bread" value="خبز صاج (+1 ر.ي)" onchange="updateCustomModalQtyDisplay()"> <span style="color: var(--accent); font-weight: 800;">خبز صاج (+1 ر.ي)</span></label>
-          <label class="option-item"><input type="radio" name="opt_bread" value="خبز أسمر (بُر) (+1 ر.ي)" onchange="updateCustomModalQtyDisplay()"> <span style="color: var(--accent); font-weight: 800;">خبز أسمر (+1 ر.ي)</span></label>
-        `;
-        return;
-      }
-
-      // 5. تورتيلا كبير: صاج وأبيض فقط
-      if (itemName.includes('تورتيلا') && itemName.includes('كبير')) {
-        container.style.display = 'block';
-        title.innerText = '🥖 نوع الخبز:';
-        grid.innerHTML = `
-          <label class="option-item"><input type="radio" name="opt_bread" value="خبز أبيض" checked onchange="updateCustomModalQtyDisplay()"> خبز أبيض</label>
-          <label class="option-item"><input type="radio" name="opt_bread" value="خبز صاج (+1 ر.ي)" onchange="updateCustomModalQtyDisplay()"> <span style="color: var(--accent); font-weight: 800;">خبز صاج (+1 ر.ي)</span></label>
-        `;
-        return;
-      }
-
-      // 6. تورتيلا صغير: أبيض وصاج وأسمر
-      if (itemName.includes('تورتيلا') && itemName.includes('صغير')) {
-        container.style.display = 'block';
-        title.innerText = '🥖 نوع الخبز:';
-        grid.innerHTML = `
-          <label class="option-item"><input type="radio" name="opt_bread" value="خبز أبيض" checked onchange="updateCustomModalQtyDisplay()"> خبز أبيض</label>
-          <label class="option-item"><input type="radio" name="opt_bread" value="خبز صاج (+1 ر.ي)" onchange="updateCustomModalQtyDisplay()"> <span style="color: var(--accent); font-weight: 800;">خبز صاج (+1 ر.ي)</span></label>
-          <label class="option-item"><input type="radio" name="opt_bread" value="خبز أسمر (بُر) (+1 ر.ي)" onchange="updateCustomModalQtyDisplay()"> <span style="color: var(--accent); font-weight: 800;">خبز أسمر (+1 ر.ي)</span></label>
-        `;
-        return;
-      }
-
-      // 7. الكلوب: توست أبيض أو أسمر
-      if (itemName.includes('كلوب')) {
-        container.style.display = 'block';
-        title.innerText = '🥖 نوع خبز التوست:';
-        grid.innerHTML = `
-          <label class="option-item"><input type="radio" name="opt_bread" value="توست أبيض" checked onchange="updateCustomModalQtyDisplay()"> توست أبيض</label>
-          <label class="option-item"><input type="radio" name="opt_bread" value="توست أسمر (بُر) (+1 ر.ي)" onchange="updateCustomModalQtyDisplay()"> <span style="color: var(--accent); font-weight: 800;">توست أسمر (+1 ر.ي)</span></label>
-        `;
-        return;
-      }
-
-      // 8. الصحن العربي: خبز صاج إضافي
-      if (itemName.includes('صحن عربي')) {
-        container.style.display = 'block';
-        title.innerText = '🥖 إضافة خبز صاج إضافي مع الصحن:';
-        grid.innerHTML = `
-          <label class="option-item"><input type="radio" name="opt_bread" value="خبز أبيض" checked onchange="updateCustomModalQtyDisplay()"> خبز أبيض</label>
-          <label class="option-item"><input type="radio" name="opt_bread" value="خبز صاج (+2 ر.ي)" onchange="updateCustomModalQtyDisplay()"> <span style="color: var(--accent); font-weight: 800;">خبز صاج (+2 ر.ي)</span></label>
-        `;
-        return;
-      }
-
-      // 9. الصاروخ
-      if (itemName.includes('صاروخ')) {
-        container.style.display = 'block';
-        title.innerText = '🥖 نوع الخبز:';
-        grid.innerHTML = `
-          <label class="option-item"><input type="radio" name="opt_bread" value="خبز أبيض" checked onchange="updateCustomModalQtyDisplay()"> خبز أبيض</label>
-          <label class="option-item"><input type="radio" name="opt_bread" value="خبز سمر (بُر) (+1 ر.ي)" onchange="updateCustomModalQtyDisplay()"> <span style="color: var(--accent); font-weight: 800;">خبز سمر (+1 ر.ي)</span></label>
-          <label class="option-item"><input type="radio" name="opt_bread" value="خبز صاج (+1 ر.ي)" onchange="updateCustomModalQtyDisplay()"> <span style="color: var(--accent); font-weight: 800;">خبز صاج (+1 ر.ي)</span></label>
-        `;
-        return;
-      }
-
-      // 10. التوست
-      if (itemName.includes('توست')) {
-        container.style.display = 'block';
-        title.innerText = '🥖 نوع الخبز:';
-        grid.innerHTML = `
-          <label class="option-item"><input type="radio" name="opt_bread" value="خبز أبيض" checked onchange="updateCustomModalQtyDisplay()"> خبز أبيض</label>
-          <label class="option-item"><input type="radio" name="opt_bread" value="خبز سمر (بُر) (+1 ر.ي)" onchange="updateCustomModalQtyDisplay()"> <span style="color: var(--accent); font-weight: 800;">خبز سمر (+1 ر.ي)</span></label>
-        `;
-        return;
-      }
-
-      // 11. الوضع الافتراضي
+      // 10. شاورما الصاروخ والشاورما العادية: الخبز الأسمر بـ 2 ريالين (+2 ر.ي)
       container.style.display = 'block';
       title.innerText = '🥖 نوع الخبز:';
       grid.innerHTML = `
         <label class="option-item"><input type="radio" name="opt_bread" value="خبز أبيض" checked onchange="updateCustomModalQtyDisplay()"> خبز أبيض</label>
-        <label class="option-item"><input type="radio" name="opt_bread" value="خبز أسمر (بُر) (+1 ر.ي)" onchange="updateCustomModalQtyDisplay()"> <span style="color: var(--accent); font-weight: 800;">خبز أسمر (+1 ر.ي)</span></label>
+        <label class="option-item"><input type="radio" name="opt_bread" value="خبز أسمر (+2 ر.ي)" onchange="updateCustomModalQtyDisplay()"> <span style="color: var(--accent); font-weight: 800;">خبز أسمر (+2 ر.ي)</span></label>
         <label class="option-item"><input type="radio" name="opt_bread" value="خبز صاج (+1 ر.ي)" onchange="updateCustomModalQtyDisplay()"> <span style="color: var(--accent); font-weight: 800;">خبز صاج (+1 ر.ي)</span></label>
       `;
     }
@@ -1736,8 +1725,11 @@
 
     /* ========================================================
        إعداد خيارات الجبنة في نافذة التفاصيل:
-       إلغاء خيار الجبنة عن قسم البرجر بالكامل
-       تفعيله فقط للتورتيلا والوجبات
+       (تم إلغاؤه تماماً عن الوجبات والبرجر وحصره فقط في التورتيلا)
+       ======================================================== */
+
+    /* ========================================================
+       إعداد خيارات الجبنة في نافذة التفاصيل
        ======================================================== */
     function setupCheeseOptions(itemName) {
       const cheeseContainer = document.getElementById('cheeseSectionContainer');
