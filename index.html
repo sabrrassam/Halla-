@@ -1388,6 +1388,7 @@
         <label style="font-weight: 800; color: var(--accent);">🚚 اختر طريقة استلام الطلب:</label>
         <div class="select-wrapper" style="margin-top: 5px;">
             <select id="deliverySelect" onchange="toggleDeliveryOptions()" class="input-field" style="font-weight: bold; background: rgba(36, 21, 18, 0.9);">
+                <option value="إضافة على الطلب السابق">إضافة على الطلب السابق</option>
                 <option value="توصيل">توصيل للموقع (رسوم 10 ر.ي)</option>
                 <option value="استلام سيارة">استلام من مواقف المطعم (سيارة)</option>
                 <option value="من المحل">استلام شخصي من المحل</option>
@@ -1890,9 +1891,21 @@
 
     function toggleDeliveryOptions() {
       const method = document.getElementById('deliverySelect').value;
-      document.getElementById('locationField').style.display = method === 'توصيل' ? 'block' : 'none';
-      document.getElementById('carField').style.display = method === 'استلام سيارة' ? 'block' : 'none';
-      document.getElementById('storeField').style.display = method === 'من المحل' ? 'block' : 'none';
+      const showLocation = method === 'توصيل';
+      const showCar = method === 'استلام سيارة';
+      const showStore = method === 'من المحل';
+      const showExtra = method === 'إضافة على الطلب السابق';
+
+      document.getElementById('locationField').style.display = showLocation ? 'block' : 'none';
+      document.getElementById('carField').style.display = showCar ? 'block' : 'none';
+      document.getElementById('storeField').style.display = showStore ? 'block' : 'none';
+
+      if (showExtra) {
+        document.getElementById('deliveryExtraFields').style.display = 'none';
+      } else {
+        document.getElementById('deliveryExtraFields').style.display = 'block';
+      }
+
       updateCartModalTotal();
     }
 
@@ -1988,7 +2001,9 @@
       orderText += "------------------------------------\n";
       orderText += `🚚 *طريقة الاستلام:* ${method}\n`;
       
-      if(method === 'توصيل') {
+      if(method === 'إضافة على الطلب السابق') {
+          orderText += `📌 *ملاحظة:* هذا الطلب يضاف إلى الطلب السابق، بدون رسوم توصيل إضافية.\n`;
+      } else if(method === 'توصيل') {
           orderText += `👤 *العميل / العنوان:* ${customerAddress ? customerAddress : 'لم يكتب العنوان'}\n`;
           orderText += `📍 *الموقع:* (سيتم إرسال الموقع عبر خرائط جوجل)\n`;
           orderText += `🛵 رسوم التوصيل: +10 ر.ي\n`;
