@@ -967,13 +967,13 @@
                 <span class="item-title">صحن بطاطس صغير</span>
                 <div class="prices-badge-group">
                   <span class="price-tag">صافي: 3 ر.ي</span>
-                  <span class="price-sub">جبن: 6 ر.ي</span>
+                  <span class="price-sub">جبن: 5 ر.ي</span>
                 </div>
               </div>
               <p class="item-desc">أصابع بطاطس مقلية ذهبية مقرمشة ولذيذة.</p>
               <div class="card-footer">
                 <button class="btn-add" onclick="openItemByName('صحن بطاطس صغير', 'base')">+ صافي (3)</button>
-                <button class="btn-add" onclick="openItemByName('صحن بطاطس صغير', 'cheese')">+ مع جبن (6)</button>
+                <button class="btn-add" onclick="openItemByName('صحن بطاطس صغير', 'cheese')">+ مع جبن (5)</button>
               </div>
             </div>
           </div>
@@ -1466,7 +1466,7 @@
         "تورتيلا زنجر برجر صغير": { base: 8 },
         "سندوتش مسحب دجاج كبير": { base: 10 },
         "سندوتش مسحب دجاج صغير": { base: 8 },
-        "صحن بطاطس صغير": { base: 3, cheese: 6 },
+        "صحن بطاطس صغير": { base: 3, cheese: 5 },
         "صحن بطاطس كبير": { base: 5, cheese: 8 },
         "وجبة توست دجاج متكاملة": { base: 13 },
         "تشيكن فرايز صغير": { single: 10 },
@@ -1677,12 +1677,12 @@
         return;
       }
 
-      // 10. شاورما الصاروخ والشاورما العادية: الخبز الأسمر بـ 2 ريالين (+2 ر.ي)
+      // 10. شاورما الصاروخ والشاورما العادية: الخبز الأسمر بـ 1 ريال (+1 ر.ي) والخبز الصاج بـ 1 ريال (+1 ر.ي)
       container.style.display = 'block';
       title.innerText = '🥖 نوع الخبز:';
       grid.innerHTML = `
         <label class="option-item"><input type="radio" name="opt_bread" value="خبز أبيض" checked onchange="updateCustomModalQtyDisplay()"> خبز أبيض</label>
-        <label class="option-item"><input type="radio" name="opt_bread" value="خبز أسمر (+2 ر.ي)" onchange="updateCustomModalQtyDisplay()"> <span style="color: var(--accent); font-weight: 800;">خبز أسمر (+2 ر.ي)</span></label>
+        <label class="option-item"><input type="radio" name="opt_bread" value="خبز أسمر (+1 ر.ي)" onchange="updateCustomModalQtyDisplay()"> <span style="color: var(--accent); font-weight: 800;">خبز أسمر (+1 ر.ي)</span></label>
         <label class="option-item"><input type="radio" name="opt_bread" value="خبز صاج (+1 ر.ي)" onchange="updateCustomModalQtyDisplay()"> <span style="color: var(--accent); font-weight: 800;">خبز صاج (+1 ر.ي)</span></label>
       `;
     }
@@ -1694,16 +1694,17 @@
       const cookingContainer = document.getElementById('cookingSectionContainer');
       const cookingGrid = document.getElementById('cookingOptionsGrid');
 
-      const isPrepSupported = (
-        itemName.includes('تورتيلا دجاج برجر') || 
-        itemName.includes('برجر دجاج') || 
-        itemName.includes('جانبو دجاج برجر') || 
-        itemName.includes('توست دجاج برجر') || 
-        itemName.includes('وجبة برجر دجاج') || 
-        itemName.includes('وجبة توست دجاج')
-      ) && !itemName.includes('شاورما') && !itemName.includes('زنجر');
+      const shouldHideCookingOptions = (
+        itemName.includes('برجر') ||
+        itemName.includes('جامبو') ||
+        itemName.includes('توست') ||
+        itemName.includes('تورتيلا') ||
+        itemName.includes('وجبة') ||
+        itemName.includes('شاورما') ||
+        itemName.includes('زنجر')
+      );
 
-      if (!isPrepSupported) {
+      if (shouldHideCookingOptions) {
         cookingContainer.style.display = 'none';
         cookingGrid.innerHTML = '';
         return;
