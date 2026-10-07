@@ -1388,10 +1388,10 @@
         <label style="font-weight: 800; color: var(--accent);">🚚 اختر طريقة استلام الطلب:</label>
         <div class="select-wrapper" style="margin-top: 5px;">
             <select id="deliverySelect" onchange="toggleDeliveryOptions()" class="input-field" style="font-weight: bold; background: rgba(36, 21, 18, 0.9);">
-                <option value="إضافة على الطلب السابق">إضافة على الطلب السابق</option>
                 <option value="توصيل">توصيل للموقع (رسوم 10 ر.ي)</option>
                 <option value="استلام سيارة">استلام من مواقف المطعم (سيارة)</option>
                 <option value="من المحل">استلام شخصي من المحل</option>
+                <option value="إضافة على الطلب السابق">إضافة على الطلب السابق</option>
             </select>
         </div>
         <button type="button" class="btn-modal-action" style="margin-top: 12px; background: linear-gradient(135deg, #0ea5e9, #38bdf8);" onclick="addAnotherOrder()">
@@ -1891,10 +1891,10 @@
 
     function toggleDeliveryOptions() {
       const method = document.getElementById('deliverySelect').value;
+            const showExtra = method === 'إضافة على الطلب السابق';
       const showLocation = method === 'توصيل';
       const showCar = method === 'استلام سيارة';
       const showStore = method === 'من المحل';
-      const showExtra = method === 'إضافة على الطلب السابق';
 
       document.getElementById('locationField').style.display = showLocation ? 'block' : 'none';
       document.getElementById('carField').style.display = showCar ? 'block' : 'none';
