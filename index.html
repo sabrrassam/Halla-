@@ -1323,11 +1323,7 @@
           <div id="breadNotice" style="display:none; background: rgba(247, 127, 0, 0.18); border: 1px dashed var(--secondary); color: var(--accent); font-size: 0.84rem; font-weight: 800; padding: 6px 12px; border-radius: 8px; margin-bottom: 8px;"></div>
         </div>
 
-        <!-- قسم خيار التحضير (مشوي / مقلي) -->
-        <div id="cookingSectionContainer" style="display:none;">
-          <div class="option-group-title">🔥 نوع التحضير:</div>
-          <div class="options-grid" id="cookingOptionsGrid"></div>
-        </div>
+        <!-- قسم نوع التحضير تم إلغاؤه بالكامل -->
 
         <!-- قسم خيارات الجبنة تم إلغاؤه -->
 
@@ -1694,33 +1690,8 @@
       const cookingContainer = document.getElementById('cookingSectionContainer');
       const cookingGrid = document.getElementById('cookingOptionsGrid');
 
-      const shouldHideCookingOptions = (
-        itemName.includes('برجر') ||
-        itemName.includes('جامبو') ||
-        itemName.includes('توست') ||
-        itemName.includes('تورتيلا') ||
-        itemName.includes('وجبة') ||
-        itemName.includes('شاورما') ||
-        itemName.includes('زنجر')
-      );
-
-      if (shouldHideCookingOptions) {
-        cookingContainer.style.display = 'none';
-        cookingGrid.innerHTML = '';
-        return;
-      }
-
-      cookingContainer.style.display = 'block';
-      const isGrilled = presetPrep ? presetPrep.includes('مشوي') : true;
-
-      cookingGrid.innerHTML = `
-        <label class="option-item">
-          <input type="radio" name="opt_cooking" value="مشوي 🔥" ${isGrilled ? 'checked' : ''}> مشوي 🔥
-        </label>
-        <label class="option-item">
-          <input type="radio" name="opt_cooking" value="مقلي 🍗" ${!isGrilled ? 'checked' : ''}> مقلي 🍗
-        </label>
-      `;
+      if (cookingContainer) cookingContainer.style.display = 'none';
+      if (cookingGrid) cookingGrid.innerHTML = '';
     }
 
     function openCustomizeModal(name, price, presetPrep) {
@@ -1848,13 +1819,7 @@
         else if (breadOpt.value.includes('+1 ر.ي')) breadExtra = 1;
       }
 
-      // نوع التحضير
-      const cookingOpt = document.querySelector('input[name="opt_cooking"]:checked');
-      if (cookingOpt) {
-        options.push(`التحضير: ${cookingOpt.value}`);
-      } else if (currentCustomizingItem.presetPrep) {
-        options.push(`التحضير: ${currentCustomizingItem.presetPrep}`);
-      }
+      // نوع التحضير تم إلغاؤه بالكامل من الواجهة والسلة
 
       // الملاحظات السريعة
       document.querySelectorAll('.note-chip input:checked').forEach(chk => {
