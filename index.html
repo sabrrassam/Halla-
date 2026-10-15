@@ -1581,6 +1581,11 @@
       openCustomizeModal(chosenName, chosenPrice, null, defaultCheeseChoice);
     }
 
+    function getOptionExtraPrice(option) {
+      const match = option?.match(/\+\s*(\d+(?:\.\d+)?)\s*ر\.ي/);
+      return match ? Number(match[1]) : 0;
+    }
+
     // دالة مخصصة للأزرار الخارجية التي تختار نوع التحضير مباشرة (مشوي / مقلي)
     function openItemWithPrep(itemId, price, prepChoice) {
       openCustomizeModal(itemId, price, prepChoice);
@@ -1764,9 +1769,18 @@
       if (!container || !grid) return;
 
       const isPlateItem = /صحن|باشكا|كلوب زنجر/.test(itemName);
-      const isSandwichItem = /شاورما|ساندوتش|برجر|توست|مسحب|تورتيلا/.test(itemName);
+      const isSandwichItem = /شاورما|ساندوتش|توست/.test(itemName);
+      const isMashebItem = /مسحب/.test(itemName);
+      const isBurgerOrTortillaItem = /برجر|تورتيلا/.test(itemName);
+      const isMealItem = /وجبة|متكاملة/.test(itemName);
 
-      if (!isPlateItem && !isSandwichItem) {
+      if (!isPlateItem && !isSandwichItem && !isMashebItem && !isBurgerOrTortillaItem && !isMealItem) {
+        container.style.display = 'none';
+        grid.innerHTML = '';
+        return;
+      }
+
+      if (isBurgerOrTortillaItem || isMashebItem || isMealItem) {
         container.style.display = 'none';
         grid.innerHTML = '';
         return;
@@ -1805,7 +1819,6 @@
         grid.innerHTML = `
           <label class="option-item"><input type="radio" name="opt_cheese" value="بدون جبن" checked onchange="updateCustomModalQtyDisplay()"> بدون جبن</label>
           <label class="option-item"><input type="radio" name="opt_cheese" value="مع جبن (+1 ر.ي)" onchange="updateCustomModalQtyDisplay()"> <span style="color: var(--accent); font-weight: 800;">مع جبن (+1 ر.ي)</span></label>
-          <label class="option-item"><input type="radio" name="opt_cheese" value="دبل جبن (+2 ر.ي)" onchange="updateCustomModalQtyDisplay()"> <span style="color: var(--accent); font-weight: 800;">دبل جبن (+2 ر.ي)</span></label>
         `;
         return;
       }
@@ -1820,7 +1833,7 @@
 
     function updateCheeseNoteChipsVisibility(itemName) {
       const cheeseNoteValues = new Set(['مع الجبن', 'بدون جبن']);
-      const shouldHideCheeseNotes = /صحن|باشكا|كلوب زنجر|شاورما|ساندوتش|برجر|توست|مسحب|تورتيلا/.test(itemName);
+      const shouldHideCheeseNotes = /صحن|باشكا|كلوب زنجر|شاورما|ساندوتش|توست/.test(itemName);
 
       document.querySelectorAll('.note-chip').forEach(chip => {
         const input = chip.querySelector('input');
@@ -1880,37 +1893,19 @@
       
       const breadOpt = document.querySelector('input[name="opt_bread"]:checked');
       const cheeseOpt = document.querySelector('input[name="opt_cheese"]:checked');
-      let breadExtra = 0;
-      let cheeseExtra = 0;
+      const breadExtra = getOptionExtraPrice(breadOpt?.value);
+      const cheeseExtra = getOptionExtraPrice(cheeseOpt?.value);
       const notice = document.getElementById('breadNotice');
 
       if (breadOpt) {
-        if (breadOpt.value.includes('+2 ر.ي')) {
-          breadExtra = 2;
+        if (breadExtra > 0) {
           notice.style.display = 'block';
-          notice.innerText = 'ℹ️ تم احتساب +2 ر.ي لإضافة خبز الصاج مع الصحن.';
-        } else if (breadOpt.value.includes('+1 ر.ي')) {
-          breadExtra = 1;
-          notice.style.display = 'block';
-          notice.innerText = 'ℹ تم احتساب +1 ر.ي لاختيار الخبز الإضافي (أسمر/صاج).';
+          notice.innerText = `ℹ️ تم احتساب +${breadExtra} ر.ي لاختيار الإضافة.`;
         } else {
           notice.style.display = 'none';
         }
       } else {
         notice.style.display = 'none';
-      }
-
-      if (cheeseOpt) {
-        if (currentCustomizingItem.name.includes('صحن بطاطس')) {
-          cheeseExtra = cheeseOpt.value.includes('مع جبن') ? 3 : 0;
-        } else if (currentCustomizingItem.name.includes('صحن')) {
-          if (cheeseOpt.value.includes('دبل جبن')) cheeseExtra = 4;
-          else if (cheeseOpt.value.includes('مع جبن')) cheeseExtra = 2;
-        } else if (cheeseOpt.value.includes('دبل جبن')) {
-          cheeseExtra = 2;
-        } else if (cheeseOpt.value.includes('جبن')) {
-          cheeseExtra = 1;
-        }
       }
 
       const unitPrice = currentCustomizingItem.basePrice + breadExtra + cheeseExtra;
@@ -1982,8 +1977,7 @@
       const breadOpt = document.querySelector('input[name="opt_bread"]:checked');
       if (breadOpt) {
         options.push(breadOpt.value);
-        if (breadOpt.value.includes('+2 ر.ي')) breadExtra = 2;
-        else if (breadOpt.value.includes('+1 ر.ي')) breadExtra = 1;
+        breadExtra = getOptionExtraPrice(breadOpt.value);
       }
 
       const cookingOpt = document.querySelector('input[name="opt_cooking"]:checked');
@@ -1994,16 +1988,7 @@
       const cheeseOpt = document.querySelector('input[name="opt_cheese"]:checked');
       if (cheeseOpt) {
         options.push(cheeseOpt.value);
-        if (currentCustomizingItem.name.includes('صحن بطاطس')) {
-          cheeseExtra = cheeseOpt.value.includes('مع جبن') ? 3 : 0;
-        } else if (currentCustomizingItem.name.includes('صحن')) {
-          if (cheeseOpt.value.includes('دبل جبن')) cheeseExtra = 4;
-          else if (cheeseOpt.value.includes('مع جبن')) cheeseExtra = 2;
-        } else if (cheeseOpt.value.includes('دبل جبن')) {
-          cheeseExtra = 2;
-        } else if (cheeseOpt.value.includes('جبن')) {
-          cheeseExtra = 1;
-        }
+        cheeseExtra = getOptionExtraPrice(cheeseOpt.value);
       }
 
       // الملاحظات السريعة
