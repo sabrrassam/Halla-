@@ -1814,6 +1814,15 @@
         return;
       }
 
+      if (itemName.includes('كلوب شاورما')) {
+        container.style.display = 'block';
+        grid.innerHTML = `
+          <label class="option-item"><input type="radio" name="opt_cheese" value="بدون جبن" checked onchange="updateCustomModalQtyDisplay()"> بدون جبن</label>
+          <label class="option-item"><input type="radio" name="opt_cheese" value="مع جبن (+2 ر.ي)" onchange="updateCustomModalQtyDisplay()"> <span style="color: var(--accent); font-weight: 800;">مع جبن (+2 ر.ي)</span></label>
+        `;
+        return;
+      }
+
       if (isSandwichItem) {
         container.style.display = 'block';
         grid.innerHTML = `
