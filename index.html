@@ -335,6 +335,26 @@
       gap: 6px;
       margin: 0.4rem 0 0.8rem;
     }
+    .notes-chips-grid[hidden] { display: none; }
+    .notes-toggle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 0 0 0.2rem;
+      border: 0;
+      background: transparent;
+      color: var(--accent);
+      font: inherit;
+      text-align: right;
+      cursor: pointer;
+    }
+    .notes-toggle::after {
+      content: '▾';
+      font-size: 1rem;
+      transition: transform 0.2s ease;
+    }
+    .notes-toggle[aria-expanded="true"]::after { transform: rotate(180deg); }
     .note-chip {
       background: rgba(45, 26, 22, 0.9);
       border: 1px solid rgba(247, 127, 0, 0.3);
@@ -1333,9 +1353,14 @@
           <div class="options-grid" id="cheeseOptionsGrid"></div>
         </div>
 
+        <div class="custom-note-section">
+          <div class="option-group-title">✍️ ملاحظات خاصة إضافية إن وجدت:</div>
+          <textarea id="itemCustomNote" class="notes-textarea" rows="2" placeholder="اكتب أي ملاحظة أخرى هنا..."></textarea>
+        </div>
+
         <!-- تفضيلات وملاحظات الطلب All Notes -->
-        <div class="option-group-title">✨ تفضيلات وملاحظات الطلب (All Notes):</div>
-        <div class="notes-chips-grid" id="notesChipsWrapper">
+        <button type="button" class="option-group-title notes-toggle" id="notesToggle" aria-expanded="false" aria-controls="notesChipsWrapper">✨ تفضيلات وملاحظات الطلب (All Notes):</button>
+        <div class="notes-chips-grid" id="notesChipsWrapper" hidden>
           <label class="note-chip"><input type="checkbox" value="مع الجبن">مع الجبن</label>
           <label class="note-chip"><input type="checkbox" value="بدون جبن">بدون جبن</label>
           <label class="note-chip"><input type="checkbox" value="مخلل">مخلل</label>
@@ -1373,8 +1398,6 @@
         <div id="freeItemHint" style="display:none; color:#25d366; font-size:0.85rem; font-weight:800; text-align:center; margin-top:4px;">
           🎁 مبروك! سيتم إضافة الوجبة الرابعة مجاناً لحسابك تلقائياً في السلة.
         </div>
-        <div class="option-group-title">✍️ ملاحظات خاصة إضافية إن وجدت:</div>
-        <textarea id="itemCustomNote" class="notes-textarea" rows="2" placeholder="اكتب أي ملاحظة أخرى هنا..."></textarea>
         <button type="button" class="btn-modal-action" onclick="confirmItemCustomization()">تأكيد وإضافة للسلة 🛒</button>
       </form>
     </div>
@@ -1533,6 +1556,14 @@
           this.parentElement.classList.remove('active');
         }
       });
+    });
+
+    const notesToggle = document.getElementById('notesToggle');
+    const notesChipsWrapper = document.getElementById('notesChipsWrapper');
+    notesToggle.addEventListener('click', function() {
+      const isExpanded = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', String(!isExpanded));
+      notesChipsWrapper.hidden = isExpanded;
     });
 
     // إخفاء الـ Splash Screen تلقائياً بعد ثانيتين
@@ -1863,6 +1894,8 @@
       
       document.getElementById('modalItemTitle').innerText = `تخصيص: ${cleanBaseName}`;
       document.getElementById('customizeForm').reset();
+      notesToggle.setAttribute('aria-expanded', 'false');
+      notesChipsWrapper.hidden = true;
       
       setupBreadOptions(cleanBaseName);
       setupCookingOptions(cleanBaseName, presetPrep);
