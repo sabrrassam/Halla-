@@ -7,15 +7,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #d62828;
-      --secondary: #f77f00;
-      --accent: #fcbf49;
-      --dark-bg: #120b09;
-      --card-bg: rgba(28, 17, 14, 0.92);
-      --text-light: #fff5eb;
-      --text-muted: #d9cac1;
-      --glow-red: 0 0 20px rgba(214, 40, 40, 0.6);
-      --glow-orange: 0 0 20px rgba(247, 127, 0, 0.6);
+      --primary: #0f766e;
+      --secondary: #c89b3c;
+      --accent: #0f766e;
+      --cream: #f7f3e8;
+      --dark-bg: #f7f3e8;
+      --card-bg: rgba(15, 118, 110, 0.06);
+      --text-light: #0f766e;
+      --text-muted: rgba(15, 118, 110, 0.78);
+      --glow-turquoise: 0 0 20px rgba(15, 118, 110, 0.18);
+      --glow-gold: 0 0 20px rgba(200, 155, 60, 0.22);
     }
 
     * {
@@ -30,13 +31,14 @@
       background-color: var(--dark-bg);
       color: var(--text-light);
       overflow-x: hidden;
+      padding-bottom: 110px;
     }
 
     /* === شاشة الترحيب Splash Screen === */
     #splashScreen {
       position: fixed;
       inset: 0;
-      background: radial-gradient(circle, #25120d 0%, #0d0605 100%);
+      background: var(--cream);
       z-index: 99999;
       display: flex;
       flex-direction: column;
@@ -74,17 +76,17 @@
       align-items: center;
       margin-bottom: 1.2rem;
       animation: spinRing 3s linear infinite;
-      box-shadow: 0 0 25px rgba(247, 127, 0, 0.4);
+      box-shadow: 0 0 25px rgba(200, 155, 60, 0.4);
     }
 
     .splash-logo-badge {
       background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: #fff;
+      color: #f7f3e8;
       font-size: 2rem;
       font-weight: 900;
       padding: 8px 22px;
       border-radius: 16px;
-      box-shadow: var(--glow-red);
+      box-shadow: var(--glow-turquoise);
       letter-spacing: 0.5px;
     }
 
@@ -96,21 +98,33 @@
       letter-spacing: 1px;
     }
 
+    .splash-family-offer {
+      margin-top: 0.9rem;
+      padding: 0.45rem 1.15rem;
+      border: 1px solid rgba(198, 40, 40, 0.38);
+      border-radius: 999px;
+      background: rgba(198, 40, 40, 0.045);
+      color: var(--primary);
+      font-size: 1.05rem;
+      font-weight: 900;
+      box-shadow: 0 0 14px rgba(198, 40, 40, 0.2), inset 0 0 8px rgba(198, 40, 40, 0.06);
+    }
+
     .splash-branch-label {
       font-size: 1.05rem;
       color: var(--text-light);
       font-weight: 700;
       margin-top: 1rem;
-      background: rgba(247, 127, 0, 0.15);
+      background: rgba(200, 155, 60, 0.15);
       padding: 6px 18px;
       border-radius: 20px;
-      border: 1px solid rgba(247, 127, 0, 0.4);
+      border: 1px solid rgba(200, 155, 60, 0.4);
     }
 
     .splash-loader-bar {
       width: 140px;
       height: 4px;
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(247, 243, 232, 0.1);
       border-radius: 10px;
       margin-top: 1.5rem;
       overflow: hidden;
@@ -148,42 +162,90 @@
       position: fixed;
       top: 0;
       width: 100%;
-      padding: 0.9rem 2rem;
+      min-height: 0;
+      padding: 0.65rem clamp(1rem, 3vw, 2rem);
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(18, 11, 9, 0.88);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      flex-direction: column;
+      justify-content: center;
+      align-items: stretch;
+      gap: 0.5rem;
+      background: rgba(247, 243, 232, 0.97);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       z-index: 1000;
-      border-bottom: 2px solid rgba(214, 40, 40, 0.35);
+      border-bottom: 1px solid rgba(15, 118, 110, 0.16);
+      box-shadow: 0 4px 20px rgba(15, 118, 110, 0.08);
     }
 
-    .brand-box { display: flex; align-items: center; gap: 12px; }
+    .brand-box { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; }
     .logo-badge {
       background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: #fff;
+      color: var(--cream);
       font-weight: 900;
       padding: 5px 14px;
       border-radius: 10px;
       font-size: 1.35rem;
-      box-shadow: var(--glow-red);
+      box-shadow: var(--glow-turquoise);
     }
-    .slogan-nav { font-size: 0.85rem; color: var(--accent); font-weight: 700; }
+    .slogan-nav { font-size: 0.85rem; color: var(--primary); font-weight: 700; }
 
-    .nav-links { display: flex; gap: 1.1rem; list-style: none; }
+    .nav-links { display: none; }
     .nav-links a { color: var(--text-light); text-decoration: none; font-weight: 700; font-size: 0.88rem; transition: all 0.3s ease; }
-    .nav-links a:hover { color: var(--secondary); text-shadow: 0 0 10px rgba(247, 127, 0, 0.8); }
+
+    .top-offer-strip {
+      position: relative;
+      display: block;
+      flex: 0 0 auto;
+      min-width: 0;
+      width: 100%;
+      max-width: none;
+      overflow: hidden;
+      padding: 0.45rem 0;
+      border: 1px solid rgba(198, 40, 40, 0.55);
+      border-radius: 999px;
+      background: rgba(200, 155, 60, 0.12);
+      color: #c62828;
+      font-size: 0.86rem;
+      font-weight: 800;
+      direction: ltr;
+      box-shadow: 0 0 12px rgba(198, 40, 40, 0.18);
+    }
+
+    .top-offer-strip::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      padding: 2px;
+      border-radius: inherit;
+      background: linear-gradient(110deg, transparent 12%, #c62828 34%, #ef5350 50%, #c62828 66%, transparent 88%);
+      background-size: 250% 100%;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      animation: offerBorderGlow 3.2s linear infinite;
+    }
+
+    .top-offer-track {
+      display: flex;
+      width: max-content;
+      animation: offerTicker 18s linear infinite;
+    }
+
+    .top-offer-strip:hover .top-offer-track { animation-play-state: paused; }
+    .top-offer-message { flex: 0 0 auto; padding: 0 1.25rem; white-space: nowrap; }
+    .top-offer-strip .top-offer-message,
+    .top-offer-strip strong { color: #c62828; }
+    .top-offer-icon { color: #c62828; font-size: 1.05rem; }
 
     .video-hero-wrapper {
-      min-height: 85vh;
       position: relative;
       overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 6.5rem 1.5rem 3.5rem;
+      padding: 8rem 1.5rem 2.5rem;
     }
 
     .video-bg {
@@ -197,71 +259,74 @@
       transform: translate(-50%, -50%);
       object-fit: cover;
       z-index: 1;
-      filter: brightness(0.65) contrast(1.1);
+      filter: brightness(0.78) saturate(0.8);
     }
 
     .video-overlay {
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle, rgba(18, 11, 9, 0.72) 0%, rgba(18, 11, 9, 0.94) 100%);
+      background: linear-gradient(135deg, rgba(15, 118, 110, 0.86), rgba(15, 118, 110, 0.72));
       z-index: 2;
     }
 
-    .hero-content { position: relative; z-index: 3; max-width: 900px; width: 100%; }
-    .tagline { display: inline-block; padding: 0.4rem 1.4rem; border: 1px solid var(--secondary); border-radius: 50px; color: var(--accent); font-weight: 800; font-size: 0.95rem; margin-bottom: 1rem; box-shadow: var(--glow-orange); }
-    .hero-content h1 { font-size: 3.2rem; font-weight: 900; margin-bottom: 0.8rem; line-height: 1.3; }
-    .hero-content h1 span { color: var(--secondary); text-shadow: var(--glow-orange); }
-    .hero-content p.hero-sub { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 1.8rem; font-weight: 600; }
+    .hero-content { position: relative; z-index: 3; max-width: 900px; width: 100%; color: var(--cream); }
+    .tagline { display: inline-block; padding: 0.32rem 1.1rem; border: 1px solid var(--secondary); border-radius: 50px; color: var(--accent); font-weight: 800; font-size: 0.9rem; margin-bottom: 0.55rem; box-shadow: var(--glow-gold); }
+    .hero-content h1 { color: var(--cream); font-size: 3rem; font-weight: 900; margin-bottom: 0.35rem; line-height: 1.25; }
+    .hero-content h1 span { color: var(--secondary); text-shadow: var(--glow-gold); }
+    .hero-content p.hero-sub { max-width: 720px; margin: 0 auto; font-size: 1.08rem; color: var(--text-muted); font-weight: 600; }
 
-    .offers-interactive-wrapper { margin: 1.5rem auto 2.2rem; max-width: 750px; position: relative; }
-    .offer-slide-box { 
-      background: linear-gradient(135deg, rgba(214, 40, 40, 0.35), rgba(247, 127, 0, 0.3)); 
-      border: 2px dashed var(--accent); 
-      border-radius: 20px; 
-      padding: 1.6rem 2rem; 
-      box-shadow: 0 0 30px rgba(247, 127, 0, 0.5); 
-      text-align: center; 
-      position: relative; 
-      backdrop-filter: blur(10px); 
-    }
-    .offer-badge { display: inline-block; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #fff; font-weight: 900; font-size: 0.85rem; padding: 4px 16px; border-radius: 30px; margin-bottom: 0.6rem; box-shadow: var(--glow-red); }
-    .offer-title { font-size: 1.8rem; font-weight: 900; color: #fff; margin-bottom: 0.4rem; text-shadow: 0 0 15px rgba(255, 255, 255, 0.6); }
-    .offer-desc { color: var(--accent); font-size: 1.25rem; font-weight: 800; margin: 0; }
-
-    .btn-glow { display: inline-block; padding: 0.85rem 2.4rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #fff; text-decoration: none; font-weight: 800; border-radius: 40px; box-shadow: 0 0 20px rgba(214, 40, 40, 0.7), 0 0 40px rgba(247, 127, 0, 0.4); transition: all 0.3s ease; border: none; cursor: pointer; }
+    .btn-glow { display: inline-block; padding: 0.85rem 2.4rem; background: var(--primary); color: var(--cream); text-decoration: none; font-weight: 800; border: 1px solid var(--secondary); border-radius: 40px; box-shadow: 0 8px 22px rgba(15, 118, 110, 0.18); transition: all 0.3s ease; cursor: pointer; }
     .btn-glow:hover { transform: translateY(-3px) scale(1.03); }
 
-    .menu-section { padding: 4.5rem 1.2rem; position: relative; }
+    @keyframes offerTicker {
+      from { transform: translateX(-50%); }
+      to { transform: translateX(0); }
+    }
+
+    @keyframes offerBorderGlow {
+      from { background-position: 100% 50%; }
+      to { background-position: 0 50%; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .top-offer-strip::before { animation: none; }
+    }
+
+    .menu-section { padding: 4.5rem 1.2rem; position: relative; scroll-margin-top: 86px; }
     .section-container { position: relative; z-index: 2; max-width: 1350px; margin: auto; }
     .section-header { text-align: center; margin-bottom: 2.2rem; }
-    .section-header h2 { font-size: 2.3rem; color: var(--secondary); font-weight: 900; text-shadow: var(--glow-orange); margin-bottom: 0.4rem; }
-    .section-header p { color: var(--accent); font-size: 1.05rem; font-weight: 700; }
+    .section-header h2 { font-size: 2.3rem; color: var(--primary); font-weight: 900; margin-bottom: 0.4rem; }
+    .section-header p { color: var(--text-muted); font-size: 1.05rem; font-weight: 700; }
 
     .section-slider-wrapper { position: relative; display: flex; align-items: center; padding: 0 10px; }
+    .section-slider-wrapper::after { content: 'اسحب أو استخدم الأسهم لاستعراض الأصناف'; position: absolute; bottom: 0.1rem; left: 50%; transform: translateX(-50%); color: var(--text-muted); font-size: 0.72rem; font-weight: 700; white-space: nowrap; pointer-events: none; }
     .slider-track { display: flex; overflow-x: auto; gap: 1.2rem; padding: 1rem 0.5rem 1.8rem; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scroll-behavior: smooth; width: 100%; }
     .slider-track::-webkit-scrollbar { height: 6px; }
     .slider-track::-webkit-scrollbar-thumb { background: var(--secondary); border-radius: 6px; }
 
     .slider-track .card { flex: 0 0 calc((100% - 3.6rem) / 4); min-width: 220px; scroll-snap-align: start; }
 
-    .card { background: var(--card-bg); border: 1px solid rgba(247, 127, 0, 0.25); border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); transition: all 0.3s ease; display: flex; flex-direction: column; }
-    .card:hover { transform: translateY(-6px); border-color: var(--secondary); box-shadow: 0 12px 30px rgba(247, 127, 0, 0.35); }
-    .card-img-wrapper { width: 100%; height: 210px; overflow: hidden; background: #201411; }
+    .card { background: var(--cream); border: 1px solid rgba(15, 118, 110, 0.14); border-radius: 18px; overflow: hidden; box-shadow: 0 8px 24px rgba(15, 118, 110, 0.08); transition: all 0.3s ease; display: flex; flex-direction: column; }
+    .card:hover { transform: translateY(-5px); border-color: var(--secondary); box-shadow: 0 12px 28px rgba(15, 118, 110, 0.14); }
+    .card-img-wrapper { width: 100%; height: 210px; overflow: hidden; background: var(--cream); }
     .card-img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
     .card:hover .card-img-wrapper img { transform: scale(1.08); }
     .card-content { padding: 1.1rem; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; }
     .card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.6rem; }
-    .item-title { font-size: 1.12rem; font-weight: 800; color: #fff; line-height: 1.4; }
+    .item-title { font-size: 1.12rem; font-weight: 800; color: var(--primary); line-height: 1.4; }
     .prices-badge-group { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; min-width: max-content; }
-    .price-tag { font-size: 1.05rem; color: var(--accent); font-weight: 900; text-shadow: 0 0 10px rgba(252, 191, 73, 0.5); }
-    .price-sub { font-size: 0.82rem; color: #ff9e00; font-weight: 700; }
+    .price-tag { font-size: 1.05rem; color: var(--primary); font-weight: 900; }
+    .price-sub { font-size: 0.82rem; color: var(--primary); font-weight: 700; }
     .item-desc { color: var(--text-muted); font-size: 0.88rem; line-height: 1.5; margin-bottom: 1rem; }
-    .card-footer { display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; align-items: center; border-top: 1px dashed rgba(255, 255, 255, 0.1); padding-top: 0.7rem; }
+    .card-footer { display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; align-items: center; border-top: 1px dashed rgba(15, 118, 110, 0.14); padding-top: 0.7rem; }
     
-    .btn-add { background: rgba(214, 40, 40, 0.2); color: #fff; border: 1px solid var(--primary); padding: 0.35rem 0.75rem; border-radius: 20px; font-weight: 700; font-size: 0.82rem; cursor: pointer; transition: all 0.3s; }
-    .btn-add:hover { background: var(--primary); box-shadow: var(--glow-red); }
+    .btn-add { background: var(--primary); color: var(--cream); border: 1px solid var(--secondary); padding: 0.4rem 0.85rem; border-radius: 20px; font-weight: 700; font-size: 0.82rem; cursor: pointer; transition: all 0.3s; }
+    .btn-add:hover { background: var(--secondary); color: var(--primary); }
+    .card-footer.card-choices { flex-direction: column; align-items: stretch; gap: 7px; }
+    .card-choices .choice-chip { display: flex; flex: 0 0 auto; align-items: center; justify-content: space-between; width: 100%; min-width: 0; min-height: 40px; padding: 0.55rem 0.8rem; border-radius: 12px; text-align: right; line-height: 1.35; }
+    .choice-price { direction: ltr; white-space: nowrap; color: var(--secondary); font-weight: 900; }
 
-    .slider-arrow-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #fff; border: 2px solid var(--accent); width: 46px; height: 46px; border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 1.3rem; font-weight: 900; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7), var(--glow-orange); transition: all 0.3s ease; }
+    .slider-arrow-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; background: var(--primary); color: var(--cream); border: 2px solid var(--secondary); width: 46px; height: 46px; border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 1.3rem; font-weight: 900; box-shadow: 0 4px 15px rgba(15, 118, 110, 0.18); transition: all 0.3s ease; }
     .slider-arrow-btn:hover { transform: translateY(-50%) scale(1.15); background: var(--secondary); }
     .arrow-left { left: -14px; }
     .arrow-right { right: -14px; }
@@ -272,9 +337,10 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%) scale(0.9);
-      background: rgba(26, 12, 9, 0.96);
+      background: var(--cream);
+      color: var(--primary);
       border: 2.5px solid var(--accent);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.95), 0 0 35px rgba(252, 191, 73, 0.6);
+      box-shadow: 0 20px 60px rgba(15, 118, 110, 0.2), 0 0 35px rgba(200, 155, 60, 0.2);
       border-radius: 24px;
       padding: 2.2rem 2.5rem;
       z-index: 3000;
@@ -295,37 +361,40 @@
     }
 
     .toast-icon { font-size: 4rem; margin-bottom: 0.6rem; animation: giftBounce 1.2s infinite alternate; }
-    .toast-title { font-size: 1.6rem; font-weight: 900; color: #fff; margin-bottom: 0.6rem; }
-    .toast-body { font-size: 1.15rem; font-weight: 800; color: var(--accent); line-height: 1.6; margin-bottom: 1.5rem; }
+    .toast-title { font-size: 1.6rem; font-weight: 900; color: var(--primary); margin-bottom: 0.6rem; }
+    .toast-body { font-size: 1.05rem; font-weight: 700; color: var(--text-muted); line-height: 1.6; margin-bottom: 1.5rem; }
 
     @keyframes giftBounce {
       from { transform: translateY(0) scale(1); }
       to { transform: translateY(-10px) scale(1.12); }
     }
 
-    .footer-bar { background: #0b0706; border-top: 2px solid var(--primary); padding: 3rem 1.5rem 6rem; text-align: center; }
-    .info-card { max-width: 750px; margin: auto; background: rgba(28, 17, 14, 0.95); border: 1px solid rgba(247, 127, 0, 0.3); padding: 2.5rem; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.8); }
-    .phone-number { font-size: 2.2rem; font-weight: 900; color: var(--accent); text-shadow: var(--glow-orange); direction: ltr; display: inline-block; margin: 1rem 0; text-decoration: none; }
+    .footer-bar { background: var(--cream); border-top: 1px solid rgba(15, 118, 110, 0.14); padding: 3rem 1.5rem 6rem; text-align: center; }
+    .info-card { max-width: 750px; margin: auto; background: var(--cream); border: 1px solid rgba(200, 155, 60, 0.5); padding: 2.5rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(15, 118, 110, 0.08); }
+    .phone-number { font-size: 2.2rem; font-weight: 900; color: var(--primary); direction: ltr; display: inline-block; margin: 1rem 0; text-decoration: none; }
+    .delivery-note { color: var(--primary); background: rgba(200, 155, 60, 0.12); border: 1px solid rgba(200, 155, 60, 0.45); border-radius: 10px; padding: 0.55rem 0.75rem; font-size: 0.78rem; line-height: 1.6; font-weight: 700; }
     
-    .cart-float { position: fixed; bottom: 25px; left: 25px; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #fff; padding: 0.9rem 1.8rem; border-radius: 50px; box-shadow: 0 0 25px rgba(247, 127, 0, 0.7); font-weight: 800; cursor: pointer; z-index: 1000; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease; }
+    .cart-float { position: fixed; bottom: calc(94px + env(safe-area-inset-bottom)); left: max(14px, env(safe-area-inset-left)); background: var(--primary); color: var(--cream); border: 1px solid var(--secondary); padding: 0.72rem 1.15rem; border-radius: 50px; box-shadow: 0 8px 24px rgba(15, 118, 110, 0.2); font-weight: 800; cursor: pointer; z-index: 1100; display: flex; align-items: center; gap: 8px; transition: transform 0.2s ease; }
     .cart-float:hover { transform: scale(1.05); }
+    .cart-count-badge { color: var(--primary); background: var(--secondary); border-radius: 50%; min-width: 1.5rem; height: 1.5rem; display: inline-grid; place-items: center; }
 
-    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 2000; justify-content: center; align-items: center; padding: 1rem; }
-    .modal-box { background: #1c110e; color: var(--text-light); width: 100%; max-width: 530px; border-radius: 18px; padding: 1.6rem; border: 1px solid rgba(247, 127, 0, 0.4); box-shadow: 0 15px 40px rgba(0, 0, 0, 0.9), var(--glow-red); animation: modalSlide 0.3s ease; max-height: 90vh; overflow-y: auto; }
-    .modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(247, 127, 0, 0.25); padding-bottom: 0.8rem; margin-bottom: 1rem; }
-    .modal-header h3 { font-size: 1.3rem; font-weight: 800; color: var(--secondary); }
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(15, 118, 110, 0.52); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 2000; justify-content: center; align-items: center; padding: 1rem; }
+    .modal-box { background: var(--cream); color: var(--primary); width: 100%; max-width: 530px; border-radius: 18px; padding: 1.6rem; border: 1px solid rgba(200, 155, 60, 0.55); box-shadow: 0 15px 40px rgba(15, 118, 110, 0.2); animation: modalSlide 0.3s ease; max-height: 90vh; overflow-y: auto; }
+    .modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(200, 155, 60, 0.25); padding-bottom: 0.8rem; margin-bottom: 1rem; }
+    .modal-header h3 { font-size: 1.3rem; font-weight: 800; color: var(--primary); }
     .close-btn { font-size: 1.8rem; cursor: pointer; color: var(--accent); line-height: 1; }
     
-    .input-field, .notes-textarea, select { width: 100%; background: #140b09; color: #fff; border: 1px solid rgba(247, 127, 0, 0.3); border-radius: 8px; padding: 0.7rem; font-family: inherit; font-size: 0.95rem; margin-top: 0.4rem; outline: none; }
+    .input-field, .notes-textarea, select { width: 100%; background: var(--cream); color: var(--primary); border: 1px solid rgba(15, 118, 110, 0.22); border-radius: 8px; padding: 0.7rem; font-family: inherit; font-size: 0.95rem; margin-top: 0.4rem; outline: none; }
     .select-wrapper { position: relative; display: block; }
-    .select-wrapper select { appearance: none; -webkit-appearance: none; -moz-appearance: none; cursor: pointer; padding-left: 2rem; }
+    .select-wrapper select { appearance: none; -webkit-appearance: none; -moz-appearance: none; cursor: pointer; padding-left: 2rem; background: var(--primary) !important; color: var(--cream); border-color: var(--secondary); }
+    .select-wrapper select option { background: var(--primary); color: var(--cream); }
     .select-wrapper::after { content: '▼'; font-size: 0.8rem; color: var(--accent); position: absolute; left: 1rem; top: 55%; transform: translateY(-50%); pointer-events: none; }
-    .input-field:focus, .notes-textarea:focus, select:focus { border-color: var(--secondary); box-shadow: var(--glow-orange); }
+    .input-field:focus, .notes-textarea:focus, select:focus { border-color: var(--secondary); box-shadow: var(--glow-gold); }
 
-    .option-group-title { font-weight: 800; font-size: 0.92rem; color: var(--accent); margin: 0.8rem 0 0.4rem; border-bottom: 1px dashed rgba(255, 255, 255, 0.1); padding-bottom: 0.2rem; }
+    .option-group-title { font-weight: 800; font-size: 0.92rem; color: var(--accent); margin: 0.8rem 0 0.4rem; border-bottom: 1px dashed rgba(247, 243, 232, 0.1); padding-bottom: 0.2rem; }
     .options-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.5rem; margin-bottom: 0.6rem; }
-    .option-item { display: flex; align-items: center; gap: 6px; background: rgba(36, 21, 18, 0.85); border: 1px solid rgba(247, 127, 0, 0.2); padding: 0.45rem 0.6rem; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; color: var(--text-light); transition: all 0.2s; }
-    .option-item:hover { background: rgba(214, 40, 40, 0.25); border-color: var(--secondary); }
+    .option-item { display: flex; align-items: center; gap: 6px; background: rgba(15, 118, 110, 0.05); border: 1px solid rgba(15, 118, 110, 0.15); padding: 0.45rem 0.6rem; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; color: var(--primary); transition: all 0.2s; }
+    .option-item:hover { background: rgba(200, 155, 60, 0.12); border-color: var(--secondary); }
     .option-item input { accent-color: var(--primary); cursor: pointer; }
 
     /* تفضيلات وملاحظات الطلب All Notes */
@@ -356,9 +425,9 @@
     }
     .notes-toggle[aria-expanded="true"]::after { transform: rotate(180deg); }
     .note-chip {
-      background: rgba(45, 26, 22, 0.9);
-      border: 1px solid rgba(247, 127, 0, 0.3);
-      color: var(--text-light);
+      background: rgba(15, 118, 110, 0.05);
+      border: 1px solid rgba(200, 155, 60, 0.3);
+      color: var(--primary);
       padding: 5px 11px;
       border-radius: 6px;
       font-size: 0.82rem;
@@ -373,23 +442,101 @@
     .note-chip input { display: none; }
     .note-chip:hover {
       border-color: var(--secondary);
-      background: rgba(214, 40, 40, 0.3);
+      background: rgba(200, 155, 60, 0.12);
     }
     .note-chip.active {
       background: linear-gradient(135deg, var(--primary), var(--secondary));
       border-color: var(--accent);
-      color: #fff;
-      box-shadow: 0 0 10px rgba(247, 127, 0, 0.4);
+      color: #f7f3e8;
+      box-shadow: 0 0 10px rgba(200, 155, 60, 0.4);
     }
 
-    .qty-counter-box { background: rgba(36, 21, 18, 0.95); border: 1.5px solid var(--secondary); border-radius: 12px; padding: 0.8rem 1rem; display: flex; justify-content: space-between; align-items: center; margin: 1rem 0 0.6rem; }
+    .qty-counter-box { background: rgba(15, 118, 110, 0.05); border: 1.5px solid var(--secondary); border-radius: 12px; padding: 0.8rem 1rem; display: flex; justify-content: space-between; align-items: center; margin: 1rem 0 0.6rem; }
     .qty-controls { display: flex; align-items: center; gap: 12px; }
-    .btn-qty-step { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #fff; border: none; width: 34px; height: 34px; border-radius: 50%; font-size: 1.3rem; font-weight: 900; cursor: pointer; display: flex; justify-content: center; align-items: center; line-height: 1; }
-    .qty-number { font-size: 1.35rem; font-weight: 900; color: var(--accent); min-width: 25px; text-align: center; }
-    .qty-subtotal-price { font-size: 1.1rem; font-weight: 900; color: var(--accent); }
+    .btn-qty-step { background: var(--primary); color: var(--cream); border: 1px solid var(--secondary); width: 34px; height: 34px; border-radius: 50%; font-size: 1.3rem; font-weight: 900; cursor: pointer; display: flex; justify-content: center; align-items: center; line-height: 1; }
+    .qty-number { font-size: 1.35rem; font-weight: 900; color: var(--primary); min-width: 25px; text-align: center; }
+    .qty-subtotal-price { font-size: 1.1rem; font-weight: 900; color: var(--primary); }
 
-    .btn-modal-action { width: 100%; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #fff; border: none; padding: 0.85rem; border-radius: 30px; font-weight: 800; font-size: 1.1rem; cursor: pointer; margin-top: 1.2rem; }
-    .cart-item-preview { background: rgba(18, 11, 9, 0.95); border: 1px solid rgba(247, 127, 0, 0.3); border-radius: 10px; padding: 0.8rem; margin-bottom: 0.7rem; }
+    .btn-modal-action { width: 100%; background: var(--primary); color: var(--cream); border: 1px solid var(--secondary); padding: 0.85rem; border-radius: 30px; font-weight: 800; font-size: 1.1rem; cursor: pointer; margin-top: 1.2rem; }
+    .cart-item-preview { background: rgba(15, 118, 110, 0.05); border: 1px solid rgba(200, 155, 60, 0.4); border-radius: 10px; padding: 0.8rem; margin-bottom: 0.7rem; }
+    .cart-item-main { display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; }
+    .cart-item-name { color: var(--primary); font-size: 0.96rem; }
+    .cart-item-controls { display: flex; align-items: center; gap: 0.45rem; flex-shrink: 0; }
+    .cart-qty-button { width: 32px; height: 32px; display: grid; place-items: center; border: 1px solid var(--secondary); border-radius: 50%; background: var(--primary); color: var(--cream); font-size: 1.1rem; font-weight: 900; cursor: pointer; }
+    .cart-qty-value { min-width: 1.5rem; color: var(--primary); font-weight: 900; text-align: center; }
+    .cart-remove-button { border: 0; border-radius: 16px; padding: 0.35rem 0.65rem; background: rgba(15, 118, 110, 0.1); color: var(--primary); font: inherit; font-size: 0.76rem; font-weight: 800; cursor: pointer; }
+
+    .section-dock {
+      position: fixed;
+      top: auto;
+      z-index: 1050;
+      left: 50%;
+      display: block;
+      bottom: max(8px, env(safe-area-inset-bottom));
+      transform: translateX(-50%);
+      width: min(500px, calc(100% - 24px));
+      padding: 7px;
+      border: 1px solid rgba(15, 118, 110, 0.14);
+      border-radius: 24px;
+      background: rgba(247, 243, 232, 0.97);
+      box-shadow: 0 8px 30px rgba(15, 118, 110, 0.16);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .section-dock-controls {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .section-dock-track {
+      display: flex;
+      flex: 1;
+      min-width: 0;
+      gap: 6px;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      direction: rtl;
+    }
+
+    .section-dock-track::-webkit-scrollbar { display: none; }
+    .section-dock-arrow { flex: 0 0 29px; width: 29px; height: 29px; display: grid; place-items: center; border: 1px solid var(--secondary); border-radius: 50%; background: var(--primary); color: var(--cream); font-size: 0.9rem; font-weight: 900; cursor: pointer; }
+
+    .section-dock-link {
+      flex: 0 0 calc((100% - 12px) / 3);
+      min-width: 0;
+      min-height: 58px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      border-radius: 17px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.72rem;
+      font-weight: 800;
+      white-space: nowrap;
+      scroll-snap-align: center;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .section-dock-icon { color: var(--secondary); font-size: 1.15rem; line-height: 1; }
+    .section-dock-link.active { background: rgba(15, 118, 110, 0.1); color: var(--primary); }
+    .section-dock-link:focus-visible { outline: 2px solid var(--secondary); outline-offset: -2px; }
+    .section-dock-hint { margin-top: 2px; color: var(--text-muted); text-align: center; font-size: 0.62rem; font-weight: 700; line-height: 1.2; }
+    .modal-header h3, .close-btn, .option-group-title, .notes-toggle { color: var(--primary); }
+    .qty-number, .qty-subtotal-price { color: var(--primary); }
+    .tagline { color: var(--cream); border-color: var(--secondary); }
+    .hero-content p.hero-sub { color: rgba(247, 243, 232, 0.9); }
+    .splash-slogan { color: var(--primary); }
+    .splash-branch-label { color: var(--primary); }
+    .footer-bar > p { color: var(--text-muted) !important; }
+    .modal-box .option-group-title { color: var(--primary); }
 
     @keyframes modalSlide { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -400,17 +547,58 @@
       .slider-track .card { flex: 0 0 calc((100% - 1.2rem) / 2); }
     }
     @media (max-width: 600px) {
-      nav { padding: 0.8rem 1rem; }
-      .nav-links { display: none; }
-      .hero-content h1 { font-size: 2.1rem; }
+      body { padding-bottom: 128px; }
+      nav { padding: 0.5rem 0.75rem; gap: 0.4rem; }
+      .brand-box { gap: 7px; }
+      .logo-badge { padding: 5px 9px; font-size: 1rem; }
+      .slogan-nav { font-size: 0.72rem; }
+      .top-offer-strip { padding: 0.32rem 0; font-size: 0.68rem; }
+      .top-offer-message { padding: 0 0.9rem; }
+      .top-offer-icon { font-size: 0.85rem; }
+      .video-hero-wrapper { padding: 6.5rem 1rem 2rem; }
+      .hero-content h1 { font-size: clamp(1.8rem, 8vw, 2.25rem); margin-bottom: 0.25rem; }
+      .hero-content p.hero-sub { max-width: 34rem; font-size: 0.92rem; line-height: 1.65; }
+      .tagline { font-size: 0.78rem; padding: 0.3rem 0.8rem; margin-bottom: 0.45rem; }
+      .hero-content .btn-glow { display: none; }
+      .menu-section { padding: 3rem 0.8rem; }
+      .section-header { margin-bottom: 1.4rem; }
+      .section-header h2 { font-size: 1.75rem; }
+      .section-header p { font-size: 0.92rem; }
+      .card { border-radius: 16px; }
+      .card-img-wrapper { height: 185px; }
+      .card-content { padding: 0.9rem; }
+      .item-title { font-size: 1rem; }
+      .item-desc { font-size: 0.83rem; }
       .phone-number { font-size: 1.7rem; }
-      .cart-float { bottom: 15px; left: 15px; padding: 0.75rem 1.2rem; font-size: 0.88rem; }
+      .cart-float { bottom: calc(112px + env(safe-area-inset-bottom)); left: max(12px, env(safe-area-inset-left)); padding: 0.6rem 0.85rem; font-size: 0.78rem; }
       .options-grid { grid-template-columns: 1fr 1fr; }
-      .slider-arrow-btn { display: none; }
+      .slider-arrow-btn { display: flex; width: 34px; height: 34px; font-size: 0.95rem; }
+      .arrow-left { left: 2px; }
+      .arrow-right { right: 2px; }
       .section-slider-wrapper { padding: 0; }
+      .section-slider-wrapper::after { font-size: 0.65rem; }
+      .slider-track { padding: 1rem 2.1rem 1.7rem; gap: 0.8rem; }
       .slider-track .card { flex: 0 0 84%; }
+      .section-dock { width: calc(100% - 20px); padding: 6px; border-radius: 21px; }
+      .section-dock-controls { gap: 3px; }
+      .section-dock-arrow { flex-basis: 26px; width: 26px; height: 26px; }
+      .section-dock-link { min-height: 51px; font-size: 0.68rem; }
+      .modal-box { padding: 1.15rem; max-height: 86dvh; }
+      .footer-bar { padding: 2.2rem 1rem 5.5rem; }
+      .info-card { padding: 1.5rem 1rem; }
       .splash-logo-badge { font-size: 1.7rem; padding: 8px 18px; }
       .splash-slogan { font-size: 1.05rem; }
+    }
+    @media (max-width: 360px) {
+      .slogan-nav { display: none; }
+      .top-offer-strip { font-size: 0.62rem; }
+      .top-offer-message { padding: 0 0.7rem; }
+      .section-dock-link { font-size: 0.62rem; }
+      .cart-float { max-width: calc(100vw - 24px); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .top-offer-track { animation: none; }
     }
   </style>
 </head>
@@ -424,6 +612,7 @@
       </div>
       <div class="splash-logo-badge">شاورمايشن</div>
       <div class="splash-slogan">طعم .. مذاق .. لذاذه ✨</div>
+      <div class="splash-family-offer">🎁 عرض الأسرة بانتظارك</div>
       <div class="splash-branch-label">📍 فرع حلي (المثلث أمام مستوصف العلوي الطبي)</div>
       
       <div class="splash-loader-bar">
@@ -443,21 +632,17 @@
     <button class="btn-glow" style="padding: 0.6rem 2.2rem; font-size: 1rem;" onclick="closeOfferToast()">حسناً، استمرار ✨</button>
   </div>
 
-  <nav>
+  <nav aria-label="رأس الصفحة">
     <div class="brand-box">
       <div class="logo-badge">شاورمايشن</div>
       <span class="slogan-nav" id="navBranchIndicator">فرع حلي</span>
     </div>
-    <ul class="nav-links">
-      <li><a href="#plates">الصحون</a></li>
-      <li><a href="#sandwiches">السندوتشات</a></li>
-      <li><a href="#burgers">البرجر</a></li>
-      <li><a href="#tortilla">تورتيلا وبطاطس</a></li>
-      <li><a href="#meals">الوجبات</a></li>
-      <li><a href="#addons">الإضافات</a></li>
-      <li><a href="#drinks">المشروبات</a></li>
-      <li><a href="#contact">الطلب</a></li>
-    </ul>
+    <div class="top-offer-strip" role="note" aria-label="عرض الأسرة">
+      <div class="top-offer-track">
+        <span class="top-offer-message"><span class="top-offer-icon" aria-hidden="true">✦</span> عرض الأسرة: اطلب <strong>3</strong> من أي صنف والرابع علينا</span>
+        <span class="top-offer-message" aria-hidden="true"><span class="top-offer-icon">✦</span> عرض الأسرة: اطلب <strong>3</strong> من أي صنف والرابع علينا</span>
+      </div>
+    </div>
   </nav>
 
   <!-- المشهد الرئيسي -->
@@ -472,20 +657,11 @@
       <h1>مطعم <span>شاورمايشن</span></h1>
       <p class="hero-sub" id="heroSubText">قائمة فرع حلي الكاملة لأشهى صحون وسندوتشات الشاورما، البرجر، التورتيلا والوجبات</p>
 
-      <div class="offers-interactive-wrapper">
-        <div class="offer-slide-box">
-          <span class="offer-badge">🔥 عرض الأسرة الدائم</span>
-          <h3 class="offer-title">اطلب 3 من أي صنف وسوف تحصل على الرابع مجاناً! 🎁</h3>
-          <p class="offer-desc">اطلب 3 حبات من أي صنف وسنضيف الرابع لك مجاناً تلقائياً في السلة</p>
-        </div>
-      </div>
-
-      <a href="#plates" class="btn-glow">استعرض المنيو واطلب الآن 🔥</a>
     </div>
   </section>
 
   <!-- القسم 1: صحون شاورمايشن -->
-  <section class="menu-section" id="plates" style="background: rgba(16,10,8,0.95);">
+  <section class="menu-section" id="plates" style="background: var(--cream);">
     <div class="section-container">
       <div class="section-header">
         <h2>صحون شاورمايشن</h2>
@@ -493,7 +669,7 @@
       </div>
 
       <div class="section-slider-wrapper">
-        <button class="slider-arrow-btn arrow-right" onclick="scrollSection('platesTrack', 'right')" aria-label="التالي">❯</button>
+        <button class="slider-arrow-btn arrow-right" onclick="scrollSection('platesTrack', 'right')" aria-label="السابق">❯</button>
 
         <div class="slider-track" id="platesTrack">
           <!-- صحن عربي كبير -->
@@ -611,13 +787,13 @@
           </div>
         </div>
 
-        <button class="slider-arrow-btn arrow-left" onclick="scrollSection('platesTrack', 'left')" aria-label="السابق">❮</button>
+        <button class="slider-arrow-btn arrow-left" onclick="scrollSection('platesTrack', 'left')" aria-label="التالي">❮</button>
       </div>
     </div>
   </section>
 
   <!-- القسم 2: سندوتشات شاورمايشن -->
-  <section class="menu-section" id="sandwiches" style="background: rgba(20,13,11,0.95);">
+  <section class="menu-section" id="sandwiches" style="background: var(--cream);">
     <div class="section-container">
       <div class="section-header">
         <h2>سندوتشات شاورمايشن</h2>
@@ -625,7 +801,7 @@
       </div>
 
       <div class="section-slider-wrapper">
-        <button class="slider-arrow-btn arrow-right" onclick="scrollSection('sandwichesTrack', 'right')" aria-label="التالي">❯</button>
+        <button class="slider-arrow-btn arrow-right" onclick="scrollSection('sandwichesTrack', 'right')" aria-label="السابق">❯</button>
 
         <div class="slider-track" id="sandwichesTrack">
           <!-- شاورما صاروخ -->
@@ -743,13 +919,13 @@
           </div>
         </div>
 
-        <button class="slider-arrow-btn arrow-left" onclick="scrollSection('sandwichesTrack', 'left')" aria-label="السابق">❮</button>
+        <button class="slider-arrow-btn arrow-left" onclick="scrollSection('sandwichesTrack', 'left')" aria-label="التالي">❮</button>
       </div>
     </div>
   </section>
 
   <!-- القسم 3: قسم البرجر -->
-  <section class="menu-section" id="burgers" style="background: rgba(16,10,8,0.95);">
+  <section class="menu-section" id="burgers" style="background: var(--cream);">
     <div class="section-container">
       <div class="section-header">
         <h2>قسم البرجر</h2>
@@ -757,7 +933,7 @@
       </div>
 
       <div class="section-slider-wrapper">
-        <button class="slider-arrow-btn arrow-right" onclick="scrollSection('burgersTrack', 'right')" aria-label="التالي">❯</button>
+        <button class="slider-arrow-btn arrow-right" onclick="scrollSection('burgersTrack', 'right')" aria-label="السابق">❯</button>
 
         <div class="slider-track" id="burgersTrack">
           <!-- برجر دجاج -->
@@ -870,21 +1046,21 @@
           </div>
         </div>
 
-        <button class="slider-arrow-btn arrow-left" onclick="scrollSection('burgersTrack', 'left')" aria-label="السابق">❮</button>
+        <button class="slider-arrow-btn arrow-left" onclick="scrollSection('burgersTrack', 'left')" aria-label="التالي">❮</button>
       </div>
     </div>
   </section>
 
-  <!-- القسم 4: تورتيلا وبطاطس شاورمايشن -->
-  <section class="menu-section" id="tortilla" style="background: rgba(22,14,12,0.95);">
+  <!-- القسم 4: تورتيلا شاورمايشن -->
+  <section class="menu-section" id="tortilla" style="background: var(--cream);">
     <div class="section-container">
       <div class="section-header">
-        <h2>تورتيلا وبطاطس شاورمايشن</h2>
-        <p>سندوتشات التورتيلا الفاخرة، المسحب المقرمش، وأطباق البطاطس الذهبية</p>
+        <h2>تورتيلا شاورمايشن</h2>
+        <p>سندوتشات التورتيلا الفاخرة والمسحب المقرمش، اسحب أو استخدم الأسهم للتنقل</p>
       </div>
 
       <div class="section-slider-wrapper">
-        <button class="slider-arrow-btn arrow-right" onclick="scrollSection('tortillaTrack', 'right')" aria-label="التالي">❯</button>
+        <button class="slider-arrow-btn arrow-right" onclick="scrollSection('tortillaTrack', 'right')" aria-label="السابق">❯</button>
 
         <div class="slider-track" id="tortillaTrack">
           <!-- تورتيلا دجاج برجر صغير -->
@@ -979,7 +1155,24 @@
             </div>
           </div>
 
-          <!-- صحن بطاطس صغير -->
+        </div>
+
+        <button class="slider-arrow-btn arrow-left" onclick="scrollSection('tortillaTrack', 'left')" aria-label="التالي">❮</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- قسم صحون البطاطس -->
+  <section class="menu-section" id="fries" style="background: var(--cream);">
+    <div class="section-container">
+      <div class="section-header">
+        <h2>صحون البطاطس</h2>
+        <p>اختر حجم الصحن والإضافة المفضلة، واسحب أو استخدم الأسهم للتنقل</p>
+      </div>
+
+      <div class="section-slider-wrapper">
+        <button class="slider-arrow-btn arrow-right" onclick="scrollSection('friesTrack', 'right')" aria-label="السابق">❯</button>
+        <div class="slider-track" id="friesTrack">
           <div class="card" data-item-id="صحن بطاطس صغير">
             <div class="card-img-wrapper"><img src="img/صحن شبس صغير (1).jpeg" alt="صحن بطاطس صغير"></div>
             <div class="card-content">
@@ -987,18 +1180,17 @@
                 <span class="item-title">صحن بطاطس صغير</span>
                 <div class="prices-badge-group">
                   <span class="price-tag">صافي: 3 ر.ي</span>
-                  <span class="price-sub">جبن: 6 ر.ي</span>
+                  <span class="price-sub">جبن: 5 ر.ي</span>
                 </div>
               </div>
               <p class="item-desc">أصابع بطاطس مقلية ذهبية مقرمشة ولذيذة.</p>
               <div class="card-footer">
                 <button class="btn-add" onclick="openItemByName('صحن بطاطس صغير', 'base')">+ صافي (3)</button>
-                <button class="btn-add" onclick="openItemByName('صحن بطاطس صغير', 'cheese')">+ مع جبن (6)</button>
+                <button class="btn-add" onclick="openItemByName('صحن بطاطس صغير', 'cheese')">+ مع جبن (5)</button>
               </div>
             </div>
           </div>
 
-          <!-- صحن بطاطس كبير -->
           <div class="card" data-item-id="صحن بطاطس كبير">
             <div class="card-img-wrapper"><img src="img/صحن شبس كبير.jpeg" alt="صحن بطاطس كبير"></div>
             <div class="card-content">
@@ -1017,14 +1209,13 @@
             </div>
           </div>
         </div>
-
-        <button class="slider-arrow-btn arrow-left" onclick="scrollSection('tortillaTrack', 'left')" aria-label="السابق">❮</button>
+        <button class="slider-arrow-btn arrow-left" onclick="scrollSection('friesTrack', 'left')" aria-label="التالي">❮</button>
       </div>
     </div>
   </section>
 
-  <!-- القسم 5: وجبات شاورمايشن -->
-  <section class="menu-section" id="meals" style="background: rgba(20,13,11,0.95);">
+  <!-- القسم 6: وجبات شاورمايشن -->
+  <section class="menu-section" id="meals" style="background: var(--cream);">
     <div class="section-container">
       <div class="section-header">
         <h2>قسم الوجبات المتكاملة</h2>
@@ -1032,7 +1223,7 @@
       </div>
 
       <div class="section-slider-wrapper">
-        <button class="slider-arrow-btn arrow-right" onclick="scrollSection('mealsTrack', 'right')" aria-label="التالي">❯</button>
+        <button class="slider-arrow-btn arrow-right" onclick="scrollSection('mealsTrack', 'right')" aria-label="السابق">❯</button>
 
         <div class="slider-track" id="mealsTrack">
           <!-- وجبة برجر دجاج متكاملة -->
@@ -1113,13 +1304,13 @@
           </div>
         </div>
 
-        <button class="slider-arrow-btn arrow-left" onclick="scrollSection('mealsTrack', 'left')" aria-label="السابق">❮</button>
+        <button class="slider-arrow-btn arrow-left" onclick="scrollSection('mealsTrack', 'left')" aria-label="التالي">❮</button>
       </div>
     </div>
   </section>
 
-  <!-- القسم 6: قسم الإضافات -->
-  <section class="menu-section" id="addons" style="background: rgba(16,10,8,0.95);">
+  <!-- القسم 7: قسم الإضافات -->
+  <section class="menu-section" id="addons" style="background: var(--cream);">
     <div class="section-container">
       <div class="section-header">
         <h2>قسم الإضافات</h2>
@@ -1127,7 +1318,7 @@
       </div>
 
       <div class="section-slider-wrapper">
-        <button class="slider-arrow-btn arrow-right" onclick="scrollSection('addonsTrack', 'right')" aria-label="التالي">❯</button>
+        <button class="slider-arrow-btn arrow-right" onclick="scrollSection('addonsTrack', 'right')" aria-label="السابق">❯</button>
 
         <div class="slider-track" id="addonsTrack">
           <div class="card" data-item-id="إضافة: صوص ثوم">
@@ -1191,13 +1382,13 @@
           </div>
         </div>
 
-        <button class="slider-arrow-btn arrow-left" onclick="scrollSection('addonsTrack', 'left')" aria-label="السابق">❮</button>
+        <button class="slider-arrow-btn arrow-left" onclick="scrollSection('addonsTrack', 'left')" aria-label="التالي">❮</button>
       </div>
     </div>
   </section>
 
-  <!-- القسم 7: المشروبات الباردة -->
-  <section class="menu-section" id="drinks" style="background: rgba(20,13,11,0.95);">
+  <!-- القسم 8: المشروبات الباردة -->
+  <section class="menu-section" id="drinks" style="background: var(--cream);">
     <div class="section-container">
       <div class="section-header">
         <h2>المشروبات الباردة والمنعشة</h2>
@@ -1205,7 +1396,7 @@
       </div>
 
       <div class="section-slider-wrapper">
-        <button class="slider-arrow-btn arrow-right" onclick="scrollSection('drinksTrack', 'right')" aria-label="التالي">❯</button>
+        <button class="slider-arrow-btn arrow-right" onclick="scrollSection('drinksTrack', 'right')" aria-label="السابق">❯</button>
 
         <div class="slider-track" id="drinksTrack">
           <div class="card" data-item-id="كوكاكولا">
@@ -1308,25 +1499,46 @@
           </div>
         </div>
 
-        <button class="slider-arrow-btn arrow-left" onclick="scrollSection('drinksTrack', 'left')" aria-label="السابق">❮</button>
+        <button class="slider-arrow-btn arrow-left" onclick="scrollSection('drinksTrack', 'left')" aria-label="التالي">❮</button>
       </div>
     </div>
   </section>
 
   <footer class="footer-bar" id="contact">
     <div class="info-card">
-      <h2 style="color: var(--secondary); font-size: 2.2rem; font-weight: 900; margin-bottom: 0.5rem;">للطلب والتوصيل السريع 🛵</h2>
+      <h2 style="color: var(--primary); font-size: 2.2rem; font-weight: 900; margin-bottom: 0.5rem;">للطلب والتوصيل السريع 🛵</h2>
       <p style="color: var(--text-muted); font-size: 1.1rem;">حدد وجباتك المفضلة واضغط على زر الطلب لنجهزها لك فوراً</p>
       <a href="tel:0500953327" id="footerPhoneLink" class="phone-number">📞 0500953327</a>
       <div class="location-text" id="footerLocationText">📍 فرع حلي (المثلث أمام مستوصف العلوي الطبي)</div>
       <button onclick="openCartReviewModal()" class="btn-glow" style="display: inline-block; margin-top: 1rem; font-size: 1.1rem;">إتمام الطلب عبر واتساب 💬</button>
     </div>
-    <p style="margin-top: 2rem; color: #777; font-size: 0.85rem;">جميع الحقوق محفوظة لمطعم شاورمايشن © 2026</p>
+    <p class="delivery-note" style="max-width: 680px; margin: 1.1rem auto 0;">🛵 تنويه: يعتمد وقت التوصيل على توفر السائق ومدى انشغاله بطلبات أخرى. نقدّر تفهّمكم.</p>
+    <p style="margin-top: 1.2rem; color: #0f766e; font-size: 0.85rem;">جميع الحقوق محفوظة لمطعم شاورمايشن © 2026</p>
   </footer>
 
   <div class="cart-float" onclick="openCartReviewModal()" title="اضغط لمراجعة السلة وإتمام الطلب">
-    🛒 الطلبات: <span id="cartCount">0</span> | الإجمالي: <span id="cartSum">0.00</span> ر.ي
+    <span aria-hidden="true">▣</span>
+    <span>السلة <span class="cart-count-badge" id="cartCount">0</span></span>
+    <span id="cartSum">0.00</span><span>ر.ي</span>
   </div>
+
+  <nav class="section-dock" aria-label="أقسام القائمة">
+    <div class="section-dock-controls">
+      <button class="section-dock-arrow" type="button" aria-label="عرض الأقسام السابقة" onclick="scrollSectionDock('left')">‹</button>
+      <div class="section-dock-track">
+        <a class="section-dock-link active" href="#plates"><span class="section-dock-icon" aria-hidden="true">◈</span><span>الصحون</span></a>
+        <a class="section-dock-link" href="#sandwiches"><span class="section-dock-icon" aria-hidden="true">▤</span><span>السندوتشات</span></a>
+        <a class="section-dock-link" href="#burgers"><span class="section-dock-icon" aria-hidden="true">◆</span><span>البرجر</span></a>
+        <a class="section-dock-link" href="#tortilla"><span class="section-dock-icon" aria-hidden="true">▧</span><span>التورتيلا</span></a>
+        <a class="section-dock-link" href="#fries"><span class="section-dock-icon" aria-hidden="true">✦</span><span>البطاطس</span></a>
+        <a class="section-dock-link" href="#meals"><span class="section-dock-icon" aria-hidden="true">◉</span><span>الوجبات</span></a>
+        <a class="section-dock-link" href="#addons"><span class="section-dock-icon" aria-hidden="true">＋</span><span>الإضافات</span></a>
+        <a class="section-dock-link" href="#drinks"><span class="section-dock-icon" aria-hidden="true">◌</span><span>المشروبات</span></a>
+      </div>
+      <button class="section-dock-arrow" type="button" aria-label="عرض الأقسام التالية" onclick="scrollSectionDock('right')">›</button>
+    </div>
+    <div class="section-dock-hint">مرّر أفقيًا أو استخدم السهمين لاستعراض الأقسام</div>
+  </nav>
 
   <!-- نافذة التخصيص التفصيلي الديناميكية -->
   <div id="customizeModal" class="modal-overlay">
@@ -1340,7 +1552,7 @@
         <div id="breadSectionContainer">
           <div class="option-group-title" id="breadSectionTitle">🥖 خيارات الخبز:</div>
           <div class="options-grid" id="breadOptionsGrid"></div>
-          <div id="breadNotice" style="display:none; background: rgba(247, 127, 0, 0.18); border: 1px dashed var(--secondary); color: var(--accent); font-size: 0.84rem; font-weight: 800; padding: 6px 12px; border-radius: 8px; margin-bottom: 8px;"></div>
+          <div id="breadNotice" style="display:none; background: rgba(200, 155, 60, 0.18); border: 1px dashed var(--secondary); color: var(--accent); font-size: 0.84rem; font-weight: 800; padding: 6px 12px; border-radius: 8px; margin-bottom: 8px;"></div>
         </div>
 
         <div id="cookingSectionContainer" style="display:none;">
@@ -1395,7 +1607,7 @@
             <span id="customModalSubtotal" class="qty-subtotal-price">0.00 ر.ي</span>
           </div>
         </div>
-        <div id="freeItemHint" style="display:none; color:#25d366; font-size:0.85rem; font-weight:800; text-align:center; margin-top:4px;">
+        <div id="freeItemHint" style="display:none; color:#0f766e; font-size:0.85rem; font-weight:800; text-align:center; margin-top:4px;">
           🎁 مبروك! سيتم إضافة الوجبة الرابعة مجاناً لحسابك تلقائياً في السلة.
         </div>
         <button type="button" class="btn-modal-action" onclick="confirmItemCustomization()">تأكيد وإضافة للسلة 🛒</button>
@@ -1416,25 +1628,26 @@
       <div style="margin-top: 1.5rem;">
         <label style="font-weight: 800; color: var(--accent);">🚚 اختر طريقة استلام الطلب:</label>
         <div class="select-wrapper" style="margin-top: 5px;">
-            <select id="deliverySelect" onchange="toggleDeliveryOptions()" class="input-field" style="font-weight: bold; background: rgba(36, 21, 18, 0.9);">
+            <select id="deliverySelect" onchange="toggleDeliveryOptions()" class="input-field" style="font-weight: bold; background: rgba(15, 118, 110, 0.9);">
                 <option value="توصيل">توصيل للموقع (رسوم 10 ر.ي)</option>
                 <option value="استلام سيارة">استلام من مواقف المطعم (سيارة)</option>
                 <option value="من المحل">استلام شخصي من المحل</option>
                 <option value="إضافة على الطلب السابق">إضافة على الطلب السابق</option>
             </select>
         </div>
-        <button type="button" class="btn-modal-action" style="margin-top: 12px; background: linear-gradient(135deg, #0ea5e9, #38bdf8);" onclick="addAnotherOrder()">
+        <button type="button" class="btn-modal-action" style="margin-top: 12px; background: linear-gradient(135deg, #0f766e, #c89b3c);" onclick="addAnotherOrder()">
           + إضافة طلبات أخرى إلى السلة
         </button>
       </div>
 
-      <div id="deliveryExtraFields" style="margin-top: 10px; background: rgba(255,255,255,0.03); padding: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
+      <div id="deliveryExtraFields" style="margin-top: 10px; background: rgba(247,243,232,0.03); padding: 10px; border-radius: 8px; border: 1px solid rgba(247,243,232,0.1);">
         <div id="locationField">
            <label style="font-weight: 700; font-size: 0.9rem; color: var(--text-muted);">👤 اسم العميل والحي / العنوان:</label>
            <textarea id="customerAddress" class="notes-textarea" rows="2" placeholder="اكتب اسمك وعنوانك بالتفصيل..."></textarea>
-           <p style="color: #25d366; font-size: 0.85rem; margin-top: 8px; font-weight: bold;">
+           <p style="color: #0f766e; font-size: 0.85rem; margin-top: 8px; font-weight: bold;">
               📍 ملاحظة: سيُطلب منك إرسال موقعك عبر خرائط جوجل (Google Maps) في الواتساب لتسهيل التوصيل السريع.
            </p>
+           <p class="delivery-note" style="margin-top: 7px;">🛵 يعتمد وقت وصول الطلب على توفر السائق وانشغاله بطلبات أخرى. شكرًا لتفهّمكم.</p>
         </div>
 
         <div id="carField" style="display: none;">
@@ -1449,7 +1662,7 @@
         </div>
       </div>
 
-      <div style="margin-top: 1.5rem; border-top: 1px dashed rgba(247, 127, 0, 0.4); padding-top: 1rem; font-weight: 900; font-size: 1.3rem; color: var(--accent); display:flex; justify-content:space-between; align-items:center;">
+      <div style="margin-top: 1.5rem; border-top: 1px dashed rgba(200, 155, 60, 0.4); padding-top: 1rem; font-weight: 900; font-size: 1.3rem; color: var(--accent); display:flex; justify-content:space-between; align-items:center;">
         <span>الإجمالي المستحق: <span id="cartModalTotal">0.00</span> ر.ي</span>
       </div>
 
@@ -1492,7 +1705,7 @@
         "تورتيلا زنجر برجر صغير": { base: 8 },
         "سندوتش مسحب دجاج كبير": { base: 10 },
         "سندوتش مسحب دجاج صغير": { base: 8 },
-        "صحن بطاطس صغير": { base: 3, cheese: 6 },
+        "صحن بطاطس صغير": { base: 3, cheese: 5 },
         "صحن بطاطس كبير": { base: 5, cheese: 8 },
         "وجبة توست دجاج متكاملة": { base: 13 },
         "تشيكن فرايز صغير": { single: 10 },
@@ -1588,28 +1801,42 @@
       }
     }
 
+    function scrollSectionDock(direction) {
+      const track = document.querySelector('.section-dock-track');
+      if (!track) return;
+      const scrollAmount = track.clientWidth * 0.72;
+      track.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
+    }
+
     // فتح التخصيص للأصناف العادية
     function openItemByName(itemId, type) {
       const itemPricing = BRANCH_DATA.prices[itemId];
       if (!itemPricing) return;
 
-      let chosenName = itemId;
-      let chosenPrice = 0;
+      const isFries = itemId.includes('بطاطس');
+      const isSandwichItem = [...document.querySelectorAll('#sandwiches .card')]
+        .some(card => card.dataset.itemId === itemId);
+      const singleCheeseExtra = (itemPricing.cheese ?? itemPricing.base) - itemPricing.base;
+      const isCheeseChoice = type === 'cheese' || type === 'doubleCheese';
+      const cheeseExtra = type === 'doubleCheese'
+        ? isSandwichItem ? itemPricing.cheese + 2 - itemPricing.base : singleCheeseExtra * 2
+        : singleCheeseExtra;
+      const cheeseChoice = isCheeseChoice
+        ? `${type === 'doubleCheese' ? 'دبل جبن' : 'مع جبن'} (+${cheeseExtra} ر.ي)`
+        : type === 'base' ? 'بدون جبن' : null;
+      const chosenName = type === 'cheese'
+        ? `${itemId} (${isFries ? 'جبن' : 'جبنة'})`
+        : type === 'base'
+          ? `${itemId} (${isFries ? 'صافي' : 'بدون جبنة'})`
+          : itemId;
 
-      let defaultCheeseChoice = 'بدون جبن';
-
-      if (type === 'base') {
-        chosenName = itemId.includes('بطاطس') ? `${itemId} (صافي)` : `${itemId} (بدون جبنة)`;
-        chosenPrice = itemPricing.base;
-      } else if (type === 'cheese') {
-        chosenName = itemId.includes('بطاطس') ? `${itemId} (جبن)` : `${itemId} (جبنة)`;
-        chosenPrice = itemPricing.cheese;
-        defaultCheeseChoice = itemId.includes('بطاطس') ? 'مع جبن (+3 ر.ي)' : itemId.includes('صحن') ? 'مع جبن (+2 ر.ي)' : 'مع جبن (+1 ر.ي)';
-      } else if (type === 'single') {
-        chosenPrice = itemPricing.single;
-      }
-
-      openCustomizeModal(chosenName, chosenPrice, null, defaultCheeseChoice);
+      const chosenPrice = type === 'single'
+        ? itemPricing.single ?? itemPricing.base ?? 0
+        : itemPricing.base ?? itemPricing.single ?? 0;
+      openCustomizeModal(chosenName, chosenPrice, null, {
+        cheeseChoice,
+        hideCheese: Boolean(cheeseChoice)
+      });
     }
 
     function getOptionExtraPrice(option) {
@@ -1619,7 +1846,7 @@
 
     // دالة مخصصة للأزرار الخارجية التي تختار نوع التحضير مباشرة (مشوي / مقلي)
     function openItemWithPrep(itemId, price, prepChoice) {
-      openCustomizeModal(itemId, price, prepChoice);
+      openCustomizeModal(itemId, price, prepChoice, { hideCooking: Boolean(prepChoice) });
     }
 
     function addDirectItemByName(itemId) {
@@ -1775,6 +2002,11 @@
       const cookingContainer = document.getElementById('cookingSectionContainer');
       const cookingGrid = document.getElementById('cookingOptionsGrid');
       if (!cookingContainer || !cookingGrid) return;
+      if (currentCustomizingItem?.hideCooking) {
+        cookingContainer.style.display = 'none';
+        cookingGrid.innerHTML = '';
+        return;
+      }
 
       const hasCookingPrepItem = /(?:برجر\s*دجاج|برجر\s*دبل\s*دجاج|(?:جام|جان)بو\s*دجاج\s*برجر|توست\s*دجاج\s*برجر|تورتيلا\s*دجاج\s*برجر|وجبة\s*برجر\s*دجاج\s*متكاملة|وجبة\s*توست\s*دجاج\s*متكاملة|وجبة\s*دجاج|وجبة\s*توست\s*دجاج|دجاج\s*برجر)/.test(itemName);
       const isNoCookingItem = /(?:برجر\s*زنجر|برجر\s*زنجر\s*دبل|(?:جام|جان)بو\s*زنجر|تورتيلا\s*زنجر|كلوب\s*زنجر|كلوب\s*شاورما|توست.*زنجر)/.test(itemName);
@@ -1794,10 +2026,15 @@
       `;
     }
 
-    function setupCheeseOptions(itemName) {
+    function setupCheeseOptions(itemName, hideCheese = false) {
       const container = document.getElementById('cheeseSectionContainer');
       const grid = document.getElementById('cheeseOptionsGrid');
       if (!container || !grid) return;
+      if (hideCheese) {
+        container.style.display = 'none';
+        grid.innerHTML = '';
+        return;
+      }
 
       const isPlateItem = /صحن|باشكا|كلوب زنجر/.test(itemName);
       const isSandwichItem = /شاورما|ساندوتش|توست/.test(itemName);
@@ -1887,9 +2124,16 @@
       });
     }
 
-    function openCustomizeModal(name, price, presetPrep) {
+    function openCustomizeModal(name, price, presetPrep, presetOptions = {}) {
       const cleanBaseName = name.replace(' (بدون جبنة)', '').replace(' (جبنة)', '').replace(' (صافي)', '').replace(' (جبن)', '');
-      currentCustomizingItem = { name: cleanBaseName, basePrice: price, presetPrep: presetPrep };
+      currentCustomizingItem = {
+        name: cleanBaseName,
+        basePrice: price,
+        presetPrep,
+        presetCheeseChoice: presetOptions.cheeseChoice || null,
+        hideCheese: Boolean(presetOptions.hideCheese),
+        hideCooking: Boolean(presetOptions.hideCooking)
+      };
       currentCustomizingQty = 1;
       
       document.getElementById('modalItemTitle').innerText = `تخصيص: ${cleanBaseName}`;
@@ -1899,7 +2143,7 @@
       
       setupBreadOptions(cleanBaseName);
       setupCookingOptions(cleanBaseName, presetPrep);
-      setupCheeseOptions(cleanBaseName);
+      setupCheeseOptions(cleanBaseName, currentCustomizingItem.hideCheese);
       updateCheeseNoteChipsVisibility(cleanBaseName);
 
       document.querySelectorAll('.note-chip').forEach(chip => {
@@ -1936,7 +2180,7 @@
       const breadOpt = document.querySelector('input[name="opt_bread"]:checked');
       const cheeseOpt = document.querySelector('input[name="opt_cheese"]:checked');
       const breadExtra = getOptionExtraPrice(breadOpt?.value);
-      const cheeseExtra = getOptionExtraPrice(cheeseOpt?.value);
+      const cheeseExtra = getOptionExtraPrice(cheeseOpt?.value || currentCustomizingItem.presetCheeseChoice);
       const notice = document.getElementById('breadNotice');
 
       if (breadOpt) {
@@ -2025,12 +2269,17 @@
       const cookingOpt = document.querySelector('input[name="opt_cooking"]:checked');
       if (cookingOpt) {
         options.push(cookingOpt.value);
+      } else if (currentCustomizingItem.presetPrep) {
+        options.push(currentCustomizingItem.presetPrep);
       }
 
       const cheeseOpt = document.querySelector('input[name="opt_cheese"]:checked');
       if (cheeseOpt) {
         options.push(cheeseOpt.value);
         cheeseExtra = getOptionExtraPrice(cheeseOpt.value);
+      } else if (currentCustomizingItem.presetCheeseChoice) {
+        options.push(currentCustomizingItem.presetCheeseChoice);
+        cheeseExtra = getOptionExtraPrice(currentCustomizingItem.presetCheeseChoice);
       }
 
       // الملاحظات السريعة
@@ -2154,17 +2403,24 @@
         const itemTotal = item.price * item.qty;
         const box = document.createElement('div');
         box.className = 'cart-item-preview';
-        box.style.borderColor = item.isFree ? '#25d366' : 'rgba(247, 127, 0, 0.3)';
+        box.style.borderColor = item.isFree ? '#c89b3c' : 'rgba(200, 155, 60, 0.3)';
         box.innerHTML = `
-          <div style="display:flex; justify-content:space-between; align-items:center;">
-            <strong style="color:${item.isFree ? '#25d366' : 'var(--secondary)'}; font-size:1rem;">
-              ${index + 1}. ${item.name} × ${item.qty} = ${item.isFree ? '0.00 ر.ي (مجاناً 🎁)' : itemTotal.toFixed(2) + ' ر.ي'}
+          <div class="cart-item-main">
+            <strong class="cart-item-name">
+              ${index + 1}. ${item.name} = ${item.isFree ? '0.00 ر.ي (مجاناً 🎁)' : itemTotal.toFixed(2) + ' ر.ي'}
             </strong>
-            <button onclick="removeItemFromCart(${index})" style="background:#ff4d4f; color:#fff; border:none; border-radius:4px; padding:2px 8px; cursor:pointer;">حذف</button>
+            <div class="cart-item-controls">
+              ${item.isFree
+                ? `<span class="cart-qty-value">× ${item.qty}</span>`
+                : `<button class="cart-qty-button" type="button" aria-label="تقليل كمية ${item.name}" onclick="changeCartItemQty(${index}, -1)">−</button>
+                   <span class="cart-qty-value">${item.qty}</span>
+                   <button class="cart-qty-button" type="button" aria-label="زيادة كمية ${item.name}" onclick="changeCartItemQty(${index}, 1)">+</button>`}
+              <button class="cart-remove-button" type="button" onclick="removeItemFromCart(${index})">حذف</button>
+            </div>
           </div>
           <div style="font-size:0.83rem; color:var(--text-muted); margin-top:5px; line-height:1.5;">
             ${item.options.length > 0 ? `<strong style="color:var(--accent);">التفاصيل والملاحظات:</strong> ${item.options.join(' ، ')}` : ''}
-            ${item.customNote ? `<br><strong style="color:#ff9e00;">ملاحظة إضافية:</strong> ${item.customNote}` : ''}
+            ${item.customNote ? `<br><strong style="color:#0f766e;">ملاحظة إضافية:</strong> ${item.customNote}` : ''}
           </div>
         `;
         container.appendChild(box);
@@ -2176,6 +2432,16 @@
     }
 
     function closeCartReviewModal() { document.getElementById('cartReviewModal').style.display = 'none'; }
+
+    function changeCartItemQty(index, change) {
+      const item = cart[index];
+      if (!item || item.isFree) return;
+
+      item.qty = Math.max(1, item.qty + change);
+      evaluateCartFamilyOffers();
+      updateCartUI();
+      openCartReviewModal();
+    }
 
     function removeItemFromCart(index) {
       cart.splice(index, 1);
@@ -2239,37 +2505,114 @@
       closeCartReviewModal();
     }
 
-    function openSimpleAdd(itemId) {
-      const itemPricing = BRANCH_DATA.prices[itemId];
-      if (!itemPricing) return;
-      const price = itemPricing.base ?? itemPricing.single ?? 0;
-      openCustomizeModal(itemId, price, null, 'بدون جبن');
-    }
-
-    // جعل أزرار الخارج "إضافة" فقط مع ترك تفاصيل الاختيارات داخل نافذة التخصيص
+    // Keep card-level choices visible as consistently sized, stacked buttons.
     function simplifyExternalActionButtons() {
       document.querySelectorAll('.card').forEach(card => {
         const cardItemId = card.getAttribute('data-item-id');
+        const itemPricing = BRANCH_DATA.prices[cardItemId];
+        const footer = card.querySelector('.card-footer');
+        const hasCheeseChoices = [...card.querySelectorAll('.btn-add')].some(button =>
+          (button.getAttribute('onclick') || '').includes('openItemByName') &&
+          (button.getAttribute('onclick') || '').includes("'cheese'")
+        );
+        const supportsDoubleCheese = /^(?:صحن|باشكا|كلوب زنجر)/.test(cardItemId || '') &&
+          !cardItemId.includes('بطاطس') &&
+          itemPricing?.base !== undefined &&
+          itemPricing?.cheese !== undefined;
+        const isSandwichCard = Boolean(card.closest('#sandwiches')) &&
+          itemPricing?.base !== undefined &&
+          itemPricing?.cheese !== undefined;
+
+        if (hasCheeseChoices && (supportsDoubleCheese || isSandwichCard) && footer && !footer.querySelector('.btn-double-cheese')) {
+          const doubleCheeseButton = document.createElement('button');
+          doubleCheeseButton.type = 'button';
+          doubleCheeseButton.className = 'btn-add btn-double-cheese';
+          doubleCheeseButton.setAttribute('aria-label', `إضافة ${cardItemId} دبل جبن`);
+          doubleCheeseButton.addEventListener('click', () => openItemByName(cardItemId, 'doubleCheese'));
+          footer.appendChild(doubleCheeseButton);
+        }
+
         const actionButtons = [...card.querySelectorAll('.btn-add')];
         if (!actionButtons.length) return;
 
-        actionButtons.forEach((btn, index) => {
-          const onclick = btn.getAttribute('onclick') || '';
-          if (onclick.includes('openItemWithPrep') || onclick.includes('openItemByName')) {
-            btn.setAttribute('onclick', `openSimpleAdd(${JSON.stringify(cardItemId)})`);
-          }
-          btn.innerText = 'إضافة';
-        });
+        const hasPrepChoices = actionButtons.some(button =>
+          (button.getAttribute('onclick') || '').includes('openItemWithPrep')
+        );
+        if (actionButtons.length > 1 || hasPrepChoices) {
+          footer?.classList.add('card-choices');
+          actionButtons.forEach(button => {
+            button.classList.add('choice-chip');
+            const action = button.getAttribute('onclick') || '';
+            let label;
+            let price;
 
-        if (actionButtons.length > 1) {
-          actionButtons.slice(1).forEach(btn => btn.remove());
+            const cheeseMatch = action.match(/openItemByName\('[^']+', '([^']+)'\)/);
+            if (cheeseMatch && itemPricing) {
+              const choice = cheeseMatch[1];
+              label = choice === 'base' ? 'بدون جبن' : choice === 'cheese' ? 'مع جبن' : null;
+              price = choice === 'cheese' ? itemPricing.cheese : itemPricing.base;
+            } else if (button.classList.contains('btn-double-cheese') && itemPricing) {
+              label = 'دبل جبن';
+              price = isSandwichCard
+                ? itemPricing.cheese + 2
+                : itemPricing.base + (itemPricing.cheese - itemPricing.base) * 2;
+            } else {
+              const prepMatch = action.match(/openItemWithPrep\('[^']+',\s*([\d.]+),\s*'([^']+)'\)/);
+              if (prepMatch) {
+                label = prepMatch[2].includes('مشوي') ? 'مشوي' : 'مقلي';
+                price = Number(prepMatch[1]);
+              }
+            }
+
+            if (!label || !Number.isFinite(price)) return;
+            const labelElement = document.createElement('span');
+            labelElement.className = 'choice-label';
+            labelElement.textContent = label;
+            const priceElement = document.createElement('span');
+            priceElement.className = 'choice-price';
+            priceElement.textContent = `${price} ر.ي`;
+            button.replaceChildren(labelElement, priceElement);
+          });
         }
       });
+    }
+
+    function setupSectionDock() {
+      const links = Array.from(document.querySelectorAll('.section-dock-link'));
+      const track = document.querySelector('.section-dock-track');
+      const sections = links
+        .map(link => document.querySelector(link.getAttribute('href')))
+        .filter(section => section instanceof HTMLElement);
+
+      const activateLink = link => {
+        if (!link || link.classList.contains('active')) return;
+        links.forEach(item => item.classList.toggle('active', item === link));
+        const trackBounds = track.getBoundingClientRect();
+        const linkBounds = link.getBoundingClientRect();
+        if (linkBounds.left < trackBounds.left || linkBounds.right > trackBounds.right) {
+          link.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
+        }
+      };
+
+      links.forEach(link => link.addEventListener('click', () => activateLink(link)));
+      if (!('IntersectionObserver' in window)) return;
+
+      const observer = new IntersectionObserver(entries => {
+        const visibleSection = entries
+          .filter(entry => entry.isIntersecting)
+          .sort((first, second) => second.intersectionRatio - first.intersectionRatio)[0];
+        if (!visibleSection) return;
+
+        activateLink(links.find(link => link.getAttribute('href') === `#${visibleSection.target.id}`));
+      }, { rootMargin: '-18% 0px -68% 0px', threshold: [0, 0.15, 0.4] });
+
+      sections.forEach(section => observer.observe(section));
     }
 
     // إغلاق شاشة البداية تلقائياً
     window.addEventListener('DOMContentLoaded', () => {
       simplifyExternalActionButtons();
+      setupSectionDock();
       setTimeout(() => {
         dismissSplashScreen();
       }, 2000);
