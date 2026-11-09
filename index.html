@@ -1665,7 +1665,7 @@
               📍 ملاحظة: سيُطلب منك إرسال موقعك عبر خرائط جوجل (Google Maps) في الواتساب لتسهيل التوصيل السريع.
            </p>
            <p class="delivery-note" style="margin-top: 7px;">🛵 يعتمد وقت وصول الطلب على توفر السائق وانشغاله بطلبات أخرى. شكرًا لتفهّمكم.</p>
-           <p id="deliveryFeeNote" class="delivery-note" style="margin-top: 7px;">🚚 رسوم التوصيل 10 ر.ي، وتصبح 5 ر.ي إذا تجاوز إجمالي الأصناف 30 ر.ي.</p>
+           <p id="deliveryFeeNote" class="delivery-note" style="margin-top: 7px;">🚚 رسوم التوصيل ثابتة: 10 ر.ي.</p>
         </div>
 
         <div id="carField" style="display: none;">
@@ -2460,8 +2460,8 @@
       }
     }
 
-    function getDeliveryFee(itemsSubtotal) {
-      return itemsSubtotal > 30 ? 5 : 10;
+    function getDeliveryFee() {
+      return 10;
     }
 
     function updateCartModalTotal() {
@@ -2469,7 +2469,7 @@
        let subtotal = itemsSubtotal;
        const method = document.getElementById('deliverySelect').value;
        const deliveryOption = document.querySelector('#deliverySelect option[value="توصيل"]');
-       const deliveryFee = getDeliveryFee(itemsSubtotal);
+       const deliveryFee = getDeliveryFee();
        if (deliveryOption) deliveryOption.textContent = `توصيل للموقع (رسوم ${deliveryFee} ر.ي)`;
        const deliveryFeeSummary = document.getElementById('deliveryFeeSummary');
        const deliveryFeeNote = document.getElementById('deliveryFeeNote');
@@ -2477,9 +2477,7 @@
          subtotal += deliveryFee;
          deliveryFeeSummary.style.display = 'block';
          deliveryFeeSummary.textContent = `رسوم التوصيل: ${deliveryFee} ر.ي`;
-         deliveryFeeNote.textContent = itemsSubtotal > 30
-           ? '🚚 رسوم التوصيل 5 ر.ي لأن إجمالي الأصناف تجاوز 30 ر.ي.'
-           : '🚚 رسوم التوصيل 10 ر.ي، وتصبح 5 ر.ي إذا تجاوز إجمالي الأصناف 30 ر.ي.';
+         deliveryFeeNote.textContent = '🚚 رسوم التوصيل ثابتة: 10 ر.ي.';
        } else {
          deliveryFeeSummary.style.display = 'none';
        }
@@ -2582,7 +2580,7 @@
       } else if(method === 'توصيل') {
           orderText += `👤 *العميل / العنوان:* ${customerAddress ? customerAddress : 'لم يكتب العنوان'}\n`;
           orderText += `📍 *الموقع:* (سيتم إرسال الموقع عبر خرائط جوجل)\n`;
-          const deliveryFee = getDeliveryFee(itemsSum);
+          const deliveryFee = getDeliveryFee();
           orderText += `🛵 رسوم التوصيل: +${deliveryFee} ر.ي\n`;
           itemsSum += deliveryFee;
       } else if(method === 'استلام سيارة') {
